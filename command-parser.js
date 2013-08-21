@@ -34,6 +34,8 @@ var crypto = require('crypto');
 
 var modlog = exports.modlog = modlog || fs.createWriteStream('logs/modlog.txt', {flags:'a+'});
 
+var complaint = exports.complaint = complaint || fs.createWriteStream('logs/complaint.txt', {flags:'a+'});
+
 /**
  * Command parser
  *
