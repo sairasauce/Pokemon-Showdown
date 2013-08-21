@@ -12,6 +12,7 @@
  */
 
 var crypto = require('crypto');
+var poofeh = true;
 //rps
 var rockpaperscissors  = false;
 var numberofspots = 2;
