@@ -103,6 +103,7 @@ function connectUser(socket) {
 			connection.sendTo(null, '|challstr|' + keyid + '|' + connection.challenge);
 		}
 	});
+	if (config.blacklist) Users.blacklistLookup(connection.ip, user, true);
 	user.joinRoom('global', connection);
 	return connection;
 }
