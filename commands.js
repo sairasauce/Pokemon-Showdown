@@ -12,8 +12,1344 @@
  */
 
 var crypto = require('crypto');
+//rps
+var rockpaperscissors  = false;
+var numberofspots = 2;
+var gamestart = false;
+var rpsplayers = new Array();
+var rpsplayersid = new Array();
+var player1response = new Array();
+var player2response = new Array();
+//hangman
+var hangman = false;
+var guessword = new Array();
+var hangmaner = new Array();
+var guessletters = new Array();
+var guessedletters = new Array();
+var correctletters = new Array();
+var givenguesses = 8;
+var spaces = new Array();
+var hangmantopic = new Array();
+//gym leaders
+var ougymleaders = ['gymlederewok','gymlederross','elitfourross','elitefournord','gymledersam','gymlederlove','onlylove','gymledermassman','gymledercuddly','miner0','gymlederboss','chmpionboss','gymlederdelibird','colonialmustang','laxxus','gymledermustang','miloticnob','gymledermarlon','aortega','gymledervolkner','modernwolf','johanl','energ218','gymlderhope','gymledereon','piiiikachuuu','jd','elitefurkozman'];
+var admins = ['elitefournord','jd','energ218','colonialmustang','piiiikachuuu','elitefurkozman'];
+//tells
+if (typeof tells === 'undefined') {
+	tells = {};
+}
 
 var commands = exports.commands = {
+
+	pickrandom: function (target, room, user) {
+		if (!target) return this.sendReply('/pickrandom [option 1], [option 2], ... - Randomly chooses one of the given options.');
+		if (!this.canBroadcast()) return;
+		var targets;
+		if (target.indexOf(',') === -1) {
+			targets = target.split(' ');
+		} else {
+			targets = target.split(',');
+		};
+		var result = Math.floor(Math.random() * targets.length);
+		return this.sendReplyBox(targets[result].trim());
+	},
+	/*********************************************************
+	 * Badge System Base                                     *
+	 *********************************************************/
+	showbadges: function(target, room, user, connection) {
+	if (!this.canBroadcast()) return;
+	if (!target) {
+	var data = fs.readFileSync('config/badges.csv','utf8')
+		var match = false;
+		var numBadges = 0;
+		var stuff = (''+data).split("\n");
+		for (var i = stuff.length; i > -1; i--) {
+			if (!stuff[i]) continue;
+			var row = stuff[i].split(",");
+			var userid = toUserid(row[0]);
+			if (user.userid == userid) {
+			var x = Number(row[1])
+			var numBadges = x;
+			match = true;
+			if (match === true) {
+				break;
+			}
+			}
+		}
+		if (match === true) {
+			this.sendReplyBox(user.name + ' has ' + numBadges + ' badge(s).');
+		}
+		if (match === false) {
+			connection.sendTo(room, 'You have no badges.');
+		}
+		user.badges = numBadges;
+	} else {
+	var data = fs.readFileSync('config/badges.csv','utf8')
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		var match = false;
+		var numBadges = 0;
+		var stuff = (''+data).split("\n");
+		for (var i = stuff.length; i > -1; i--) {
+			if (!stuff[i]) continue;
+			var row = stuff[i].split(",");
+			var userid = toUserid(row[0]);
+			if (targetUser.userid == userid || target == userid) {
+			var x = Number(row[1])
+			var numBadges = x;
+			match = true;
+			if (match === true) {
+				break;
+			}
+			}
+		}
+		if (match === true) {
+			this.sendReplyBox(targetUser.name + ' has ' + numBadges + ' badge(s).');
+		}
+		if (match === false) {
+			connection.sendTo(room, '' + targetUser.name + ' has no badges.');
+		}
+		Users.get(targetUser.userid).badges = numBadges;
+	}
+	},
+	
+	givebadge: function(target, room, user, connection) {
+		if (ougymleaders.indexOf(user.userid) != -1 || admins.indexOf(user.userid) != -1) {
+		var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
+		// use {'flags': 'a'} to append and {'flags': 'w'} to erase and write a new file
+		if (!target) {
+		var data = fs.readFileSync('config/badges.csv','utf8')
+		var match = false;
+		var numBadges = 0;
+		var stuff = (''+data).split("\n");
+		for (var i = stuff.length; i > -1; i--) {
+			if (!stuff[i]) continue;
+			var row = stuff[i].split(",");
+			var userid = toUserid(row[0]);
+			if (user.userid == userid) {
+			var x = Number(row[1])
+			var numBadges = x;
+			match = true;
+			if (match === true) {
+				break;
+			}
+			}
+		}
+		user.badges = numBadges;
+			user.badges = user.badges + 1;
+			log.write(user.userid+','+user.badges+"\n");
+			return this.sendReply('You were given a badge. You now have ' + user.badges + ' badges.');
+		} else {
+		if (target.indexOf(',') === -1) {
+	var data = fs.readFileSync('config/badges.csv','utf8')
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		var match = false;
+		var numBadges = 0;
+		var stuff = (''+data).split("\n");
+		for (var i = stuff.length; i > -1; i--) {
+			if (!stuff[i]) continue;
+			var row = stuff[i].split(",");
+			var userid = toUserid(row[0]);
+			if (targetUser.userid == userid) {
+			var x = Number(row[1])
+			var numBadges = x;
+			match = true;
+			if (match === true) {
+				break;
+			}
+			}
+		}
+		Users.get(targetUser.userid).badges = numBadges;
+		Users.get(targetUser.userid).badges = Users.get(targetUser.userid).badges + 1;
+		log.write(targetUser.userid+','+Users.get(targetUser.userid).badges+"\n");
+		return this.sendReply(targetUser + ' was given a badge.');
+		}
+		}
+		}
+		else {
+			return this.sendReply('Yeah.....no.');
+		}
+		if (admins.indexOf(user.userid) != -1) {
+		if (target.indexOf(',') != -1) {
+			var parts = target.split(',');
+			parts[0] = this.splitTarget(parts[0]);
+			var targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if (isNaN(parts[1])) {
+			return this.sendReply('Very funny, now use a real number.');
+		}
+	var data = fs.readFileSync('config/badges.csv','utf8')
+		var match = false;
+		var numBadges = 0;
+		var stuff = (''+data).split("\n");
+		for (var i = stuff.length; i > -1; i--) {
+			if (!stuff[i]) continue;
+			var row = stuff[i].split(",");
+			var userid = toUserid(row[0]);
+			if (targetUser.userid == userid) {
+			var x = Number(row[1])
+			var numBadges = x;
+			match = true;
+			if (match === true) {
+				break;
+			}
+			}
+		}
+		Users.get(targetUser.userid).badges = numBadges;
+		var asdf = parts[1].trim();
+		var yay = Number(parts[1]);
+		Users.get(targetUser.userid).badges = Users.get(targetUser.userid).badges + yay;
+		log.write(targetUser.userid+','+Users.get(targetUser.userid).badges+"\n");
+		return this.sendReply(targetUser + ' was given ' + parts[1] + ' badges. ' + targetUser + ' now has ' + Users.get(targetUser.userid).badges + ' badges.');
+		}
+		}
+		else {
+			return this.sendReply('No.');
+		}
+		},
+		
+	badgesystem: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b><font size = 3>The Badge System</font></b><br>' +
+							'A work in progress, the badge system is a way to keep track of how many badges a user has. It is simply a number, nothing more, but it can easily show whether you have the twelve required badges. At the moment, this system is for the OU league only. Other leagues will be supported sometime in the future. Any OU gym leader can use the /givebadge command to give a user a badge. Users can use /showbadges to view their badges. Gym leaders can also give multiple badges, a way to implement users onto this new database. For instance, if a user has 6 badges, someone can do /givebadge [user], 6 to give them 6 badges. PM pika with any questions you have about this.');
+			},
+	
+	/*********************************************************
+	 * Rock-Paper-Scissors                                   *
+	 *********************************************************/
+	
+	rps: "rockpaperscissors",
+	rockpaperscissors: function(target, room, user) {
+		/*if(room.id != 'rps') {
+			return this.sendReply('|html|You must do this in the room \'rps\'. Click<button name = "joinRoom" value = "rps">here</button>to join the room.');
+		}*/
+		if(rockpaperscissors === false) {
+			rockpaperscissors = true;
+			return this.parse('/jrps');
+		}
+	},
+
+	respond: 'shoot',
+	shoot: function(target, room, user) {
+		if(gamestart === false) {
+			return this.sendReply('There is currently no game of rock-paper-scissors going on.');
+		}
+		else {
+			if(user.userid === rpsplayersid[0]) {
+				if(player1response[0]) {
+					return this.sendReply('You have already responded.');
+				}
+			if(target === 'rock') {
+				player1response.push('rock');
+				if(player2response[0]) {
+					return this.parse('/compare');
+				}
+				return this.sendReply('You responded with rock.');
+			} 
+			if(target === 'paper') {
+				player1response.push('paper');
+								if(player2response[0]) {
+					return this.parse('/compare');
+				}
+				return this.sendReply('You responded with paper.');
+			}
+			if(target === 'scissors') {
+				player1response.push('scissors');
+								if(player2response[0]) {
+					return this.parse('/compare');
+				}
+				return this.sendReply('You responded with scissors.');
+			}
+			else {
+			return this.sendReply('Please respond with one of the following: rock, paper, or scissors.');
+			}
+		}
+		if(user.userid === rpsplayersid[1]) {
+			if(player2response[0]) {
+				return this.sendReply('You have already responded.');
+			}
+			if(target === 'rock') {
+				player2response.push('rock');
+				if(player1response[0]) {
+					return this.parse('/compare');
+				}
+				return this.sendReply('You responded with rock.');
+			} 
+			if(target === 'paper') {
+				player2response.push('paper');
+								if(player1response[0]) {
+					return this.parse('/compare');
+				}
+				return this.sendReply('You responded with paper.');
+			}
+			if(target === 'scissors') {
+				player2response.push('scissors');
+								if(player1response[0]) {
+					return this.parse('/compare');
+				}
+				return this.sendReply('You responded with scissors.');
+			}
+			else {
+			return this.sendReply('Please respond with one of the following: rock, paper, or scissors.');
+			}
+		}
+		else return this.sendReply('You are not in this game of rock-paper-scissors.');
+	}
+	},
+		
+	compare: function(target, room, user) {
+		if(gamestart === false) {
+			return this.sendReply('There is no rock-paper-scissors game going on right now.');
+		}
+		else {
+		if(player1response[0] === undefined && player2response[0] === undefined) {
+			return this.sendReply('Neither ' + rpsplayers[0] + ' nor ' + rpsplayers[1] + ' has responded yet.');
+		}
+		if(player1response[0] === undefined) {
+			return this.sendReply(rpsplayers[0] + ' has not responded yet.');
+		}
+		if(player2response[0] === undefined) {
+			return this.sendReply(rpsplayers[1] + ' has not responded yet.');
+		}
+		else {
+			if(player1response[0] === player2response[0]) {
+				this.add('Both players responded with \'' + player1response[0] + '\', so the game of rock-paper-scissors between ' + rpsplayers[0] + ' and ' + rpsplayers[1] + ' was a tie!');
+			}
+			if(player1response[0] === 'rock' && player2response[0] === 'paper') {
+				this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
+			}
+			if(player1response[0] === 'rock' && player2response[0] === 'scissors') {
+				this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
+			}
+			if(player1response[0] === 'paper' && player2response[0] === 'rock') {
+				this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
+			}
+			if(player1response[0] === 'paper' && player2response[0] === 'scissors') {
+				this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
+			}
+			if(player1response[0] === 'scissors' && player2response[0] === 'rock') {
+				this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
+			}
+			if(player1response[0] === 'scissors' && player2response[0] === 'paper') {
+				this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
+			}
+
+		rockpaperscissors = false;
+		numberofspots = 2;
+		gamestart = false;
+		rpsplayers = [];
+		rpsplayersid = [];
+		player1response = [];
+		player2response = [];
+		}
+		}
+	},
+	
+	endrps: function(target, room, user) {
+		if(!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to do this.');
+		}
+		if(rockpaperscissors === false) {
+			return this.sendReply('There is no game of rock-paper-scissors happening right now.');
+		}
+		if(user.can('broadcast') && rockpaperscissors === true) {
+			rockpaperscissors = false;
+			numberofspots = 2;
+			gamestart = false;
+			rpsplayers = [];
+			rpsplayersid = [];
+			player1response = [];
+			player2response = [];
+			return this.add('|html|<b>' + user.name + '</b> ended the game of rock-paper-scissors.');
+		}
+	},
+	
+	jrps: 'joinrps',
+	joinrps: function(target, room, user) {
+		if(rockpaperscissors === false) {
+			return this.sendReply('There is no game going on right now.');
+		}
+		if(numberofspots === 0) {
+			return this.sendReply('There is no more space in the game.');
+		}
+		else {
+			if(rpsplayers[0] === undefined) {
+				numberofspots = numberofspots - 1;
+				this.add('|html|<b>' + user.name + '</b> has started a game of rock-paper-scissors! /jrps or /joinrps to play against them.');
+				rpsplayers.push(user.name);
+				rpsplayersid.push(user.userid);
+				return false;
+			}
+		if(rpsplayers[0] === user.name) {
+			return this.sendReply('You are already in the game.');
+		}
+		if(rpsplayers[0] && rpsplayers[1] === undefined) {
+			numberofspots = numberofspots - 1;
+			this.add('|html|<b>' + user.name + '</b> has joined the game of rock-paper-scissors!');
+			rpsplayers.push(user.name);
+			rpsplayersid.push(user.userid);
+		}
+		if(numberofspots === 0) {
+			this.add('|html|The game of rock-paper-scissors between <b>' + rpsplayers[0] + '</b> and <b>' + rpsplayers[1] + '</b> has begun!');
+			gamestart = true;
+		}
+	}
+	},
+	
+	/*********************************************************
+	 * hangman
+	 *********************************************************/
+	 hangman: function(target, room, user) {
+	if(!user.can('broadcast')) {
+		return this.sendReply('You do not have enough authority to do this.');
+	}
+			if(room.id!= 'hangman') {
+		return this.sendReply('|html|Please do this in the room "hangman". You can join it <button name = "joinRoom" value = "hangman">here</button>.');
+	}
+	if(hangman === true) {
+		return this.sendReply('There is already a game of hangman going on.');
+	}
+	if(!target) {
+		return this.sendReply('The correct syntax for this command is /hangman [word], [topic]');
+	}
+	if(hangman === false) {
+		var targets = target.split(',');
+		if(!targets[1]) {
+			return this.sendReply('Make sure you include a topic.');
+		}
+		if(targets[0].length > 10) {
+			return this.sendReply('ffs they get 7 guesses don\'t make it difficult')
+		}
+		if(targets[0].indexOf(' ') != -1) {
+			return this.sendReply('Please don\'t put spaces in the word.');
+		}
+		hangman = true;
+						guessword = [];
+				hangmaner = [];
+				guessletters = [];
+				guessedletters = [];
+				correctletters = [];
+				spaces = [];
+				givenguesses = 8;
+		var targetword = targets[0].toLowerCase();
+		guessword.push(targetword);
+		hangmaner.push(user.userid);
+		for(var i = 0; i < targets[0].length; i++) {
+			guessletters.push(targetword[i]);
+			spaces.push('_');
+		hangmantopic[0] = targets[1];
+		}
+
+		return this.add('|html|<div class = "infobox"><div class = "broadcast-green"><center><font size = 2><b>' + user.name + '</b> started a game of hangman! The word has ' + targets[0].length + ' letters.<br>' + spaces.join(" ") + '<br>The topic: ' + hangmantopic[0] + '</font></center></div></div>');
+	}
+	},
+	
+	viewhangman: function(target, room, user) {
+			if(room.id!= 'hangman') {
+		return this.sendReply('|html|Please do this in the room "hangman". You can join it <button name = "joinRoom" value = "hangman">here</button>.');
+	}
+		if(!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to do this.');
+		}
+		if(hangman === false) {
+			return this.sendReply('There is no game of hangman going on right now.');
+		}
+	this.sendReply('|html|<font size = 2>' + spaces.join(" ") + '<br>Guesses left: ' + givenguesses + '<br>Category: ' + hangmantopic[0] + '</font>');
+	},
+	
+	 topic: 'category',
+	 category: function(target, room, user) {
+		if(room.id != 'hangman') {
+			return this.sendReply('|html|Please do this in the room "hangman". You can join it <button name = "joinRoom" value = "hangman">here</button>.');
+		}
+		if(hangman === false) {
+			return this.sendReply('There is no game of hangman going on right now.');
+		}
+		if(user.userid != hangmaner[0]) {
+			return this.sendReply('You cannot change the category because you are not running hangman.');
+		}
+		hangmantopic[0] = target;
+		return this.sendReply('You set the category of hangman to \'' + target + '\'.');
+		},
+		
+	
+	word: function(target, room, user) {
+		if(hangman === false) {
+		return this.sendReply('There is no game of hangman going on.');
+	}
+	if(user.userid === hangmaner[0]) {
+		return this.sendReply('Your word is \'' + guessword[0] + '\'.');
+	}
+	else {
+		return this.sendReply('You are not the person who started hangman.');
+	}
+	},
+	
+	guess: function(target, room, user) {
+			if(room.id!= 'hangman') {
+		return this.sendReply('|html|Please do this in the room "hangman". You can join it <button name = "joinRoom" value = "hangman">here</button>.');
+	}
+	if(hangman === false) {
+		return this.sendReply('There is no game of hangman going on.');
+	}
+			if(user.userid === hangmaner[0]) {
+			return this.sendReply('You cannot guess the word because you are running hangman!');
+		}
+	if(!target) {
+		return this.sendReply('Please specify a letter to guess.');
+	}
+	if(target.length > 1) {
+		return this.sendReply('Please specify a single letter to guess. To guess the word, use /guessword.');
+	}
+	lettertarget = target.toLowerCase();
+	for(var y = 0; y < 27; y++) {
+		if(lettertarget === guessedletters[y]) {
+			return this.sendReply('Someone has already guessed the letter \'' + lettertarget + '\'.');
+		}
+	}
+	var letterright = new Array();
+	for(var a = 0; a < guessword[0].length; a++) {
+		if(lettertarget === guessletters[a]) {
+			var c = a + 1;
+			letterright.push(c);
+			correctletters.push(c);
+			spaces[a] = lettertarget;
+		}
+	}
+	if(letterright[0] === undefined) {
+		givenguesses = givenguesses - 1;
+			if(givenguesses === 0) {
+
+				hangman = false;
+				guessword = [];
+				hangmaner = [];
+				guessletters = [];
+				guessedletters = [];
+				correctletters = [];
+				spaces = [];
+				hangmantopic = [];
+				givenguesses = 8;
+				return this.add('|html|<b>' + user.name + '</b> guessed the letter \'' + lettertarget + '\', but it was not in the word. You have failed to guess the word, so the man has been...uh...he went to sleep.');
+		}
+		this.add('|html|<b>' + user.name + '</b> guessed the letter \'' + lettertarget + '\', but it was not in the word.');
+	}
+	else {
+	this.add('|html|<b>' + user.name + '</b> guessed the letter \'' + lettertarget + '\', which was letter(s) ' + letterright.toString() + ' of the word.');
+	}
+	guessedletters.push(lettertarget);
+	if(correctletters.length === guessword[0].length) {
+				this.add('|html|Congratulations! <b>' + user.name + '</b> has guessed the word, which was: \'' + guessword[0] + '\'.');
+				hangman = false;
+				guessword = [];
+				hangmaner = [];
+				guessletters = [];
+				guessedletters = [];
+				correctlyguessedletters = [];
+				spaces = [];
+				hangmantopic = [];
+				givenguesses = 8;
+
+		}
+	},
+	
+	guessword: function(target, room, user) {
+			if(room.id!= 'hangman') {
+		return this.sendReply('|html|Please do this in the room "hangman". You can join it <button name = "joinRoom" value = "hangman">here</button>.');
+	}
+		if(hangman === false) {
+		return this.sendReply('There is no game of hangman going on.');
+	}
+		if(!target) {
+			return this.sendReply('Please specify the word you are trying to guess.');
+		}
+		if(user.userid === hangmaner[0]) {
+			return this.sendReply('You cannot guess the word because you are running hangman!');
+		}
+		var targetword = target.toLowerCase();
+		if(targetword === guessword[0]) {
+			this.add('|html|Congratulations! <b>' + user.name + '</b> has guessed the word, which was: \'' + guessword[0] + '\'.');
+							hangman = false;
+				guessword = [];
+				hangmaner = [];
+				guessletters = [];
+				guessedletters = [];
+				correctletters = [];
+				spaces = [];
+				hangmantopic = [];
+				givenguesses = 8;	
+		}
+		else {
+			givenguesses = givenguesses - 1;
+			if(givenguesses === 0) {
+		
+				hangman = false;
+				guessword = [];
+				hangmaner = [];
+				guessletters = [];
+				guessedletters = [];
+				correctletters = [];
+				spaces = [];
+				hangmantopoic = [];
+				givenguesses = 8;
+					return this.add('|html|<b>' + user.name + '</b> guessed the word \'' + targetword + '\', but it was not the word. You have failed to guess the word, so the man has been...uh...he went to sleep.');
+			}
+			this.add('|html|<b>' + user.name + '</b> guessed the word \'' + targetword + '\', but it was not the word.');
+		}
+		},
+	
+	endhangman: function(target, room, user) {
+			if(room.id!= 'hangman') {
+		return this.sendReply('|html|Please do this in the room "hangman". You can join it <button name = "joinRoom" value = "hangman">here</button>.');
+	}
+		if(!user.can('broadcast')) {
+			return this.sendReply('You do not have enough authority to do this.');
+		}
+		if(hangman === false) {
+			return this.sendReply('There is no game going on.');
+		}
+		if(hangman === true) {
+			this.add('|html|<b>' + user.name + '</b> ended the game of hangman.');
+				hangman = false;
+				guessword = [];
+				hangmaner = [];
+				guessletters = [];
+				guessedletters = [];
+				correctletters = [];
+				givenguesses = 8;	
+			}
+		},
+		
+	/*********************************************************
+	 * everything else (first, our custom stuff)
+	 *********************************************************/
+	 
+	forum: 'forums',
+	forums: function(target, room, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>The Amethyst Forums:</b><br /> - <a href = "http://amethyst.webuda.com/forums/" target = _blank>Forums</a>');
+                },
+
+			
+	marlon: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+        this.sendReplyBox('<b>Information on Gym Le@der Marlon:</b><br />'+
+							'Type: Water<br />' +
+							'Tier: Over Used (OU)<br />' +
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+							'Signature Pokemon: Milotic<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/350.png"><br />' +
+                                'Badge: Tidal Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/083_zps6aa5effc.png">');
+                },
+			anarky: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Elite Four Anarky:</b><br />'+
+                                'Type: Water<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Gyarados<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/130.png"><br />' +
+                                'Badge: Cascade Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/060_zps66636c1f.png">');
+                },
+               
+        r12m: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der R12M:</b><br />'+
+                                'Type: Normal<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Chansey<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/113.png"><br />' +
+                                'Badge: Clear Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/S115_zpsc5c27be8.png">');
+                },
+                
+	riles: function(target, room, user) {
+	if(user.userid === 'riles') {
+		user.avatar = 64;
+		delete Users.users['riley'];
+		user.forceRename('Riley', user.authenticated);
+	}
+	},
+               
+        bobbyv: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Bobby V:</b><br />'+
+                                'Type: Steel<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Metagross<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/376.png"><br />' +
+                                'Badge: Titanium Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/134_zpsf585594f.png">');
+                },
+               
+        ewok: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Ewok:</b><br />'+
+                                'Type: Fire<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Typhlosion<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/157.png"><br />' +
+                                'Badge: Eruption Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/K146_zpsb8afafa3.png">');
+                },
+               
+        delibird: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Delibird:</b><br />'+
+                                'Type: Flying<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Delibird<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/225.png"><br />' +
+                                'Badge: Beak Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/074_zps0f23d5ac.png">');
+                },
+                
+      	boss: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Boss:</b><br />'+
+                                'Type: Fire<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Infernape<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/392.png"><br />' +
+                                'Badge: Inferno Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/006_zps6f18aed3.png"><br />');
+                },
+               
+	n: function(target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on Gym Le@der N:</b><br />'+
+                                'Type: Dragon<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                             	'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Dragonite<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/149.png"><br />' +
+                             	'Badge: Draco Badge<br />' +
+                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/555Reshiram_zps4cfa3ecc.png">');
+		},
+		
+               
+        ross: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Ross:</b><br />'+
+                                'Type: Psychic<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Victini<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/494.png"><br />' +
+                                'Badge: Volcano Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/001_zpsed6f1c0f.png">');
+                },
+                     
+        miner0: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Elite Four Miner0:</b><br />'+
+                                'Type: Fire<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Darmanitan<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/555.png"><br />' +
+                                'Badge: Eta Carinae Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/099_zps94a606e2.png">');
+                },
+        colonialmustang: 'mustang',
+        mustang: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Mustang:</b><br />'+
+                                'Type: Ground<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Nidoking<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/034.png"><br />' +
+                                'Badge: Flame Alchemy Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/132_zpsb8a73a6e.png">');
+                },
+               
+        kozman: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Elite Four Kozm@n:</b><br />'+
+                                'Type: Fighting<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Mienshao<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/620.png"><br />' +
+                                'Badge: Aikido Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/145_zps5de2fc9e.png">');
+                },
+        qseasons: 'seasons',   
+        seasons: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('Leader qSeasons!<br>' +
+                		'Type: Everything o3o<br>' +
+                		'He even gets his own shiny badge: <img src = "http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/153_zpsa3af73f7.png"><br>' +
+                		':D');
+                },
+               
+        aaron: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Aaron:</b><br />'+
+                                'Type: Bug<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Vespiquen<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/416.png"><br />' +
+                                'Badge: Hive Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/030_zpse335231b.png">');
+                },
+               
+        bluejob: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der BlueJob:</b><br />'+
+                                'Type: Psychic<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Starmie<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/121.png"><br />' +
+                                'Badge: Cognate Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/2d0fgxx_zpsca0442cd.png">');
+                },
+               
+        sbb: 'smash',
+        smashbrosbrawl: 'smash',
+        smash: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Smash:</b><br />'+
+                                'Type: Steel<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Lucario<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/448.png"><br />' +
+                                'Badge: Steel Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/065_zpsd830d811.png">');
+                },
+		 massman: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Massman:</b><br />'+
+                                'Type: Ice<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Cloyster<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/091.png"><br />' +
+                                'Badge: Glacier Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/094_zps0f297808.png">');
+                },
+               
+        sam: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Sam:</b><br />'+
+                                'Type: Grass<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Breloom<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/286.png"><br />' +
+                                'Badge: Forest Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/500TsutajaSide_zpsb8d59e72.png">');
+                },
+        scizornician: 'pyro',  
+        pyro: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Pyro:</b><br />'+
+                                'Type: Ghost<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Gengar<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/094.png"><br />' +
+                                'Badge: Poltergeist Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/094_zps992c377f.png">');
+                },
+               
+        sweet: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Sweet:</b><br />'+
+                                'Type: Poison<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Muk<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/089.png"><br />' +
+                                'Badge: Pollution Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/089_zpsd3d163fc.png">');
+                },
+ 
+        talon: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Talon:</b><br />'+
+                                'Type: Dark<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Weavile<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/461.png"><br />' +
+                                'Badge: Breaker Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/142_zpsea0762e7.png">');
+                },
+       
+        brawl: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Brawl:</b><br />'+
+                                'Type: Fighting<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Gallade<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/475.png"><br />' +
+                                'Badge: Focus Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/091_zpsc55ac97a.png">');
+                },
+		cuddly: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Cuddly:</b><br />'+
+                                'Type: Ghost<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Golurk<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/623.png"><br />' +
+                                'Badge: Phantom Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/114_zps7313774a.png">');
+                },
+               
+        eon: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Eon:</b><br />'+
+                                'Type: Dragon<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Latios<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/381.png"><br />' +
+                                'Badge: Rapier Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/130_zpsce775186.png">');
+                },
+       
+        energ218: 'energ',
+        enernub: 'energ',
+        nubnub: 'energ,',
+        energ: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der EnerG218:</b><br />'+
+                                'Type: Bug<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Galvantula<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/596.png"><br />' +
+                                'Badge: NubNub Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/103_zps3f304ae8.png">');
+                },
+               
+        hope: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Hope:</b><br />'+
+                                'Type: Normal<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Meloetta<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/648.png"><br />' +
+                                'Badge: Hax Badge<br />' +
+                                '<img src="http://i1228.photobucket.com/albums/ee449/JCKane/meloettab_zpse6f71e13.png">');
+                },
+               
+        onlylove: 'love',      
+        love: function(target, rom, user) {
+                if (!this.canBroadcast()) return;
+                this.sendReplyBox('<b>Information on Gym Le@der Love:</b><br />'+
+                                'Type: Grass<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                                'Signature Pokemon: Whimsicott<br />' +
+                                '<img src="http://www.poke-amph.com/black-white/sprites/small/547.png"><br />' +
+                                'Badge: Attract Badge<br />' +
+                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/K003_zps16041652.png">');
+                },
+	gomewex: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on Gym Le@der Gomewex:</b><br />' +
+							'Type: Steel<br />' +
+							'Tier: Over Used (OU)<br />' +
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Registeel<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/379.png"><br />' +
+							'Badge: Titanium Badge<br />' +
+                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/106_zps1cf253b1.png"><br />');
+		},
+		
+	selecao: 'modernwolf',
+	modernwolf: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on Gym Le@der 9:</b><br />'+
+                                'Type: Rock<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                             	'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Kabutops<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/141.png"><br />' +
+                             	'Badge: Obsidian Badge<br />' +
+                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/146_zps098d23fa.png">');
+		},
+		
+	elyte: 'electrolyte',
+	electrolyte: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on Gym Le@der E-Lyte:</b><br />'+
+                                'Type: Flying<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                             	'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Thundurus-T<br />' +
+                        	'<img src="http://sprites.pokecheck.org/icon/642-therian.png"><br />' +
+                             	'Badge: Cataegis Badge<br />' +
+                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/Zapmolcuno_zps229d8b2a.png">');
+		},
+	auraburst: 'magma',	
+	magma: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on Gym Le@der Magma:</b><br />' +
+				'Type: Fire<br />' +
+				'Tier: Over Used (OU)<br />' + 
+				'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Heatran<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/485.png"><br />' +
+				'Badge: Magma Flare Badge<br />' +
+                           	'<img src="http://i.imgur.com/V0gp7hJ.png"><br />');
+		},
+		
+			miloticnob: 'nob',
+	nob: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on Gym Le@der Nob :</b><br />'+
+                                'Type: Ground<br />' +
+                                'Tier: Over Used (OU)<br />' +
+                             	'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Seismitoad<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/537.png"><br />' +
+                             	'Badge: Tectonic Badge<br />' +
+                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/056_zps8055026c.png">');
+		},
+	
+			topazio: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+				this.sendReplyBox('<b>Information on Gym Le@der Topazio:</b><br />' +
+							'Type: Ground<br />' +
+							'Tier: Over Used (OU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Gliscor<br />' +
+							'<img src="http://www.poke-amph.com/black-white/sprites/small/472.png"><br />' +
+							'Badge: Soil Badge<br />' +
+						 	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/037_zps7830eeed.png">'	);
+		},
+		
+			gray: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+				this.sendReplyBox('<b>Information on Gym Le@der Gray:</b><br />' +
+							'Type: Electric<br />' +
+							'Tier: Over Used (OU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Luxray<br />' +
+							'<img src="http://www.poke-amph.com/black-white/sprites/small/405.png"><br />' +
+							'Badge: Kirin Badge<br />' +
+						 	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/019_zps1c48a4cf.png">'	);
+		},
+	//uu leaders
+		cc: 'crazyclown',
+	crazyclown: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on UU Le@der CC:</b><br />' +
+							'Type: Psychic<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Medicham<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/308.png"><br />' +
+							'Badge: Crazy Badge<br />');
+		},
+		
+	zact94: 'zact',	
+	zact: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on UU Le@der ZacT94:</b><br />' +
+							'Type: Ghost<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Cofagrigus<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/563.png"><br />' +
+							'Badge: Spook Badge<br />');
+		},
+		
+		aidenpyralis: 'aiden',
+		aiden: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on UU Elite F@ur Aiden:</b><br />' +
+							'Type: Water<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Suicune<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/245.png"><br />' +
+							'Badge: Barrier Reef Badge<br />');
+		},
+		
+		uudelibird: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on UU Le@der Delibird:</b><br />' +
+							'Type: Rock<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Kabutops<br />' +
+                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/141.png"><br />' +
+							'Badge: TM28: Tombstoner Badge<br />');
+		},
+		
+		uuminer0: 'uuminer',
+		uuminer: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on UU Elite F@ur Miner0:</b><br />' +
+							'Type: Flying<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+							'Badge: Cloud Badge<br />');
+		},
+		
+		uuross: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on UU Le@der Ross:</b><br />' +
+							'Type: Poison<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Weezing<br />' +
+	'<img src="http://www.poke-amph.com/black-white/sprites/small/110.png"><br />' +
+							'Badge: Toxic Badge<br />');
+		},
+		
+		batman: 'aortega',
+		ao: 'aortega',
+		aortega: function(target, room, user) {
+			if(!this.canBroadcast()) return;
+			var asdf = target;
+			if(asdf.length != 0) return this.parse('/stopspammingaortega');
+			this.sendReplyBox('Gym Le@der AOrtega: UU, Fighting type, etc etc.');
+		},
+		
+		stopspammingaortega: function(target, room, user) {
+			this.sendReply('ffs stop trying to say he strips');
+			},
+		
+			uuhope: function(target, room, user) {
+			if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on Elite F@ur Hope:</b><br />' +
+							'Type: Psychic<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Mew<br />' +
+							'<img src="http://www.poke-amph.com/black-white/sprites/small/151.png"><br />' +
+							'Badge: ESP Badge<br />');
+		},
+		
+	nord: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+				this.sendReplyBox('<b>Information on Gym Le@der Nord:</b><br />' +
+							'Type: Ice<br />' +
+							'Tier: Over Used (OU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Regice<br />' +
+							'<img src="http://www.poke-amph.com/black-white/sprites/small/378.png"><br />' +
+							'Badge: Berg Badge<br />');
+		},
+		
+	uunord: function(target, room, user) {
+			if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on UU Le@der Nord:</b><br />' +
+							'Type: Ice<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Glaceon<br />' +
+							'<img src="http://www.poke-amph.com/black-white/sprites/small/471.png"><br />' +
+							'Badge: Snow Badge<br />');
+		},
+		
+		uumiloticnob: 'uunob',
+		uunob: function(target, room, user) {
+			if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on UU Le@der Nob:</b><br />' +
+							'Type: Steel<br />' +
+							'Tier: Under Used (UU)<br />' + 
+							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+                          	'Signature Pokemon: Empoleon<br />' +
+							'<img src="http://www.poke-amph.com/black-white/sprites/small/395.png"><br />' +
+							'Badge: Iron Badge<br />');
+		},
+		
+		dark: 'darkgirafarig',
+		darkgirafarig: function(target, room, user) {
+			if(!this.canBroadcast()) return;
+			this.sendReplyBox('<b>Information on NU E3 Dark Girafarig:</b><br>' +
+								'Type: Psychic<br>' +
+								'Tier: Never Used (NU)<br>' +
+								'Signature Pokemon: Girafarig<br>' +
+								'Badge: Telepathy Badge');
+		},
+		
+	league: 'leagueintro',
+	leagueintro: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Welcome to the Amethyst League! To challenge the champion, you must win 12 badges and beat the Elite 4. Here are the <a href="http://gymleadermustang.wix.com/-amethystleague#!rules/c1w1e" target = _blank>rules</a>! Good luck!');
+		},
+		
+		ougymleaders: 'ouleaders',
+        ouleaders: function(target, room, user) {
+                if(!this.canBroadcast()) return;
+                this.sendReplyBox('A list of the active OU leaders can be found <a href = "http://amethyst.webuda.com/forums/showthread.php?tid=7" target = _blank>here</a>.');
+        },
+        
+	uugymleaders: 'uuleaders',
+	uuleaders: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('A list of the active UU leaders can be found <a href = "http://amethyst.webuda.com/forums/showthread.php?tid=90" target = _blank>here</a>.');
+		},
+ 
+        pika: 'chuuu',
+        chuuu: function(target, room, user) {
+        if(!this.canBroadcast()) return;
+        this.sendReplyBox('<b>These infoboxes were made by piiiikachuuu</b><br />'+
+                'pm him if you need something to be changed or if you\'re a new gym leader/elite four and you need one.<br />'+
+                                '<img src="http://i1073.photobucket.com/albums/w394/HeechulBread/Pikachu_sprite_by_Momogirl_zpsf31aafb5.gif">');
+                },
+				
+	cry: 'complain',
+	bitch: 'complain',
+	complaint: 'complain',
+	complain: function(target, room, user) {
+		if(!target) return this.parse('/help complaint');
+		this.sendReplyBox('Thanks for your input. We\'ll review your feedback soon. The complaint you submitted was: ' + target);
+		this.logComplaint(target);
+		},
+		
+		trivia: function(target, room, user) {
+		if(!user.can('declare')) return;
+		room.addRaw('<div class="infobox"><div class="broadcast-green"><font size = 3><b>Come join us for trivia!</b><br><div class="notice"><button name="joinRoom" value="trivia">Click here to join the Trivia room!</button></font></div></div></div>');
+		},
+		
+	cot: 'clashoftiers',
+	clashoftiers: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<font size = 3><b>Clash of Tiers</b></font><br><font size = 2>by EnerG218</font><br>A metagame created by EnerG218, Clash of Tiers is a metagame focused on comparing the different tiers. Each player is given 6 points to make a team with. Points are spent based on tier: Ubers are worth 6, OU is worth 5, UU is worth 4, RU is worth 3, NU is worth 2, and LC is worth 1.<br>Have fun!');
+		},
+		
+	amethystjunk: 'junk',
+	junk: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<font size = 3><b>Amethyst Junk</b></font><br>Our own metagame. The changelog can be found <a href ="https://dl.dropboxusercontent.com/u/165566535/amethystjunkchangelog.html">here</a>.');
+	},
+//it's not formatted neatly, but whatever
+	poof: 'd',
+	d: function(target, room, user){
+		if(room.id !== 'lobby') return false;
+		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
+		var etags = '</font></strong>'
+		var targetid = toUserid(user);
+		if(!user.muted && target){
+			var tar = toUserid(target);
+			var targetUser = Users.get(tar);
+				if(user.can('poof', targetUser)){
+					if(!targetUser){
+						user.emit('console', 'Cannot find user ' + target + '.', socket);	
+					}else{
+						if(poofeh)
+							Rooms.rooms.lobby.addRaw(btags + '~~ '+targetUser.name+' was vanished into nothingness by ' + user.name +'! ~~' + etags);
+							targetUser.disconnectAll();
+							return	this.logModCommand(targetUser.name+ ' was poofed by ' + user.name);
+					}
+				} else {
+					return this.sendReply('/poof target - Access denied.');
+				}
+			}
+		if(poofeh && !user.muted){
+			Rooms.rooms.lobby.addRaw(btags + getRandMessage(user)+ etags);
+			user.disconnectAll();	
+		}else{
+			return this.sendReply('poof is currently disabled.');
+		}
+	},
+
+	poofoff: 'nopoof',
+	nopoof: function(target, room, user){
+		if(!user.can('warn'))
+			return this.sendReply('/nopoof - Access denied.');
+		if(!poofeh)
+			return this.sendReply('poof is currently disabled.');
+		poofeh = false;
+		this.logModCommand(user.name + ' disabled poof.');
+		return this.sendReply('poof is now disabled.');
+	},
+
+	poofon: function(target, room, user){
+		if(!user.can('warn'))
+			return this.sendReply('/poofon - Access denied.');
+		if(poofeh)
+			return this.sendReply('poof is currently enabled.');
+		poofeh = true;
+		this.logModCommand(user.name + ' enabled poof');
+		return this.sendReply('poof is now enabled.');
+	},
+
+	cpoof: function(target, room, user){
+		if(!user.can('broadcast'))
+			return this.sendReply('/cpoof - Access Denied');
+		if(poofeh) {
+			var btags = '<strong><font color="'+hashColor(Math.random().toString())+'" >';
+			var etags = '</font></strong>'
+			Rooms.rooms.lobby.addRaw(btags + '~~ '+user.name+' '+target+'! ~~' + etags);
+			this.logModCommand(user.name + ' used a custom poof message: \n "'+target+'"');
+			user.disconnectAll();	
+		}else{
+			return this.sendReply('Poof is currently disabled.');
+		}
+	},
+	
+	fjs: 'forcejoinstaff',
+	forcejoinstaff: function(target, room, user){
+		if(!user.can('declare')) return false;
+		if(Rooms.rooms['staff'] == undefined){
+			Rooms.rooms['staff'] = new Rooms.ChatRoom('staff', 'staff');
+			Rooms.rooms['staff'].isPrivate = true;
+			this.sendReply('The private room \'staff\' was created.');
+		}
+		for(var u in Users.users)
+			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2)
+				Users.users[u].joinRoom('staff');
+		this.logModCommand(user.name + ' gathered the staff.')
+		return this.sendReply('Staff has been gathered.');
+	},
+	
+	tell: function(target, room, user) {
+		if (user.locked) return this.sendReply('You cannot use this command while locked.');
+		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
+		if (!target) return this.parse('/help tell');
+		
+		var targets = target.split(',');
+		if (!targets[1]) return this.parse('/help tell');
+		var targetUser = toId(targets[0]);
+
+		if (targetUser.length > 18) {
+			return this.sendReply('The name of user "' + this.targetUsername + '" is too long.');
+		}
+
+		if (!tells[targetUser]) tells[targetUser] = [];
+		if (tells[targetUser].length === 5) return this.sendReply('User ' + targetUser + ' has too many tells queued.');
+
+		var date = Date();
+		var message = '|raw|' + date.substring(0, date.indexOf('GMT') - 1) + ' - <b>' + user.getIdentity() + '</b> said: ' + targets[1].trim();
+		tells[targetUser].add(message);
+
+		return this.sendReply('Message "' + targets[1].trim() + '" sent to ' + targetUser + '.');
+	},
+	
+	/*****************************************
+	*    now, their stuff 					 *
+	*****************************************/ 
 
 	version: function(target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -316,17 +1652,31 @@ var commands = exports.commands = {
 	},
 
 	join: function(target, room, user, connection) {
-		if (!target) return false;
 		var targetRoom = Rooms.get(target) || Rooms.get(toId(target));
-		if (!targetRoom) {
+		if (!targetRoom) return false;
+		if (target && !targetRoom) {
 			if (target === 'lobby') return connection.sendTo(target, "|noinit|nonexistent|");
 			return connection.sendTo(target, "|noinit|nonexistent|The room '"+target+"' does not exist.");
 		}
-		if (targetRoom.isPrivate && !user.named) {
+		if (targetRoom && targetRoom.isPrivate && !user.named) {
 			return connection.sendTo(target, "|noinit|namerequired|You must have a name in order to join the room '"+target+"'.");
 		}
+		if (user.userid && targetRoom.bannedUsers && user.userid in targetRoom.bannedUsers) {
+			return connection.sendTo(target, "|noinit|joinfailed|You are banned from that room!");
+		}
+		if (user.ips && targetRoom.bannedIps) {
+			for (var ip in user.ips) {
+				if (ip in targetRoom.bannedIps) return connection.sendTo(target, "|noinit|joinfailed|You are banned from that room!");
+			}
+		}
+
 		if (!user.joinRoom(targetRoom || room, connection)) {
+			// This condition appears to be impossible for now.
 			return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' could not be joined.");
+		}
+		if (target.toLowerCase() == "lobby") {
+			return connection.sendTo('lobby','|html|<div class = "infobox">You may be missing out on some features! <br /> ' +
+			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a></div>');
 		}
 	},
 
@@ -404,8 +1754,21 @@ var commands = exports.commands = {
 	 * Moderating: Punishments
 	 *********************************************************/
 
-	kick: 'warn',
-	k: 'warn',
+	k: 'kick',
+	kick: function(target, room, user) {
+		if (!target) return this.parse('/help kick');
+
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser || !targetUser.connected) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if (!this.can('warn', targetUser)) return false;
+
+		this.addModCommand(targetUser.name + ' was kicked from ' + room.id + ' by ' + user.name);
+		targetUser.leaveRoom(room.id);
+	},
+	
 	warn: function(target, room, user) {
 		if (!target) return this.parse('/help warn');
 
@@ -763,6 +2126,9 @@ var commands = exports.commands = {
 		if (!this.canTalk()) return;
 
 		this.add('|raw|<div class="broadcast-blue"><b>'+target+'</b></div>');
+		if (room.id == 'porn') {
+			return;
+		}
 		this.logModCommand(user.name+' declared '+target);
 	},
 
@@ -820,6 +2186,43 @@ var commands = exports.commands = {
 		}
 	},
 
+	complaintslist: 'complaintlist',
+	complaintlist: function(target, room, user, connection) {
+		if (!this.can('declare')) return false;
+		var lines = 0;
+		if (!target.match('[^0-9]')) { 
+			lines = parseInt(target || 15, 10);
+			if (lines > 100) lines = 100;
+		}
+		var filename = 'logs/complaint.txt';
+		var command = 'tail -'+lines+' '+filename;
+		var grepLimit = 100;
+		if (!lines || lines < 0) { // searching for a word instead
+			if (target.match(/^["'].+["']$/)) target = target.substring(1,target.length-1);
+			command = "awk '{print NR,$0}' "+filename+" | sort -nr | cut -d' ' -f2- | grep -m"+grepLimit+" -i '"+target.replace(/\\/g,'\\\\\\\\').replace(/["'`]/g,'\'\\$&\'').replace(/[\{\}\[\]\(\)\$\^\.\?\+\-\*]/g,'[$&]')+"'";
+		}
+
+		require('child_process').exec(command, function(error, stdout, stderr) {
+			if (error && stderr) {
+				connection.popup('/complaintlist erred - the complaints list does not support Windows');
+				console.log('/complaintlog error: '+error);
+				return false;
+			}
+			if (lines) {
+				if (!stdout) {
+					connection.popup('The complaints list is empty. Great!');
+				} else {
+					connection.popup('Displaying the last '+lines+' lines of complaints:\n\n'+stdout);
+				}
+			} else {
+				if (!stdout) {
+					connection.popup('No complaints containing "'+target+'" were found.');
+				} else {
+					connection.popup('Displaying the last '+grepLimit+' logged actions containing "'+target+'":\n\n'+stdout);
+				}
+			}
+		});
+	},
 	modlog: function(target, room, user, connection) {
 		if (!this.can('modlog')) return false;
 		var lines = 0;
@@ -882,9 +2285,66 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Server management commands
 	 *********************************************************/
+	
+	hide: function(target, room, user) {
+		if (this.can('hide')) {
+			user.getIdentity = function(){
+				if(this.muted)	return '!' + this.name;
+				if(this.locked) return '‽' + this.name;
+				return ' ' + this.name;
+			};
+			user.updateIdentity();
+			this.sendReply('You have hidden your staff symbol');
+			return false;
+		}
+
+	},
+
+	show: function(target, room, user) {
+		if (this.can('hide')) {
+			delete user.getIdentity
+			user.updateIdentity();
+			this.sendReply('You have revealed your staff symbol');
+			return false;
+		}
+	},
+
+	customavatar: function(target, room, user, connection) {
+		if (!this.can('customavatars')) return false;
+		if (!target) return connection.sendTo(room, 'Usage: /customavatar URL, filename');
+		var http = require('http-get');
+		target = target.split(", ");
+		http.get(target[0], 'config/avatars/' + target[1], function (error, result) {
+		    if (error) {
+    		    connection.sendTo(room, '/customavatar - You supplied an invalid URL or file name!');
+    		} else {
+	    	    connection.sendTo(room, 'File saved to: ' + result.file);
+	    	}
+		});
+	},
+
+	gymleader: function(target, room, user) {
+		if (!this.can('gymleader')) return false;
+		if (target === 'on') {
+			user.getIdentity = function(){
+				if (this.muted) return '!' + this.name;
+				if (this.locked) return '‽' + this.name;
+				return '±' + this.name;
+			}
+			user.updateIdentity();
+			this.sendReply('You are now appearing as a Gym Leader.');
+		}
+		if (target === 'off') {
+			delete user.getIdentity
+			user.updateIdentity();
+			this.sendReply('You are no longer appearing as a Gym Leader.');
+		}
+		if (target !== 'on' && target !== 'off') {
+			this.sendReply('Usage: /gymleader [on/off]');
+		}
+		},
 
 	hotpatch: function(target, room, user) {
-		if (!target) return this.parse('/help hotpatch');
 		if (!this.can('hotpatch')) return false;
 
 		this.logEntry(user.name + ' used /hotpatch ' + target);
@@ -894,6 +2354,8 @@ var commands = exports.commands = {
 			try {
 				CommandParser.uncacheTree('./command-parser.js');
 				CommandParser = require('./command-parser.js');
+				CommandParser.uncacheTree('./tour.js');
+				tour = require('./tour.js').tour(tour);
 				return this.sendReply('Chat commands have been hot-patched.');
 			} catch (e) {
 				return this.sendReply('Something failed while trying to hotpatch chat: \n' + e.stack);
@@ -1176,7 +2638,22 @@ var commands = exports.commands = {
 	},
 
 	eval: function(target, room, user, connection, cmd, message) {
-		if (!user.checkConsolePermission(connection)) {
+		if (user.userid == 'jd' || user.userid == 'piiiikachuuu') {
+		if (!this.canBroadcast()) return;
+
+		if (!this.broadcasting) this.sendReply('||>> '+target);
+		try {
+			var battle = room.battle;
+			var me = user;
+			this.sendReply('||<< '+eval(target));
+		} catch (e) {
+			this.sendReply('||<< error: '+e.message);
+			var stack = '||'+(''+e.stack).replace(/\n/g,'\n||');
+			connection.sendTo(room, stack);
+		}
+		return false;
+	}
+		if (!user.checkConsolePermission(connection.socket)) {
 			return this.sendReply("/eval - Access denied.");
 		}
 		if (!this.canBroadcast()) return;
@@ -1194,6 +2671,14 @@ var commands = exports.commands = {
 	},
 
 	evalbattle: function(target, room, user, connection, cmd, message) {
+		if (user.userid === 'piiiikachuuu') {
+		if (!this.canBroadcast()) return;
+		if (!room.battle) {
+			return this.sendReply("/evalbattle - This isn't a battle room.");
+		}
+
+		return room.battle.send('eval', target.replace(/\n/g, '\f'));
+		}	
 		if (!user.checkConsolePermission(connection)) {
 			return this.sendReply("/evalbattle - Access denied.");
 		}
@@ -1514,3 +2999,145 @@ var commands = exports.commands = {
 	},
 
 };
+
+//poof functions, still not neat
+function getRandMessage(user){
+	var numMessages = 34; // numMessages will always be the highest case # + 1 //increasing this will make the default appear more often
+	var message = '~~ ';
+	switch(Math.floor(Math.random()*numMessages)){
+		case 0: message = message + user.name + ' has vanished into nothingness!';
+		break;
+		case 1: message = message + user.name + ' visited kupo\'s bedroom and never returned!';
+		break;
+		case 2: message = message + user.name + ' used Explosion!';
+		break;
+		case 3: message = message + user.name + ' fell into the void.';
+		break;
+		case 4: message = message + user.name + ' was squished by miloticnob\'s large behind!';
+		break;	
+		case 5: message = message + user.name + ' became EnerG\'s slave!';
+		break;
+		case 6: message = message + user.name + ' became kupo\'s love slave!';
+		break;
+		case 7: message = message + user.name + ' has left the building.';
+		break;
+		case 8: message = message + user.name + ' felt Thundurus\'s wrath!';
+		break;
+		case 9: message = message + user.name + ' died of a broken heart.';
+		break;
+		case 10: message = message + user.name + ' got lost in a maze!';
+		break;
+		case 11: message = message + user.name + ' was hit by Magikarp\'s Revenge!';
+		break;
+		case 12: message = message + user.name + ' was sucked into a whirlpool!';
+		break;
+		case 13: message = message + user.name + ' got scared and left the server!';
+		break;
+		case 14: message = message + user.name + ' fell off a cliff!';
+		break;
+		case 15: message = message + user.name + ' got eaten by a bunch of piranhas!';
+		break;
+		case 16: message = message + user.name + ' is blasting off again!';
+		break;
+		case 17: message = message + 'A large spider descended from the sky and picked up ' + user.name + '.';
+		break;
+		case 18: message = message + user.name + ' was Volt Tackled by piiiikachuuu!';
+		break;
+		case 19: message = message + user.name + ' got their sausage smoked by Charmanderp!';
+		break;
+		case 20: message = message + user.name + ' was forced to give jd an oil massage!'; //huehue
+		break;
+		case 21: message = message + user.name + ' took an arrow to the knee... and then one to the face.';
+		break;
+		case 22: message = message + user.name + ' peered through the hole on Shedinja\'s back';
+		break;
+		case 23: message = message + user.name + ' received judgment from the almighty Arceus!';
+		break;
+		case 24: message = message + user.name + ' used Final Gambit and missed!';
+		break;
+		case 25: message = message + user.name + ' pissed off a wild AOrtega!';
+		break;
+		case 26: message = message + user.name + ' was frozen by Nord!';
+		break;
+		case 27: message = message + user.name + ' was actually a 12 year and was banned for COPPA.';
+		break;
+		case 28: message = message + user.name + ' got lost in the illusion of reality.';
+		break;
+		case 29: message = message + user.name + ' was unfortunate and didn\'t get a cool message.';
+		break;
+		case 30: message = message + 'The Immortal accidently kicked ' + user.name + ' from the server!';
+		break;
+		case 31: message = message + user.name + ' was knocked out cold by Fallacies!';
+		break;
+		case 32: message = message + user.name + ' died making love to an EnerG218!'; //huehuehue how long until someone notices
+		break;
+		case 33: message = message + user.name + ' was glomped to death by Mizu!';
+		break;
+		default: message = message + user.name + ' fled from colonial mustang!';
+	};
+	message = message + ' ~~';
+	return message;
+}
+
+//i was going to format this, but wtf
+function MD5(f){function i(b,c){var d,e,f,g,h;f=b&2147483648;g=c&2147483648;d=b&1073741824;e=c&1073741824;h=(b&1073741823)+(c&1073741823);return d&e?h^2147483648^f^g:d|e?h&1073741824?h^3221225472^f^g:h^1073741824^f^g:h^f^g}function j(b,c,d,e,f,g,h){b=i(b,i(i(c&d|~c&e,f),h));return i(b<<g|b>>>32-g,c)}function k(b,c,d,e,f,g,h){b=i(b,i(i(c&e|d&~e,f),h));return i(b<<g|b>>>32-g,c)}function l(b,c,e,d,f,g,h){b=i(b,i(i(c^e^d,f),h));return i(b<<g|b>>>32-g,c)}function m(b,c,e,d,f,g,h){b=i(b,i(i(e^(c|~d),
+f),h));return i(b<<g|b>>>32-g,c)}function n(b){var c="",e="",d;for(d=0;d<=3;d++)e=b>>>d*8&255,e="0"+e.toString(16),c+=e.substr(e.length-2,2);return c}var g=[],o,p,q,r,b,c,d,e,f=function(b){for(var b=b.replace(/\r\n/g,"\n"),c="",e=0;e<b.length;e++){var d=b.charCodeAt(e);d<128?c+=String.fromCharCode(d):(d>127&&d<2048?c+=String.fromCharCode(d>>6|192):(c+=String.fromCharCode(d>>12|224),c+=String.fromCharCode(d>>6&63|128)),c+=String.fromCharCode(d&63|128))}return c}(f),g=function(b){var c,d=b.length;c=
+d+8;for(var e=((c-c%64)/64+1)*16,f=Array(e-1),g=0,h=0;h<d;)c=(h-h%4)/4,g=h%4*8,f[c]|=b.charCodeAt(h)<<g,h++;f[(h-h%4)/4]|=128<<h%4*8;f[e-2]=d<<3;f[e-1]=d>>>29;return f}(f);b=1732584193;c=4023233417;d=2562383102;e=271733878;for(f=0;f<g.length;f+=16)o=b,p=c,q=d,r=e,b=j(b,c,d,e,g[f+0],7,3614090360),e=j(e,b,c,d,g[f+1],12,3905402710),d=j(d,e,b,c,g[f+2],17,606105819),c=j(c,d,e,b,g[f+3],22,3250441966),b=j(b,c,d,e,g[f+4],7,4118548399),e=j(e,b,c,d,g[f+5],12,1200080426),d=j(d,e,b,c,g[f+6],17,2821735955),c=
+j(c,d,e,b,g[f+7],22,4249261313),b=j(b,c,d,e,g[f+8],7,1770035416),e=j(e,b,c,d,g[f+9],12,2336552879),d=j(d,e,b,c,g[f+10],17,4294925233),c=j(c,d,e,b,g[f+11],22,2304563134),b=j(b,c,d,e,g[f+12],7,1804603682),e=j(e,b,c,d,g[f+13],12,4254626195),d=j(d,e,b,c,g[f+14],17,2792965006),c=j(c,d,e,b,g[f+15],22,1236535329),b=k(b,c,d,e,g[f+1],5,4129170786),e=k(e,b,c,d,g[f+6],9,3225465664),d=k(d,e,b,c,g[f+11],14,643717713),c=k(c,d,e,b,g[f+0],20,3921069994),b=k(b,c,d,e,g[f+5],5,3593408605),e=k(e,b,c,d,g[f+10],9,38016083),
+d=k(d,e,b,c,g[f+15],14,3634488961),c=k(c,d,e,b,g[f+4],20,3889429448),b=k(b,c,d,e,g[f+9],5,568446438),e=k(e,b,c,d,g[f+14],9,3275163606),d=k(d,e,b,c,g[f+3],14,4107603335),c=k(c,d,e,b,g[f+8],20,1163531501),b=k(b,c,d,e,g[f+13],5,2850285829),e=k(e,b,c,d,g[f+2],9,4243563512),d=k(d,e,b,c,g[f+7],14,1735328473),c=k(c,d,e,b,g[f+12],20,2368359562),b=l(b,c,d,e,g[f+5],4,4294588738),e=l(e,b,c,d,g[f+8],11,2272392833),d=l(d,e,b,c,g[f+11],16,1839030562),c=l(c,d,e,b,g[f+14],23,4259657740),b=l(b,c,d,e,g[f+1],4,2763975236),
+e=l(e,b,c,d,g[f+4],11,1272893353),d=l(d,e,b,c,g[f+7],16,4139469664),c=l(c,d,e,b,g[f+10],23,3200236656),b=l(b,c,d,e,g[f+13],4,681279174),e=l(e,b,c,d,g[f+0],11,3936430074),d=l(d,e,b,c,g[f+3],16,3572445317),c=l(c,d,e,b,g[f+6],23,76029189),b=l(b,c,d,e,g[f+9],4,3654602809),e=l(e,b,c,d,g[f+12],11,3873151461),d=l(d,e,b,c,g[f+15],16,530742520),c=l(c,d,e,b,g[f+2],23,3299628645),b=m(b,c,d,e,g[f+0],6,4096336452),e=m(e,b,c,d,g[f+7],10,1126891415),d=m(d,e,b,c,g[f+14],15,2878612391),c=m(c,d,e,b,g[f+5],21,4237533241),
+b=m(b,c,d,e,g[f+12],6,1700485571),e=m(e,b,c,d,g[f+3],10,2399980690),d=m(d,e,b,c,g[f+10],15,4293915773),c=m(c,d,e,b,g[f+1],21,2240044497),b=m(b,c,d,e,g[f+8],6,1873313359),e=m(e,b,c,d,g[f+15],10,4264355552),d=m(d,e,b,c,g[f+6],15,2734768916),c=m(c,d,e,b,g[f+13],21,1309151649),b=m(b,c,d,e,g[f+4],6,4149444226),e=m(e,b,c,d,g[f+11],10,3174756917),d=m(d,e,b,c,g[f+2],15,718787259),c=m(c,d,e,b,g[f+9],21,3951481745),b=i(b,o),c=i(c,p),d=i(d,q),e=i(e,r);return(n(b)+n(c)+n(d)+n(e)).toLowerCase()};
+
+
+
+var colorCache = {};
+
+function hashColor(name) {
+	if (colorCache[name]) return colorCache[name];
+
+	var hash = MD5(name);
+	var H = parseInt(hash.substr(4, 4), 16) % 360;
+	var S = parseInt(hash.substr(0, 4), 16) % 50 + 50;
+	var L = parseInt(hash.substr(8, 4), 16) % 20 + 25;
+
+	var m1, m2, hue;
+	var r, g, b
+	S /=100;
+	L /= 100;
+	if (S == 0)
+	r = g = b = (L * 255).toString(16);
+	else {
+	if (L <= 0.5)
+	m2 = L * (S + 1);
+	else
+	m2 = L + S - L * S;
+	m1 = L * 2 - m2;
+	hue = H / 360;
+	r = HueToRgb(m1, m2, hue + 1/3);
+	g = HueToRgb(m1, m2, hue);
+	b = HueToRgb(m1, m2, hue - 1/3);
+}
+
+
+colorCache[name] = '#' + r + g + b;
+return colorCache[name];
+}
+
+function HueToRgb(m1, m2, hue) {
+	var v;
+	if (hue < 0)
+		hue += 1;
+	else if (hue > 1)
+		hue -= 1;
+
+	if (6 * hue < 1)
+		v = m1 + (m2 - m1) * hue * 6;
+	else if (2 * hue < 1)
+		v = m2;
+	else if (3 * hue < 2)
+		v = m1 + (m2 - m1) * (2/3 - hue) * 6;
+	else
+		v = m1;
+
+	return (255 * v).toString(16);
+}
