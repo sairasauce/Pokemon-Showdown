@@ -1192,6 +1192,14 @@ var commands = exports.commands = {
 								'Signature Pokemon: Girafarig<br>' +
 								'Badge: Telepathy Badge');
 		},
+	
+	platinum: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on NU E3 Pl@tinum:</b><br>' +
+							'Type: Poison<br>' +
+							'Tier: Never Used (NU)<br>' +
+							'Signature Pokemon: Golbat');
+		},
 		
 	league: 'leagueintro',
 	leagueintro: function(target, room, user) {
