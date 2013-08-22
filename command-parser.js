@@ -143,6 +143,9 @@ var parse = exports.parse = function(message, room, user, connection, levelsDeep
 			logModCommand: function(result) {
 				modlog.write('['+(new Date().toJSON())+'] ('+room.id+') '+result+'\n');
 			},
+			logComplaint: function(result) {
+				complaint.write('['+(new Date().toJSON())+'] ('+room.id+') '+ user.name + ': ' +result+'\n');
+			},
 			can: function(permission, target, room) {
 				if (!user.can(permission, target, room)) {
 					this.sendReply('/'+cmd+' - Access denied.');
