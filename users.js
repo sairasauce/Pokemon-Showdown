@@ -1645,7 +1645,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 														}
 														console.log(connection + ' is listed in spamhaus. (IP listed in css.spamhaus.org)');
 														break;
-													case '127.0.0.4':
+												/*	case '127.0.0.4':
 														if (ban) {
 															user.ban();
 															CommandParser.modlog.write('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (IP Listed in xbl.spamhaus.org) IP: ' + connection + '\n');
@@ -1653,7 +1653,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 															ipbans.write('\n'+connection);
 														}
 														console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
-														break;
+														break;*/
 													case '127.0.0.5':
 														if (ban) {
 															user.ban();
