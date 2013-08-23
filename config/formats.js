@@ -80,14 +80,6 @@ exports.Formats = [
 		banlist: ['RU','BL3']
 	},
 	{
-		name: "LC",
-		section: "Singles",
-
-		maxLevel: 5,
-		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
-		banlist: ['Sonicboom', 'Dragon Rage', 'Berry Juice', 'Carvanha', 'Meditite', 'Gligar', 'Scyther', 'Sneasel', 'Tangela', 'Vulpix', 'Yanma', 'Soul Dew']
-	},
-	{
 		name: "CAP",
 		section: "Singles",
 
@@ -139,30 +131,6 @@ exports.Formats = [
 		},
 		ruleset: ['Pokemon', 'Species Clause', 'Item Clause', 'Team Preview GBU'],
 		banlist: ['Unreleased', 'Illegal', 'Sky Drop', 'Dark Void', 'Soul Dew', 'Chatot']
-	},
-	{
-		name: "Custom Game",
-		section: "Singles",
-
-		searchShow: false,
-		canUseRandomTeam: true,
-		debug: true,
-		maxLevel: 1000,
-		defaultLevel: 100,
-		// no restrictions, for serious (other than team preview)
-		ruleset: ['Team Preview']
-	},
-	{
-		name: "Custom Game (no Team Preview)",
-		section: "Singles",
-
-		searchShow: false,
-		canUseRandomTeam: true,
-		debug: true,
-		maxLevel: 1000,
-		defaultLevel: 100,
-		// no restrictions, for serious
-		ruleset: []
 	},
 
 	// Doubles
@@ -239,32 +207,38 @@ exports.Formats = [
 
 		gameType: 'doubles',
 		team: 'random',
-		searchShow: false,
 		debug: true,
 		ruleset: ['PotD', 'Pokemon', 'HP Percentage Mod']
 	},
 	{
-		name: "Doubles Challenge Cup",
-		section: 'Doubles',
+		name: "Challenge Cup",
+		section: "Challenge Cup",
 
-		gameType: 'doubles',
 		team: 'randomCC',
-		searchShow: false,
-		debug: true,
 		ruleset: ['Pokemon', 'HP Percentage Mod']
 	},
 	{
-		name: "Doubles Custom Game",
-		section: 'Doubles',
+		name: "Challenge Cup 1-vs-1",
+		section: "Challenge Cup",
+
+		team: 'randomCC',
+		ruleset: ['Pokemon', 'Team Preview 1v1', 'HP Percentage Mod'],
+		onBegin: function() {
+			this.debug('Cutting down to 1');
+			this.p1.pokemon = this.p1.pokemon.slice(0, 1);
+			this.p1.pokemonLeft = this.p1.pokemon.length;
+			this.p2.pokemon = this.p2.pokemon.slice(0, 1);
+			this.p2.pokemonLeft = this.p2.pokemon.length;
+		}
+	},
+	{
+		name: "Doubles Challenge Cup",
+		section: 'Challenge Cup',
 
 		gameType: 'doubles',
-		searchShow: false,
-		canUseRandomTeam: true,
+		team: 'randomCC',
 		debug: true,
-		maxLevel: 1000,
-		defaultLevel: 100,
-		// no restrictions, for serious (other than team preview)
-		ruleset: ['Team Preview']
+		ruleset: ['Pokemon', 'HP Percentage Mod']
 	},
 
 	// Other Metagames
@@ -280,77 +254,6 @@ exports.Formats = [
 			'Arceus', 'Arceus-Bug', 'Arceus-Dark', 'Arceus-Dragon', 'Arceus-Electric', 'Arceus-Fighting', 'Arceus-Fire', 'Arceus-Flying', 'Arceus-Ghost', 'Arceus-Grass', 'Arceus-Ground', 'Arceus-Ice', 'Arceus-Poison', 'Arceus-Psychic', 'Arceus-Rock', 'Arceus-Steel', 'Arceus-Water',
 			'Reshiram', 'Zekrom', 'Kyurem-White', 'Genesect'
 		]
-	},
-	{
-		name: "[Seasonal] Average August",
-		section: "OM of the Month",
-
-		team: 'randomSeasonalAA',
-		gameType: 'doubles',
-		ruleset: ['HP Percentage Mod', 'Sleep Clause Mod'],
-		onBegin: function() {
-			// What does player 1 lead with?
-			var p1Where = 'boat';
-			var p2Where = 'boat';
-			if (this.p1.pokemon[0].name === 'Kyogre') p1Where = 'pirates';
-			if (this.p2.pokemon[0].name === 'Kyogre') p2Where = 'pirates';
-			var shipNames = [
-				'Zarelrules', 'Joimawesome', 'Treeckonoob', 'MJailBait', 'mikelpuns', 'TTTtttttt', 'Frazzle Dazzle',
-				'TIbot', 'CDXCIV', 'Srs Bsns Trts', 'Leemz', 'Eggymad', 'Snoffles', 'bmelted', 'Poopes', 'Hugonedugen',
-				'Il Haunter', 'chaospwns', 'WaterBro', 'niggie', 'DOOM', 'qhore', 'Jizzmine', 'Aldarown'
-			].randomize();
-			var whereAreThey = (p1Where === 'boat' && p2Where === 'boat')? 'You both were aboard the fantastic ship S. S. ' + shipNames[0] :
-			((p1Where === 'pirates' && p2Where === 'pirates')? 'You are two pirate gangs on a summer sea storm about to raze the ship S. S. ' +  shipNames[0] :
-			((p1Where === 'pirates')? this.p1.name : this.p2.name) + ' leads a pirate boat to raze the ship S. S. ' + shipNames[0]
-			+ ' where ' + ((p1Where === 'pirates')? this.p2.name : this.p1.name)) + ' is enjoying a sea travel,';
-
-			this.add('-message',
-				'Alas, poor trainers! ' + whereAreThey + " when a sudden summer Hurricane made a Wailord hit your transport, and now it's sinking! "
-				+ "There are not enough life boats for everyone nor trainers ain't sharing their Water-type friends, "
-				+ "so you'll have to fight to access a life boat! Good luck! You have to be fast to not to be hit by the Hurricane!"
-			);
-		},
-		onSwitchIn: function(pokemon) {
-			if (pokemon.battle.turn > 0) {
-				var result = true;
-				for (var i=0; i<pokemon.battle.sides.length; i++) {
-					for (var j=0; j<pokemon.battle.sides[i].active.length; j++) {
-						if (pokemon.battle.sides[i].active[j] && !pokemon.battle.sides[i].active[j].volatiles['perishsong']) {
-							result = false;
-						}
-						if (pokemon.battle.sides[i].active[j] && pokemon.battle.sides[i].active[j].ability !== 'soundproof') {
-							pokemon.battle.sides[i].active[j].addVolatile('perishsong');
-						} else {
-							this.add('-immune', pokemon.battle.sides[i].active[j], '[msg]');
-							this.add('-end', pokemon.battle.sides[i].active[j], 'Perish Song');
-						}
-					}
-				}
-				if (result) return false;
-				this.add('-fieldactivate', 'move: Perish Song');
-			}
-		}
-	},
-	{
-		name: "Challenge Cup",
-		section: "Other Metagames",
-
-		team: 'randomCC',
-		ruleset: ['Pokemon', 'HP Percentage Mod']
-	},
-	{
-		name: "Challenge Cup 1-vs-1",
-		section: "Other Metagames",
-
-		team: 'randomCC',
-		ruleset: ['Pokemon', 'Team Preview 1v1', 'HP Percentage Mod'],
-		onBegin: function() {
-			this.debug('Cutting down to 1');
-			this.p1.pokemon = this.p1.pokemon.slice(0, 1);
-			this.p1.pokemonLeft = this.p1.pokemon.length;
-			this.p2.pokemon = this.p2.pokemon.slice(0, 1);
-			this.p2.pokemonLeft = this.p2.pokemon.length;
-		}
 	},
 	{
 		name: "Hackmons",
@@ -371,7 +274,6 @@ exports.Formats = [
 		section: "Other Metagames",
 
 		mod: 'gennext',
-		searchShow: false,
 		ruleset: ['Pokemon', 'Standard NEXT', 'Team Preview'],
 		banlist: ['Uber']
 	},
@@ -386,34 +288,14 @@ exports.Formats = [
 		name: "Glitchmons",
 		section: "Other Metagames",
 
-		searchShow: false,
 		ruleset: ['Pokemon', 'Team Preview', 'HP Percentage Mod'],
 		banlist: ['Illegal', 'Unreleased'],
 		mimicGlitch: true
 	},
 	{
-		name: "LC Ubers",
-		section: "Other Metagames",
-
-		maxLevel: 5,
-		searchShow: false,
-		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
-		banlist: ['Sonicboom', 'Dragon Rage', 'Berry Juice', 'Soul Dew']
-	},
-	{
-		name: "LC UU",
-		section: "Other Metagames",
-
-		maxLevel: 5,
-		searchShow: false,
-		ruleset: ['LC'],
-		banlist: ['Abra', 'Aipom', 'Archen', 'Axew', 'Bronzor', 'Chinchou', 'Clamperl', 'Cottonee', 'Cranidos', 'Croagunk', 'Diglett', 'Drifloon', 'Drilbur', 'Dwebble', 'Ferroseed', 'Foongus', 'Frillish', 'Gastly', 'Hippopotas', 'Houndour', 'Koffing', 'Larvesta', 'Lileep', 'Machop', 'Magnemite', 'Mienfoo', 'Misdreavus', 'Munchlax', 'Murkrow', 'Pawniard', 'Ponyta', 'Porygon', 'Riolu', 'Sandshrew', 'Scraggy', 'Shellder', 'Shroomish', 'Slowpoke', 'Snover', 'Staryu', 'Tentacool', 'Timburr', 'Tirtouga']
-	},
-	{
 		name: "Dream World",
 		section: "Other Metagames",
 
-		searchShow: false,
 		ruleset: ['Pokemon', 'Standard DW', 'Team Preview'],
 		banlist: []
 	},
@@ -465,6 +347,119 @@ exports.Formats = [
 		searchShow: false,
 		ruleset: ['NU'],
 		banlist: ["Charizard", "Wartortle", "Kadabra", "Golem", "Haunter", "Exeggutor", "Weezing", "Kangaskhan", "Pinsir", "Lapras", "Ampharos", "Misdreavus", "Piloswine", "Miltank", "Ludicolo", "Swellow", "Gardevoir", "Ninjask", "Torkoal", "Cacturne", "Altaria", "Armaldo", "Gorebyss", "Regirock", "Regice", "Bastiodon", "Floatzel", "Drifblim", "Skuntank", "Lickilicky", "Probopass", "Rotom-Fan", "Samurott", "Musharna", "Gurdurr", "Sawk", "Carracosta", "Garbodor", "Sawsbuck", "Alomomola", "Golurk", "Braviary", "Electabuzz", "Electrode", "Liepard", "Tangela", "Eelektross", "Ditto", "Seismitoad", "Zangoose", "Roselia", "Serperior", "Metang", "Tauros", "Cradily", "Primeape", "Scolipede", "Jynx", "Basculin", "Gigalith", "Camerupt", "Golbat"]
+	},
+	{
+		name: "Average August",
+		section: "Seasonals",
+
+		team: 'randomSeasonalAA',
+		gameType: 'doubles',
+		ruleset: ['HP Percentage Mod', 'Sleep Clause Mod'],
+		onBegin: function() {
+			// What does player 1 lead with?
+			var p1Where = 'boat';
+			var p2Where = 'boat';
+			if (this.p1.pokemon[0].name === 'Kyogre') p1Where = 'pirates';
+			if (this.p2.pokemon[0].name === 'Kyogre') p2Where = 'pirates';
+			var shipNames = [
+				'Zarelrules', 'Joimawesome', 'Treeckonoob', 'MJailBait', 'mikelpuns', 'TTTtttttt', 'Frazzle Dazzle',
+				'TIbot', 'CDXCIV', 'Srs Bsns Trts', 'Leemz', 'Eggymad', 'Snoffles', 'bmelted', 'Poopes', 'Hugonedugen',
+				'Il Haunter', 'chaospwns', 'WaterBro', 'niggie', 'DOOM', 'qhore', 'Jizzmine', 'Aldarown'
+			].randomize();
+			var whereAreThey = (p1Where === 'boat' && p2Where === 'boat')? 'You both were aboard the fantastic ship S. S. ' + shipNames[0] :
+			((p1Where === 'pirates' && p2Where === 'pirates')? 'You are two pirate gangs on a summer sea storm about to raze the ship S. S. ' +  shipNames[0] :
+			((p1Where === 'pirates')? this.p1.name : this.p2.name) + ' leads a pirate boat to raze the ship S. S. ' + shipNames[0]
+			+ ' where ' + ((p1Where === 'pirates')? this.p2.name : this.p1.name)) + ' is enjoying a sea travel,';
+
+			this.add('-message',
+				'Alas, poor trainers! ' + whereAreThey + " when a sudden summer Hurricane made a Wailord hit your transport, and now it's sinking! "
+				+ "There are not enough life boats for everyone nor trainers ain't sharing their Water-type friends, "
+				+ "so you'll have to fight to access a life boat! Good luck! You have to be fast to not to be hit by the Hurricane!"
+			);
+		},
+		onSwitchIn: function(pokemon) {
+			if (pokemon.battle.turn > 0) {
+				var result = true;
+				for (var i=0; i<pokemon.battle.sides.length; i++) {
+					for (var j=0; j<pokemon.battle.sides[i].active.length; j++) {
+						if (pokemon.battle.sides[i].active[j] && !pokemon.battle.sides[i].active[j].volatiles['perishsong']) {
+							result = false;
+						}
+						if (pokemon.battle.sides[i].active[j] && pokemon.battle.sides[i].active[j].ability !== 'soundproof') {
+							pokemon.battle.sides[i].active[j].addVolatile('perishsong');
+						} else {
+							this.add('-immune', pokemon.battle.sides[i].active[j], '[msg]');
+							this.add('-end', pokemon.battle.sides[i].active[j], 'Perish Song');
+						}
+					}
+				}
+				if (result) return false;
+				this.add('-fieldactivate', 'move: Perish Song');
+			}
+		}
+	},
+	{
+		name: "Custom Game",
+		section: "Custom Games",
+
+		searchShow: false,
+		canUseRandomTeam: true,
+		debug: true,
+		maxLevel: 1000,
+		defaultLevel: 100,
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview']
+	},
+	{
+		name: "Custom Game (no Team Preview)",
+		section: "Custom Games",
+
+		searchShow: false,
+		canUseRandomTeam: true,
+		debug: true,
+		maxLevel: 1000,
+		defaultLevel: 100,
+		// no restrictions, for serious
+		ruleset: []
+	},
+	{
+		name: "Doubles Custom Game",
+		section: 'Custom Games',
+
+		gameType: 'doubles',
+		searchShow: false,
+		canUseRandomTeam: true,
+		debug: true,
+		maxLevel: 1000,
+		defaultLevel: 100,
+		// no restrictions, for serious (other than team preview)
+		ruleset: ['Team Preview']
+	},
+	{
+		name: "LC",
+		section: "LC",
+
+		maxLevel: 5,
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
+		banlist: ['Sonicboom', 'Dragon Rage', 'Berry Juice', 'Carvanha', 'Meditite', 'Gligar', 'Scyther', 'Sneasel', 'Tangela', 'Vulpix', 'Yanma', 'Soul Dew']
+	},
+	{
+		name: "LC Ubers",
+		section: "LC",
+
+		maxLevel: 5,
+		searchShow: false,
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Little Cup'],
+		banlist: ['Sonicboom', 'Dragon Rage', 'Berry Juice', 'Soul Dew']
+	},
+	{
+		name: "LC UU",
+		section: "LC",
+
+		maxLevel: 5,
+		searchShow: false,
+		ruleset: ['LC'],
+		banlist: ['Abra', 'Aipom', 'Archen', 'Axew', 'Bronzor', 'Chinchou', 'Clamperl', 'Cottonee', 'Cranidos', 'Croagunk', 'Diglett', 'Drifloon', 'Drilbur', 'Dwebble', 'Ferroseed', 'Foongus', 'Frillish', 'Gastly', 'Hippopotas', 'Houndour', 'Koffing', 'Larvesta', 'Lileep', 'Machop', 'Magnemite', 'Mienfoo', 'Misdreavus', 'Munchlax', 'Murkrow', 'Pawniard', 'Ponyta', 'Porygon', 'Riolu', 'Sandshrew', 'Scraggy', 'Shellder', 'Shroomish', 'Slowpoke', 'Snover', 'Staryu', 'Tentacool', 'Timburr', 'Tirtouga']
 	},
 
 	// Past Generations
