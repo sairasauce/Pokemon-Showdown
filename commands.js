@@ -2141,6 +2141,18 @@ var commands = exports.commands = {
 		this.logModCommand(user.name+' declared '+target);
 	},
 
+	declareall: function(target, room, user) {
+		if (!target) return this.sendReply('/declareall - Declares a message in all chatrooms. Requires & ~');
+		if (!this.can('declare')) return;
+
+		if (!this.canTalk()) return;
+
+		for (var r in Rooms.rooms) {
+			if (Rooms.rooms[r].type === 'chat') Rooms.rooms[r].add('|raw|<div class="broadcast-blue"><b><i>Broadcast Message from '+user.name+':</i><br />'+target+'</b></div>');
+		}
+		this.logModCommand(user.name+' declared '+target);
+	},
+
 	wall: 'announce',
 	announce: function(target, room, user) {
 		if (!target) return this.parse('/help announce');
