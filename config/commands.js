@@ -1252,6 +1252,10 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/modchat [off/registered/+/%/@/&/~] - Set the level of moderated chat. Requires: @ & ~');
 		}
+		if (target === '&' || target === 'permaban') {
+			matched = true;
+			this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts.');
+		}
 		if (target === '~' || target === 'hotpatch') {
 			matched = true;
 			this.sendReply('Hot-patching the game engine allows you to update parts of Showdown without interrupting currently-running battles. Requires: ~');
@@ -1279,7 +1283,7 @@ var commands = exports.commands = {
 			if (user.group !== config.groupsranking[0]) {
 				this.sendReply('DRIVER COMMANDS: /mute, /unmute, /announce, /forcerename, /alts')
 				this.sendReply('MODERATOR COMMANDS: /ban, /unban, /unbanall, /ip, /modlog, /redirect, /kick');
-				this.sendReply('LEADER COMMANDS: /promote, /demote, /forcewin, /forcetie, /declare');
+				this.sendReply('LEADER COMMANDS: /promote, /demote, /forcewin, /forcetie, /declare, /permaban');
 				this.sendReply('For details on all moderator commands, use /help @');
 			}
 			this.sendReply('For details of a specific command, use something like: /help data');

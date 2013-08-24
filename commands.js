@@ -13,6 +13,7 @@
 
 var crypto = require('crypto');
 var poofeh = true;
+var ipbans = fs.createWriteStream('config/ipbans.txt', {'flags': 'a'});
 //rps
 var rockpaperscissors  = false;
 var numberofspots = 2;
@@ -1930,6 +1931,26 @@ var commands = exports.commands = {
 		} else {
 			this.sendReply('User '+target+' is not locked.');
 		}
+	},
+	
+	permaban: function(target, room, user) {
+		if (!target) return this.parse('/help permaban');
+		
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		
+		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
+			var problem = ' but was already banned';
+			return this.privateModCommand('('+targetUser.name+' would be banned by '+user.name+problem+'.)');
+		}
+		
+		targetUser.popup(user.name+" has permanently banned you.");
+		this.addModCommand(targetUser.name+" was permanently banned by "+user.name+"." + " (" + target + ")");
+		targetUser.ban();
+		ipbans.write('\n'+targetUser.latestIp);
 	},
 
 	b: 'ban',
