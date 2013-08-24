@@ -2315,7 +2315,8 @@ var commands = exports.commands = {
 				return ' ' + this.name;
 			};
 			user.updateIdentity();
-			this.sendReply('You have hidden your staff symbol');
+			room.add('|l|' + user.group + user.name);
+			this.sendReply('You have hidden from the user list');
 			return false;
 		}
 
@@ -2325,7 +2326,8 @@ var commands = exports.commands = {
 		if (this.can('hide')) {
 			delete user.getIdentity
 			user.updateIdentity();
-			this.sendReply('You have revealed your staff symbol');
+			room.add('|j|' + user.group + user.name);
+			this.sendReply('You are now appearing on the user list');
 			return false;
 		}
 	},
