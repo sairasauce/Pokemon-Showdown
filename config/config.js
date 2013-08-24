@@ -172,7 +172,7 @@ exports.customavatars = {
 	'darkgirafarig':'darkgirafarig.png',
 	'uuledercc':'uuledercc.png',
 	'crazyclown94':'uuledercc.png',
-	'gymlderhope':'hope.png',
+	'gymlderhope':'hope1.png',
 	'gymldrmgm':'magma.png',
 	'gymlederrss':'3006.png',
 	'solsticeequinox':'solstice.png',
