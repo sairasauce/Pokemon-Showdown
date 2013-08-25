@@ -1941,14 +1941,14 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
-		if (!this.can('permaban')) return false;
+		if (!this.can('permaban', targetUser)) return false;
 		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
 			var problem = ' but was already banned';
 			return this.privateModCommand('('+targetUser.name+' would be banned by '+user.name+problem+'.)');
 		}
 		
 		targetUser.popup(user.name+" has permanently banned you.");
-		this.addModCommand(targetUser.name+" was permanently banned by "+user.name+"." + " (" + target + ")");
+		this.addModCommand(targetUser.name+" was permanently banned by "+user.name+".");
 		targetUser.ban();
 		ipbans.write('\n'+targetUser.latestIp);
 	},
