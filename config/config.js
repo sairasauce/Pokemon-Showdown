@@ -201,7 +201,8 @@ exports.customavatars = {
 	'mater9000':'mater.gif',
 	'mrsmellyfeet100':'smelly.gif',
 	'mrka':'mrka.jpg',
-	'neema':'neema.png'
+	'neema':'neema.png',
+	'pidis':'pidis.png'
 	
 };
 
