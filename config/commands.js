@@ -761,7 +761,7 @@ var commands = exports.commands = {
 	rules: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Please follow the rules:<br />' +
-			'- <a href="http://pokemonshowdown.com/rules">Rules</a><br />' +
+			'- <a href="http://amethyst-server.no-ip.org/rules.html">Rules</a><br />' +
 			'</div>');
 	},
 
