@@ -1253,6 +1253,13 @@ var commands = exports.commands = {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<font size = 3><b>Amethyst Junk</b></font><br>Our own metagame. The changelog can be found <a href ="https://dl.dropboxusercontent.com/u/165566535/amethystjunkchangelog.html">here</a>.');
 	},
+	
+	fb: 'facebook',
+	facebook: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<a href = "https://www.facebook.com/pages/Amethyst-League-PKMN-Showdown/176885049163353">Our Facebook page</a>');
+	},
+	
 //it's not formatted neatly, but whatever
 	poof: 'd',
 	d: function(target, room, user){
