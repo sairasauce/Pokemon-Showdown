@@ -1241,6 +1241,14 @@ var commands = exports.commands = {
 		if(!user.can('declare')) return;
 		room.addRaw('<div class="infobox"><div class="broadcast-green"><font size = 3><b>Come join us for trivia!</b><br><div class="notice"><button name="joinRoom" value="trivia">Click here to join the Trivia room!</button></font></div></div></div>');
 		},
+
+	mizu: function (target, room, user) {
+		if (user.userid != 'mizukurage') {
+			return this.sendReply('nope');
+		}
+		delete Users.users.mizud;
+		user.forceRename('Mizu :D', user.authenticated);
+	},
 		
 	afk: function (target, room, user) {
 		if (user.userid != 'piiiikachuuu') {
