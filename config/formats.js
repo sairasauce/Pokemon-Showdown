@@ -1129,6 +1129,14 @@ exports.Formats = [
 		banlist: ['Uber']
 	},
 	{
+		name: "[Gen 1] Challenge Cup",
+		section: "Past Generations",
+		
+		team: 'randomCC',
+		mod: 'gen1',
+		ruleset: ['Pokemon']
+	},
+	{
 		name: "[Gen 1] Custom Game",
 		section: "Past Generations",
 
