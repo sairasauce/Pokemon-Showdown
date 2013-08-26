@@ -60,6 +60,13 @@ exports.Formats = [
 		banlist: ['Uber', 'Drizzle ++ Swift Swim', 'Soul Dew']
 	},
 	{
+		name: "Mixed Tier",
+		section: "Amethyst Metas",
+		
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Mixed Tier Clause'],
+		banlist: ['Drizzle ++ Swift Swim', 'Soul Dew']
+	},
+	{
 		name: "Random Battle",
 		section: "Singles",
 

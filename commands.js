@@ -1262,8 +1262,13 @@ var commands = exports.commands = {
 	clashoftiers: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<font size = 3><b>Clash of Tiers</b></font><br><font size = 2>by EnerG218</font><br>A metagame created by EnerG218, Clash of Tiers is a metagame focused on comparing the different tiers. Each player is given 6 points to make a team with. Points are spent based on tier: Ubers are worth 6, OU is worth 5, UU is worth 4, RU is worth 3, NU is worth 2, and LC is worth 1.<br>Have fun!');
-		},
-		
+	},
+	
+	mixedtier: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<font size = 3><b>Mixed Tier</b></font><br><font size = 2>by Colonial Mustang</font><br>A metagame created by Colonial Mustang, Mixed Tier is a tier in which players must use one Pokemon from each of the following tiers: Uber, OU, UU, RU, NU, and LC.<br>Have fun!');
+	},
+	
 	amethystjunk: 'junk',
 	junk: function(target, room, user) {
 		if(!this.canBroadcast()) return;

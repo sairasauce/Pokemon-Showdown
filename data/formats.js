@@ -625,6 +625,64 @@ exports.BattleFormats = {
 			}
 		}
 	},
+	mixedtierclause: {
+		effectType: 'Rule',
+		onStart: function() {
+			this.add('rule', 'Mixed Tier Clause: One Pokemon from each tier');
+		},
+		validateTeam: function(team, format) {
+			var uber = false;
+			var ou = false;
+			var uu = false;
+			var ru = false;
+			var nu = false;
+			var lc = false;
+			var missingtiers = [];
+			for (var i = 0; i < team.length; i++) {
+				var template = this.getTemplate(team[i].species);
+				var tier = template.tier;
+				if (tier === 'Uber') {
+					uber = true;
+				}
+				if (tier === 'OU' || tier === 'BL') {
+					ou = true;
+				}
+				if (tier === 'UU' || tier === 'BL2') {
+					uu = true;
+				}
+				if (tier === 'RU' || tier === 'BL3') {
+					ru = true;
+				}
+				if (tier === 'NU' || tier === 'NFE') {
+					nu = true;
+				}
+				if (tier === 'LC') {
+					lc = true;
+				}
+			}
+			if (uber === false || ou === false || uu === false || ru === false || nu === false || lc === false) {
+				if (uber === false) {
+					missingtiers.push('Uber');
+				}
+				if (ou === false) {
+					missingtiers.push('OU');
+				}
+				if (uu === false) {
+					missingtiers.push('UU');
+				}
+				if (ru === false) {
+					missingtiers.push('RU');
+				}
+				if (nu === false) {
+					missingtiers.push('NU');
+				}
+				if (lc === false) {
+					missingtiers.push('LC');
+				}
+				return ['You must have one Pokemon from each of the following tiers: Uber, OU, UU, RU, NU, and LC. You are missing Pokemon from the following tiers: ' + missingtiers.join(', ') + '.'];
+			}
+		}
+	},
 	haxclause: {
 		effectType: 'Rule',
 		onStart: function() {
