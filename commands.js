@@ -410,7 +410,7 @@ var commands = exports.commands = {
 	 * hangman
 	 *********************************************************/
 	 hangman: function(target, room, user) {
-	if(!user.can('broadcast')) {
+	if(!this.canBroadcast()) {
 		return this.sendReply('You do not have enough authority to do this.');
 	}
 			if(room.id!= 'hangman') {
@@ -458,7 +458,7 @@ var commands = exports.commands = {
 			if(room.id!= 'hangman') {
 		return this.sendReply('|html|Please do this in the room "hangman". You can join it <button name = "joinRoom" value = "hangman">here</button>.');
 	}
-		if(!user.can('broadcast')) {
+		if(!this.canBroadcast()) {
 			return this.sendReply('You do not have enough authority to do this.');
 		}
 		if(hangman === false) {
