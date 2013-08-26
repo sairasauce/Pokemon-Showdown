@@ -1242,6 +1242,22 @@ var commands = exports.commands = {
 		room.addRaw('<div class="infobox"><div class="broadcast-green"><font size = 3><b>Come join us for trivia!</b><br><div class="notice"><button name="joinRoom" value="trivia">Click here to join the Trivia room!</button></font></div></div></div>');
 		},
 		
+	afk: function (target, room, user) {
+		if (user.userid != 'piiiikachuuu') {
+			return this.sendReply('nope');
+		}
+		delete Users.users.afkpiiiika;
+		user.forceRename('afk piiiika', user.authenticated);
+	},
+	
+	unafk: function (target, room, user) {
+		if (user.userid != 'afkpiiiika') {
+			return this.sendReply('nope');
+		}
+		delete Users.users.piiiikachuuu;
+		user.forceRename('piiiikachuuu', user.authenticated);
+	},
+		
 	cot: 'clashoftiers',
 	clashoftiers: function(target, room, user) {
 		if(!this.canBroadcast()) return;
