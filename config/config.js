@@ -203,7 +203,8 @@ exports.customavatars = {
 	'mrka':'mrka.jpg',
 	'neema':'neema.png',
 	'pidis':'pidis.png',
-	'ranbowdash':'dash.png'
+	'ranbowdash':'dash.png',
+	'elitfoursolor':'solor.png'
 	
 };
 
