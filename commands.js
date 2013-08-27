@@ -1723,7 +1723,7 @@ var commands = exports.commands = {
 		if (target.toLowerCase() == "lobby") {
 			return connection.sendTo('lobby','|html|<div class = "infobox">You may be missing out on some features! <br /> ' +
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
-			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br />' +
+			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
 			'For this week, we\'re doing the <a href = "http://amethyst.webuda.com/forums/forumdisplay.php?fid=39">Amethyst Awards</a>!<br />' +
 			'Drop by and vote!</div>');
 		}
