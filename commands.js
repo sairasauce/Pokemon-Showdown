@@ -33,7 +33,7 @@ var givenguesses = 8;
 var spaces = new Array();
 var hangmantopic = new Array();
 //gym leaders
-var ougymleaders = ['gymlederewok','gymlederross','elitfourross','elitefournord','gymledersam','gymlederlove','onlylove','gymledermassman','gymledercuddly','miner0','gymlederboss','chmpionboss','gymlederdelibird','colonialmustang','laxxus','gymledermustang','miloticnob','gymledermarlon','aortega','gymledervolkner','modernwolf','johanl','energ218','gymlderhope','gymledereon','piiiikachuuu','jd','elitefurkozman'];
+var ougymleaders = ['gymlederewok','gymlederross','elitfourross','elitefournord','gymledersam','gymlederlove','onlylove','gymledermassman','gymledercuddly','miner0','gymlederboss','chmpionboss','gymlederdelibird','colonialmustang','laxxus','gymledermustang','miloticnob','gymledermarlon','aortega','gymledervolkner','modernwolf','johanl','energ218','gymlderhope','gymledereon','piiiikachuuu','jd','elitefurkozman','gymlederbrawl'];
 var admins = ['elitefournord','jd','energ218','colonialmustang','piiiikachuuu','elitefurkozman'];
 //tells
 if (typeof tells === 'undefined') {
