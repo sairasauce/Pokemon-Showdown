@@ -1256,6 +1256,7 @@ var commands = exports.commands = {
 		}
 		delete Users.users.afkpiiiika;
 		user.forceRename('afk piiiika', user.authenticated);
+		this.parse('/away');
 	},
 	
 	unafk: function (target, room, user) {
@@ -1264,6 +1265,7 @@ var commands = exports.commands = {
 		}
 		delete Users.users.piiiikachuuu;
 		user.forceRename('piiiikachuuu', user.authenticated);
+		this.parse('/back');
 	},
 		
 	cot: 'clashoftiers',
