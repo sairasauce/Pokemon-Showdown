@@ -240,6 +240,9 @@ var commands = exports.commands = {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
 		var roomid = (target || room.id);
+		if (roomid === 'spamroom') {
+			return this.sendReply('You cannot invite users there.');
+		}
 		if (!Rooms.get(roomid)) {
 			return this.sendReply('Room '+roomid+' not found.');
 		}
