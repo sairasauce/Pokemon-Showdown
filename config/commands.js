@@ -211,6 +211,9 @@ var commands = exports.commands = {
 			output += '<a href="/'+i+'" room="'+i+'">'+i+'</a>';
 		}
 		this.sendReply('|raw|'+output);
+		if (!targetUser.connected) {
+			this.sendReply('|raw|This user is <font color = "red">offline</font>.');
+		}
 	},
 
 	ipsearch: function(target, room, user) {
