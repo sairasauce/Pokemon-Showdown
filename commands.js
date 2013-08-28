@@ -1789,6 +1789,9 @@ var commands = exports.commands = {
 			'For this week, we\'re doing the <a href = "http://amethyst.webuda.com/forums/forumdisplay.php?fid=39">Amethyst Awards</a>!<br />' +
 			'Drop by and vote!</div>');
 		}
+		if (target.toLowerCase() == "spamroom" && user.group < "&") {
+			return connection.sendTo(target, "|noinit|joinfailed|You cannot join this room.");
+		}
 	},
 
 	roomban: function(target, room, user, connection) {
