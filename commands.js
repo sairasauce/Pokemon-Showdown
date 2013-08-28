@@ -1514,6 +1514,10 @@ var commands = exports.commands = {
 			}
 			return this.parse('/help msg');
 		}
+		
+		if (target.indexOf('invite') != -1 && target.indexOf('spamroom') != -1) {
+			return user.sendTo('lobby', '|popup|You cannot invite people there.');
+		}
 
 		if (user.locked && !targetUser.can('lock', user)) {
 			return this.popupReply('You can only private message members of the moderation team (users marked by %, @, &, or ~) when locked.');
