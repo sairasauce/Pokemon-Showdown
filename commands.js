@@ -1293,6 +1293,11 @@ var commands = exports.commands = {
 		this.sendReplyBox('<font size = 3><b>Amethyst Junk</b></font><br>Our own metagame. The changelog can be found <a href ="https://dl.dropboxusercontent.com/u/165566535/amethystjunkchangelog.html">here</a>.');
 	},
 	
+	cutemons: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<font size = 3><b>Cutemons</b></font><br><font size = 2>by Mizu :D</font><br>A metagame created by Mizu :D, Cutemons is a tier in which only Pokemon deemed cute enough are allowed. Many Pokemon also gain new abilities. A changelog can be found here: <a href = "https://dl.dropboxusercontent.com/u/165566535/cutemons.html">here</a>.<br>Have fun!');
+	},
+	
 	fb: 'facebook',
 	facebook: function(target, room, user) {
 		if(!this.canBroadcast()) return;

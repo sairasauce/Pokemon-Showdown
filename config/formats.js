@@ -67,6 +67,15 @@ exports.Formats = [
 		banlist: ['Drizzle ++ Swift Swim', 'Soul Dew']
 	},
 	{
+		name: "Cutemons",
+		section: "Amethyst Metas",
+		
+		mod: 'cutemons',
+		gameType: 'doubles',
+		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Cutemons Clause'],
+		banlist: []
+	},
+	{
 		name: "Random Battle",
 		section: "Singles",
 
