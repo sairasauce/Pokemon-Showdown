@@ -425,6 +425,101 @@ exports.BattleFormats = {
 			return problems;
 		}
 	},
+cutemons: {
+		effectType: 'Banlist',
+		validateSet: function(set, format) {
+			var item = this.getItem(set.item);
+			var template = this.getTemplate(set.species);
+			var problems = [];
+
+			if (set.species === set.name) delete set.name;
+			if (template.gen > this.gen) {
+				problems.push(set.species+' does not exist in gen '+this.gen+'.');
+			}
+			if (set.ability) {
+				var ability = this.getAbility(set.ability);
+				if (ability.gen > this.gen) {
+					problems.push(ability.name+' does not exist in gen '+this.gen+'.');
+				} else if (ability.isNonstandard) {
+					problems.push(ability.name+' is not a real ability.');
+				}
+			}
+			if (set.moves) for (var i=0; i<set.moves.length; i++) {
+				var move = this.getMove(set.moves[i]);
+				if (move.gen > this.gen) {
+					problems.push(move.name+' does not exist in gen '+this.gen+'.');
+				} else if (move.isNonstandard) {
+					problems.push(move.name+' is not a real move.');
+				}
+			}
+			if (item) {
+				if (item.gen > this.gen) {
+					problems.push(item.name+' does not exist in gen '+this.gen+'.');
+				} else if (item.isNonstandard) {
+					problems.push(item.name + ' is not a real item.');
+				}
+			}
+			if (set.moves && set.moves.length > 4) {
+				problems.push((set.name||set.species) + ' has more than four moves.');
+			}
+			if (set.level && set.level > 100) {
+				problems.push((set.name||set.species) + ' is higher than level 100.');
+			}
+
+			// ----------- legality line ------------------------------------------
+			if (!format.banlistTable || !format.banlistTable['illegal']) return problems;
+			// everything after this line only happens if we're doing legality enforcement
+
+			// limit one of each move
+			var moves = [];
+			if (set.moves) {
+				var hasMove = {};
+				for (var i=0; i<set.moves.length; i++) {
+					var move = this.getMove(set.moves[i]);
+					var moveid = move.id;
+					if (hasMove[moveid]) continue;
+					hasMove[moveid] = true;
+					moves.push(set.moves[i]);
+				}
+			}
+			set.moves = moves;
+
+			if (template.num == 351) { // Castform
+				set.species = 'Castform';
+			}
+			if (template.num == 421) { // Cherrim
+				set.species = 'Cherrim';
+			}
+			if (template.num == 493) { // Arceus
+				if (set.ability === 'Multitype' && item.onPlate) {
+					set.species = 'Arceus-'+item.onPlate;
+				} else {
+					set.species = 'Arceus';
+				}
+			}
+			if (template.num == 555) { // Darmanitan
+				set.species = 'Darmanitan';
+			}
+			if (template.num == 487) { // Giratina
+				if (item.id === 'griseousorb') {
+					set.species = 'Giratina-Origin';
+					set.ability = 'Levitate';
+				} else {
+					set.species = 'Giratina';
+					set.ability = 'Pressure';
+				}
+			}
+			if (template.num == 647) { // Keldeo
+				if (set.species === 'Keldeo-Resolute' && set.moves.indexOf('Secret Sword') < 0) {
+					set.species = 'Keldeo';
+				}
+			}
+			if (template.num == 648) { // Meloetta
+				set.species = 'Meloetta';
+			}
+			return problems;
+		}
+	},
 	slowmonspokemon: {
 		effectType: 'Banlist',
 		validateSet: function(set, format) {
@@ -689,7 +784,7 @@ exports.BattleFormats = {
 			this.add('rule', 'Cutemons Clause: Pokemon must be cute');
 		},
 		validateTeam: function(team, format) {
-			var cutemons = ['Vaporeon','Mew','Articuno','Starmie','Lapras','Chansey','Marowak','Persian','Wigglytuff','Clefable','Rapidash','Kangaskhan','Butterfree','Ninetales','Politoed','Arcanine','Slowking','Porygon2','Porygon-Z','Victini','Pikachu','Raichu','Ampharos','Bellossom','Jumpluff','Espeon','Umbreon','Hitmontop','Blissey','Raikou','Suicune','Entei','Celebi','Miltank','Linoone','Beautifly','Gardevoir','Masquerain','Breloom','Delcatty','Medicham','Milotic','Castform','Gorebyss','Luvdisc','Jirachi','Piplup','Roserade','Vespiquen','Pachirisu','Lopunny','Gabite','Togetic','Togekiss','Leafeon','Glaceon','Froslass','Ditto','Mesprit','Cresselia','Manaphy','Lucario','Serperior','Cottonee','Whimsicott','Lilligant','Cinccino','Swanna','Chandelure','Mienshao','Mandibuzz','Virizion','Ursaring','Eevee','Munchlax','Snorlax','Growlithe','Clefairy','Drifblim','Phione','Lickilicky','Ponyta','Furret','Uxie','Azelf','Weavile','Mudkip','Marshtomp','Swampert','Quagsire','Swinub','Lumineon','Flaaffy','Grotle','Floatzel','Abomasnow','Luxray','Heatran','Ambipom','Phanpy','Donphan','Ludicolo','Munna','Musharna','Swoobat','Alomomola','Solosis','Duosion','Reuniclus','Dodrio','Jolteon','Chimecho','Dragonair','Mothim','Azumarill','Hippopotas','Spheal','Sealeo','Walrein','Flareon','Mamoswine','Liepard','Galvantula','Gastrodon','Dragonite','Cherrim','Kricketune','Zorua','Zoroark','Meloetta','Maractus','Rufflet','Braviary','Pidgeot','Keldeo','Emolga','Jellicent','Audino','Simipour','Zebstrika','Stoutland','Mantine','Staraptor','Metang','Combusken','Grovyle','Volbeat','Illumise','Mawile','Plusle','Minun','Kingdra','Spinda','Xatu','Granbull','Sandslash','Latias'];
+			var cutemons = ['Vaporeon','Mew','Articuno','Starmie','Lapras','Chansey','Marowak','Persian','Wigglytuff','Clefable','Rapidash','Kangaskhan','Butterfree','Ninetales','Politoed','Arcanine','Slowking','Porygon2','Porygon-Z','Victini','Pikachu','Raichu','Ampharos','Bellossom','Jumpluff','Espeon','Umbreon','Hitmontop','Blissey','Raikou','Suicune','Entei','Celebi','Miltank','Linoone','Beautifly','Gardevoir','Masquerain','Breloom','Delcatty','Medicham','Milotic','Castform','Gorebyss','Luvdisc','Jirachi','Piplup','Roserade','Vespiquen','Pachirisu','Lopunny','Gabite','Togetic','Togekiss','Leafeon','Glaceon','Froslass','Ditto','Mesprit','Cresselia','Manaphy','Lucario','Serperior','Cottonee','Whimsicott','Lilligant','Cinccino','Swanna','Chandelure','Mienshao','Mandibuzz','Virizion','Ursaring','Eevee','Munchlax','Snorlax','Growlithe','Clefairy','Drifblim','Phione','Lickilicky','Ponyta','Furret','Uxie','Azelf','Weavile','Mudkip','Marshtomp','Swampert','Quagsire','Swinub','Lumineon','Flaaffy','Grotle','Floatzel','Abomasnow','Luxray','Heatran','Ambipom','Phanpy','Donphan','Ludicolo','Munna','Musharna','Swoobat','Alomomola','Solosis','Duosion','Reuniclus','Dodrio','Jolteon','Chimecho','Dragonair','Mothim','Azumarill','Hippopotas','Spheal','Sealeo','Walrein','Flareon','Mamoswine','Liepard','Galvantula','Gastrodon','Dragonite','Cherrim','Kricketune','Zorua','Zoroark','Meloetta','Maractus','Rufflet','Braviary','Pidgeot','Keldeo','Emolga','Jellicent','Audino','Simipour','Zebstrika','Stoutland','Mantine','Staraptor','Metang','Combusken','Grovyle','Volbeat','Illumise','Mawile','Plusle','Minun','Kingdra','Spinda','Xatu','Granbull','Sandslash','Latias','jd'];
 			var notcute = [];
 			for (var i = 0; i < team.length; i++) {
 				var template = this.getTemplate(team[i].species);
