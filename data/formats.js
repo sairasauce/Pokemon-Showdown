@@ -466,9 +466,6 @@ cutemons: {
 				problems.push((set.name||set.species) + ' is higher than level 100.');
 			}
 
-			// ----------- legality line ------------------------------------------
-			if (!format.banlistTable || !format.banlistTable['illegal']) return problems;
-			// everything after this line only happens if we're doing legality enforcement
 
 			// limit one of each move
 			var moves = [];
