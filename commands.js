@@ -2081,7 +2081,7 @@ var commands = exports.commands = {
 
 	unlock: function(target, room, user) {
 		if (!target) return this.parse('/help unlock');
-		if (!this.can('lock')) return false;
+		if (!this.can('lock', targetUser)) return false;
 
 		var unlocked = Users.unlock(target);
 
