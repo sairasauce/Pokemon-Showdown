@@ -1889,7 +1889,7 @@ var commands = exports.commands = {
 		if (!this.can('mute', targetUser)) {
 			return false;
 		}
-		if (targetUser === 'piiiikachuuu') {
+		if (targetUser.userid === 'piiiikachuuu') {
 			return this.sendReply('Nope c:');
 		}
 		if (spamroom[targetUser]) {
