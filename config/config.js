@@ -148,7 +148,7 @@ exports.customavatars = {
 	'lexie':'lexie.png',
 	'fallacie':'2014.png',
 	'aikenk':'aikenka.png',
-	'aortega':'3333.png',
+	'aortega':'ao.jpg',
 	'seleo9':'9998.png',
 	'laaagar':'1011.png',
 	'stevoduhhero':'2012.png',
