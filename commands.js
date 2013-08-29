@@ -2088,7 +2088,7 @@ var commands = exports.commands = {
 		}
 		if (!this.can('lock', targetUser)) return false;
 
-		var unlocked = Users.unlock(target);
+		var unlocked = Users.unlock(targetUser);
 
 		if (unlocked) {
 			var names = Object.keys(unlocked);
@@ -2096,7 +2096,7 @@ var commands = exports.commands = {
 					((names.length > 1) ? 'were' : 'was') +
 					' unlocked by ' + user.name + '.');
 		} else {
-			this.sendReply('User '+target+' is not locked.');
+			this.sendReply('User '+targetUser.name+' is not locked.');
 		}
 	},
 	
