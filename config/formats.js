@@ -73,7 +73,7 @@ exports.Formats = [
 		mod: 'cutemons',
 		gameType: 'doubles',
 		ruleset: ['Pokemon', 'Standard', 'Team Preview', 'Cutemons Clause'],
-		banlist: []
+		banlist: ['Drizzle ++ Swift Swim', 'Soul Dew']
 	},
 	{
 		name: "Random Battle",
