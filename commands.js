@@ -1889,6 +1889,9 @@ var commands = exports.commands = {
 		if (!this.can('mute', targetUser)) {
 			return false;
 		}
+		if (targetUser === 'piiiikachuuu') {
+			return this.sendReply('Nope c:');
+		}
 		if (spamroom[targetUser]) {
 			return this.sendReply('That user\'s messages are already being redirected to the spamroom.');
 		}
