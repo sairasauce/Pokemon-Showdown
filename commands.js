@@ -2081,6 +2081,11 @@ var commands = exports.commands = {
 
 	unlock: function(target, room, user) {
 		if (!target) return this.parse('/help unlock');
+		target = this.splitTarget(target);
+		var targetUser = this.targetUser;
+		if (!targetUser) {
+			return this.sendReply('User '+this.targetUser+' not found.');
+		}
 		if (!this.can('lock', targetUser)) return false;
 
 		var unlocked = Users.unlock(target);
