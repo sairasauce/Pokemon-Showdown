@@ -192,7 +192,7 @@ var commands = exports.commands = {
 			this.sendReply('(Pok\xE9mon Showdown Development Staff)');
 		}
 		if (targetUser.customClient) {
-			user.send('|raw|' + targetUser.name + ' is using the <a href="http://amethyst-server.no-ip.org"><i>custom client!</i></div>');
+			this.sendReply('|raw|' + targetUser.name + ' is using the <a href="http://amethyst-server.no-ip.org"><i>custom client!</i></a>');
 		}
 		if (!targetUser.authenticated) {
 			this.sendReply('(Unregistered)');
