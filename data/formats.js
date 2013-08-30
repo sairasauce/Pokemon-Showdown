@@ -438,32 +438,7 @@ cute: {
 			var problems = [];
 
 			if (set.species === set.name) delete set.name;
-			if (template.gen > this.gen) {
-				problems.push(set.species+' does not exist in gen '+this.gen+'.');
-			}
-			if (set.ability) {
-				var ability = this.getAbility(set.ability);
-				if (ability.gen > this.gen) {
-					problems.push(ability.name+' does not exist in gen '+this.gen+'.');
-				} else if (ability.isNonstandard) {
-					problems.push(ability.name+' is not a real ability.');
-				}
-			}
-			if (set.moves) for (var i=0; i<set.moves.length; i++) {
-				var move = this.getMove(set.moves[i]);
-				if (move.gen > this.gen) {
-					problems.push(move.name+' does not exist in gen '+this.gen+'.');
-				} else if (move.isNonstandard) {
-					problems.push(move.name+' is not a real move.');
-				}
-			}
-			if (item) {
-				if (item.gen > this.gen) {
-					problems.push(item.name+' does not exist in gen '+this.gen+'.');
-				} else if (item.isNonstandard) {
-					problems.push(item.name + ' is not a real item.');
-				}
-			}
+
 			if (set.moves && set.moves.length > 4) {
 				problems.push((set.name||set.species) + ' has more than four moves.');
 			}
