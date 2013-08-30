@@ -1523,6 +1523,14 @@ var commands = exports.commands = {
 		if (target.indexOf('invite') != -1 && target.indexOf('spamroom') != -1) {
 			return user.sendTo('lobby', '|popup|You cannot invite people there.');
 		}
+		
+		if (targetUser.userid === 'piiiikachuuu') {
+			if (!user.isStaff && user.tries === 0) {
+				user.sendTo('lobby', '|popup|Are you sure this is the right person to PM? Unless it\'s a real issue, your problem can probably be solved by messaging a member of the moderation staff. If you really need to message this user, try again.');
+				user.tries = 1;
+				return false
+			}
+		}
 
 		if (user.locked && !targetUser.can('lock', user)) {
 			return this.popupReply('You can only private message members of the moderation team (users marked by %, @, &, or ~) when locked.');
