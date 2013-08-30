@@ -205,7 +205,8 @@ exports.customavatars = {
 	'pidis':'pidis.png',
 	'ranbowdash':'dash.png',
 	'elitfoursolor':'solor.png',
-	'kaityberry':'kaity.gif'
+	'kaityberry':'kaity.gif',
+	'epicamerican':'america.jpg'
 	
 };
 
