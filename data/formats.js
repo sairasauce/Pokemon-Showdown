@@ -11,6 +11,11 @@ exports.BattleFormats = {
 		ruleset: ['Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'HP Percentage Mod'],
 		banlist: ['Unreleased', 'Illegal']
 	},
+	standardcutemons: {
+		effectType: 'Banlist',
+		ruleset: ['Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'HP Percentage Mod'],
+		banlist: []
+	},
 	standardnext: {
 		effectType: 'Banlist',
 		ruleset: ['Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'HP Percentage Mod'],
@@ -425,7 +430,7 @@ exports.BattleFormats = {
 			return problems;
 		}
 	},
-cutemons: {
+cute: {
 		effectType: 'Banlist',
 		validateSet: function(set, format) {
 			var item = this.getItem(set.item);

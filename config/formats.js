@@ -72,7 +72,7 @@ exports.Formats = [
 		
 		mod: 'cutemons',
 		gameType: 'doubles',
-		ruleset: ['Cutemons', 'Standard', 'Team Preview', 'Cutemons Clause'],
+		ruleset: ['Cute', 'Standard Cutemons', 'Team Preview', 'Cutemons Clause'],
 		banlist: ['Drizzle ++ Swift Swim', 'Soul Dew']
 	},
 	{
