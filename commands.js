@@ -1955,7 +1955,7 @@ var commands = exports.commands = {
 		}
 		if (!this.can('warn', targetUser)) return false;
 
-		this.addModCommand(targetUser.name + ' was kicked from ' + room.id + ' by ' + user.name);
+		this.addModCommand(targetUser.name + ' was kicked from ' + room.id + ' by ' + user.name + '.');
 		targetUser.leaveRoom(room.id);
 	},
 	
