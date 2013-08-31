@@ -1304,6 +1304,14 @@ var commands = exports.commands = {
 		this.sendReplyBox('<a href = "https://www.facebook.com/pages/Amethyst-League-PKMN-Showdown/176885049163353">Our Facebook page</a>');
 	},
 	
+	customclientlist: function(target, room, user) {
+		for (var u in Users.users) {
+			if (Users.get(u).customClient && Users.get(u).connected) {
+				this.sendReply(Users.get(u).name);
+			}
+		}
+	},
+	
 //it's not formatted neatly, but whatever
 	poof: 'd',
 	d: function(target, room, user){
