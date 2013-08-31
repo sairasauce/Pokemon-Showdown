@@ -1343,8 +1343,8 @@ statistics: function(target, room, user) {
 		} else {
 			percentageClient = clientUsers/nonClientUsers;
 		}
-		this.sendReply('Percentage of users that are staff: ' + percentageStaff * 100 + '%.');
-		this.sendReply('Percentage of users that are using the custom client: ' + percentageClient * 100 + '%.');
+		this.sendReply('Percentage of users that are staff: ' + (Math.round(percentageStaff*100)/100) * 100 + '%.');
+		this.sendReply('Percentage of users that are using the custom client: ' + (Math.round(percentageClient*100)/100) * 100 + '%.');
 	},
 	
 //it's not formatted neatly, but whatever
