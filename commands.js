@@ -1312,40 +1312,6 @@ var commands = exports.commands = {
 			}
 		}
 	},
-statistics: function(target, room, user) {
-		var staff = 0;
-		var regUsers = 0;
-		var clientUsers = 0;
-		var percentageStaff = 0;
-		var percentageClient = 0;
-		var nonClientUsers = 0;
-		for (var u in Users.users) {
-			if (Users.get(u).connected) {
-				if (Users.get(u).customClient) {
-					clientUsers = clientUsers + 1;
-				} else {
-					nonClientUsers = nonClientUsers + 1;
-				}
-				if (Users.get(u).isStaff) {
-					staff = staff + 1;
-				} else {
-					regUsers = regUsers + 1;
-				}
-			}
-		}
-		if (regUsers === 0) {
-			percentageStaff = 1;
-		} else {
-			percentageStaff = staff / regUsers;
-		}
-		if (nonClientUsers === 0) {
-			percentageClient = 1;
-		} else {
-			percentageClient = clientUsers/nonClientUsers;
-		}
-		this.sendReply('Percentage of users that are staff: ' + percentageStaff * 100 + '%.');
-		this.sendReply('Percentage of users that are using the custom client: ' + percentageClient * 100 + '%.');
-	},
 	
 //it's not formatted neatly, but whatever
 	poof: 'd',
