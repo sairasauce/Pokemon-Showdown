@@ -182,7 +182,7 @@ exports.customavatars = {
 	'elitefourkzman':'kozman.png',
 	'bayspot':'bayspot2.png',
 	'theimmortal':'monster.png',
-	'higglybiggly':'higglybiggly.png',
+	'higglybiggly':'biggly.gif',
 	'danano':'danano.png',
 	'theturtlelord':'turtlelord.png',
 	'mizud':'mizu.png',
