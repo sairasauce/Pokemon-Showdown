@@ -1305,6 +1305,7 @@ var commands = exports.commands = {
 	},
 	
 	customclientlist: function(target, room, user) {
+		this.sendReply('Users using the custom client:');
 		for (var u in Users.users) {
 			if (Users.get(u).customClient && Users.get(u).connected) {
 				this.sendReply(Users.get(u).name);
