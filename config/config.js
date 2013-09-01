@@ -192,7 +192,7 @@ exports.customavatars = {
 	'coolasian':'cool.png',
 	'elitefournord':'nord.png',
 	'skymn':'skymn2.png',
-	'scizornician':'sciz1.png',
+	'scizornician':'mew.jpg',
 	'tailz':'tailz.png',
 	'ultimatechimera':'chimera.jpg',
 	'angelthekat':'angel55.jpg',
