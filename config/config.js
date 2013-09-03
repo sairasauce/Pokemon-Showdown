@@ -196,7 +196,7 @@ exports.customavatars = {
 	'tailz':'tailz.png',
 	'ultimatechimera':'chimera.jpg',
 	'angelthekat':'angel55.jpg',
-	'voltage':'voltage.jpg',
+	'voltage':'149.gif',
 	'johanl':'johan.png',
 	'mater9000':'mater.gif',
 	'mrsmellyfeet100':'smelly.gif',
@@ -206,7 +206,8 @@ exports.customavatars = {
 	'ranbowdash':'dash.png',
 	'elitfoursolor':'solor.png',
 	'kaityberry':'kaity.gif',
-	'epicamerican':'america.jpg'
+	'epicamerican':'america.jpg',
+	'mraka':'mraka.jpg'
 	
 };
 

@@ -77,7 +77,7 @@ var commands = exports.commands = {
 			var row = stuff[i].split(",");
 			var userid = toUserid(row[0]);
 			if (user.userid == userid) {
-			var x = Number(row[1])
+			var x = Number(row[1]);
 			var numBadges = x;
 			match = true;
 			if (match === true) {
