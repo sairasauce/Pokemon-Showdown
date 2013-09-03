@@ -176,7 +176,7 @@ exports.customavatars = {
 	'gymldrmgm':'magma.png',
 	'gymlederrss':'3006.png',
 	'solsticeequinox':'solstice.png',
-	'miloticnob':'nob.jpg',
+	'miloticnob':'whimsicott.png',
 	'gymledermassman':'massman.png',
 	'superiorjigglypuff':'jigglypuff.png',
 	'elitefourkzman':'kozman.png',
