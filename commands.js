@@ -107,7 +107,7 @@ var commands = exports.commands = {
 			var row = stuff[i].split(",");
 			var userid = toUserid(row[0]);
 			if (targetUser.userid == userid || target == userid) {
-			var x = Number(row[1])
+			var x = Number(row[1]);
 			var numBadges = x;
 			match = true;
 			if (match === true) {
@@ -127,33 +127,47 @@ var commands = exports.commands = {
 	
 	givebadge: function(target, room, user, connection) {
 		if (ougymleaders.indexOf(user.userid) != -1 || admins.indexOf(user.userid) != -1) {
-		var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
-		// use {'flags': 'a'} to append and {'flags': 'w'} to erase and write a new file
 		if (!target) {
 		var data = fs.readFileSync('config/badges.csv','utf8')
 		var match = false;
 		var numBadges = 0;
 		var stuff = (''+data).split("\n");
+		var line = '';
 		for (var i = stuff.length; i > -1; i--) {
 			if (!stuff[i]) continue;
 			var row = stuff[i].split(",");
 			var userid = toUserid(row[0]);
 			if (user.userid == userid) {
-			var x = Number(row[1])
+			var x = Number(row[1]);
 			var numBadges = x;
 			match = true;
 			if (match === true) {
+				line = line + stuff[i];
 				break;
 			}
 			}
 		}
 		user.badges = numBadges;
-			user.badges = user.badges + 1;
-			log.write(user.userid+','+user.badges+"\n");
-			return this.sendReply('You were given a badge. You now have ' + user.badges + ' badges.');
+		user.badges = user.badges + 1;
+		if (match === true) {
+		var re = new RegExp(line,"g");
+		fs.readFile('config/badges.csv', 'utf8', function (err,data) {
+			if (err) {
+				return console.log(err);
+			}
+			var result = data.replace(re, user.userid+','+user.badges);
+			fs.writeFile('config/badges.csv', result, 'utf8', function (err) {
+			if (err) return console.log(err);
+			});
+		});
 		} else {
+			var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
+			log.write("\n"+user.userid+','+user.badges);
+		}
+		return this.sendReply('You were given a badge. You now have ' + user.badges + ' badges.');
+	} else {
 		if (target.indexOf(',') === -1) {
-	var data = fs.readFileSync('config/badges.csv','utf8')
+		var data = fs.readFileSync('config/badges.csv','utf8')
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) {
@@ -162,22 +176,37 @@ var commands = exports.commands = {
 		var match = false;
 		var numBadges = 0;
 		var stuff = (''+data).split("\n");
+		var line = '';
 		for (var i = stuff.length; i > -1; i--) {
 			if (!stuff[i]) continue;
 			var row = stuff[i].split(",");
 			var userid = toUserid(row[0]);
 			if (targetUser.userid == userid) {
-			var x = Number(row[1])
+			var x = Number(row[1]);
 			var numBadges = x;
 			match = true;
 			if (match === true) {
+				line = line + stuff[i];
 				break;
 			}
 			}
 		}
 		Users.get(targetUser.userid).badges = numBadges;
 		Users.get(targetUser.userid).badges = Users.get(targetUser.userid).badges + 1;
-		log.write(targetUser.userid+','+Users.get(targetUser.userid).badges+"\n");
+		if (match === true) {
+		var re = new RegExp(line,"g");
+		fs.readFile('config/badges.csv', 'utf8', function (err,data) {
+			if (err) {
+				return console.log(err);
+			}
+			var result = data.replace(re, targetUser.userid+','+Users.get(targetUser.userid).badges);
+			fs.writeFile('config/badges.csv', result, 'utf8', function (err) {
+			if (err) return console.log(err);
+			});
+		});} else {
+			var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
+			log.write("\n"+targetUser.userid+','+Users.get(targetUser.userid).badges);
+		}
 		return this.sendReply(targetUser + ' was given a badge.');
 		}
 		}
@@ -200,15 +229,17 @@ var commands = exports.commands = {
 		var match = false;
 		var numBadges = 0;
 		var stuff = (''+data).split("\n");
+		var line = '';
 		for (var i = stuff.length; i > -1; i--) {
 			if (!stuff[i]) continue;
 			var row = stuff[i].split(",");
 			var userid = toUserid(row[0]);
 			if (targetUser.userid == userid) {
-			var x = Number(row[1])
+			var x = Number(row[1]);
 			var numBadges = x;
 			match = true;
 			if (match === true) {
+				line = line + stuff[i];
 				break;
 			}
 			}
@@ -217,7 +248,20 @@ var commands = exports.commands = {
 		var asdf = parts[1].trim();
 		var yay = Number(parts[1]);
 		Users.get(targetUser.userid).badges = Users.get(targetUser.userid).badges + yay;
-		log.write(targetUser.userid+','+Users.get(targetUser.userid).badges+"\n");
+		if (match === true) {
+		var re = new RegExp(line,"g");
+		fs.readFile('config/badges.csv', 'utf8', function (err,data) {
+			if (err) {
+				return console.log(err);
+			}
+			var result = data.replace(re, targetUser.userid+','+Users.get(targetUser.userid).badges);
+			fs.writeFile('config/badges.csv', result, 'utf8', function (err) {
+			if (err) return console.log(err);
+			});
+		});} else {
+			var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
+			log.write("\n"+targetUser.userid+','+Users.get(targetUser.userid).badges);
+		}
 		return this.sendReply(targetUser + ' was given ' + parts[1] + ' badges. ' + targetUser + ' now has ' + Users.get(targetUser.userid).badges + ' badges.');
 		}
 		}
