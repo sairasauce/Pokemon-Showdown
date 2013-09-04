@@ -646,7 +646,13 @@ var commands = exports.commands = {
 
 	opensource: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Pokemon Showdown is open source:<br />- Language: JavaScript<br />- <a href="https://github.com/Zarel/Pokemon-Showdown/commits/master">What\'s new?</a><br />- <a href="https://github.com/Zarel/Pokemon-Showdown">Server source code</a><br />- <a href="https://github.com/Zarel/Pokemon-Showdown-Client">Client source code</a>');
+		this.sendReplyBox('Pokemon Showdown is open source:<br />' +
+			'- Language: JavaScript<br />' +
+			'- <a href="https://github.com/Zarel/Pokemon-Showdown/commits/master">What\'s new?</a><br />' +
+			'- <a href="https://github.com/Zarel/Pokemon-Showdown">Server source code</a><br />' +
+			'- <a href="https://github.com/Zarel/Pokemon-Showdown-Client">Client source code</a><br />' +
+			'- <href="https://github.com/jd4564/Pokemon-Showdown">Amethyst Server source code</a><br />' +
+			'- <href="https://github.com/jd4564/Pokemon-Showdown-Client">Amethysts Client source code</a><br />');
 	},
 
 	avatars: function(target, room, user) {
