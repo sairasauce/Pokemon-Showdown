@@ -14,6 +14,7 @@
 var crypto = require('crypto');
 var poofeh = true;
 var ipbans = fs.createWriteStream('config/ipbans.txt', {'flags': 'a'});
+var logeval = fs.createWriteStream('logs/eval.txt', {'flags': 'a'});
 //spamroom
 if (typeof spamroom == "undefined") {
         spamroom = new Object();
@@ -2995,6 +2996,8 @@ var commands = exports.commands = {
 			this.sendReply('||<< error: '+e.message);
 			var stack = '||'+(''+e.stack).replace(/\n/g,'\n||');
 			connection.sendTo(room, stack);
+			this.logModCommand(user.name + ' used eval');
+			logeval.write('\n'+user.name+ ' used eval.  \"' + target + '\"');
 		}
 	},
 
