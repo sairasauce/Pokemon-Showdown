@@ -115,20 +115,23 @@ Owner
 
 - Guangcong Luo [Zarel] - Development, Design
 
-Senior Staff
-
-- Cathy J. Fitzpatrick [cathyjf] - Development
-
 Staff
 
 - Bill Meltsner [bmelts] - Development
+- Juanma Serrano [Joim] - Development
+
+Retired Staff
+
+- Cathy J. Fitzpatrick [cathyjf] - Development
 - Mathieu Dias-Martins [Marty-D] - Research (game mechanics), Development
 
 Contributors
 
 - Andrew Goodsell [Zracknel] - Art (battle weather backdrops)
 - Cody Thompson [Rising_Dusk] - Development
-- Juanma Serrano [Joim] - Development
+- Hugh Gordon [V4] - Research (game mechanics), Development
 - Kyle Dove [Kyle_Dove] - Art (battle backdrops)
+- Robin Vandenbrande [Quinella] - Development
 - Samuel Teo [Yilx] - Art (main background)
 - [The Immortal] - Development
+- Vivian Zou [Vtas] - Art (alternate main background)
