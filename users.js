@@ -1347,7 +1347,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 	ahbl = ip[3] + '.' + ip[2] + '.' + ip[1] + '.' + ip[0] + '.dnsbl.ahbl.org';
 	spamhaus = ip[3] + '.' + ip[2] + '.' + ip[1] + '.' + ip[0] + '.zen.spamhaus.org';
 	dns.resolve(dronebl, function(err, addresses) {
-	console.log('Checking IP ' + connection + ' with DroneBL.');
+	//console.log('Checking IP ' + connection + ' with DroneBL.');
 	if (!err) {
 		switch(addresses[0]){
 			case '127.0.0.3':
@@ -1357,7 +1357,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (IRC Drone) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (IRC Drone)');
+				//console.log(connection + ' is listed in DroneBL. (IRC Drone)');
 				break;
 			case '127.0.0.5':
 				if (ban) {
@@ -1366,7 +1366,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Bottler) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (Bottler)');
+				//console.log(connection + ' is listed in DroneBL. (Bottler)');
 				break;
 			case '127.0.0.6':
 				if (ban) {
@@ -1375,7 +1375,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 						Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Unknown spambot or drone) IP: ' + connection);
 						ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (Unknown spambot or drone)');
+				//console.log(connection + ' is listed in DroneBL. (Unknown spambot or drone)');
 				break;
 			case '127.0.0.7':
 				if (ban) {
@@ -1384,7 +1384,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (DDOS Drone) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (DDOS Drone)');
+				//console.log(connection + ' is listed in DroneBL. (DDOS Drone)');
 				break;
 			case '127.0.0.8':
 				if (ban) {
@@ -1393,7 +1393,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (SOCKS Proxy) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (SOCKS Proxy)');
+				//console.log(connection + ' is listed in DroneBL. (SOCKS Proxy)');
 				break;
 			case '127.0.0.9':
 				if (ban) { 
@@ -1402,7 +1402,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (HTTP Proxy) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (HTTP Proxy)');
+				//console.log(connection + ' is listed in DroneBL. (HTTP Proxy)');
 				break;
 			case '127.0.0.10':
 				if (ban) {
@@ -1411,7 +1411,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (ProxyChain) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (ProxyChain)');
+				//console.log(connection + ' is listed in DroneBL. (ProxyChain)');
 				break;
 			case '127.0.0.13':
 				user.ban();
@@ -1426,7 +1426,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Open Wingate proxy) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (Open wingate proxy)');
+				//console.log(connection + ' is listed in DroneBL. (Open wingate proxy)');
 				break;
 			case '127.0.0.15':
 				if (ban) {
@@ -1435,7 +1435,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Compromised router / gateway) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (Compromised router / gateway)');
+				//console.log(connection + ' is listed in DroneBL. (Compromised router / gateway)');
 				break;
 			case '127.0.0.17':
 				if (ban) {
@@ -1444,21 +1444,21 @@ exports.blacklistLookup = function (connection, user, ban) {
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Automatically determined botnet IPs (experimental)) IP: ' + connection);
 					ipbans.write('\n'+connection);
 				}
-				console.log(connection + ' is listed in DroneBL. (Automatically determined botnet IPs (experimental)');
+				//console.log(connection + ' is listed in DroneBL. (Automatically determined botnet IPs (experimental)');
 				break;
 			case '127.0.0.255':
 				if (ban) {
 					CommandParser.modlog.write('['+(new Date().toJSON())+'] ' + user.name + ' is listed in DroneBL as Unknown. IP: ' + connection + '\n');
 					Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' is listed in DroneBL as Unknown. IP: ' + connection);
 				}
-				console.log(connection + ' is listed in DroneBL as Unknown.');
+				//console.log(connection + ' is listed in DroneBL as Unknown.');
 				break;
 		}
 	}
 	    if (err) {
-			console.log(connection + ' is not listed in DroneBL.');
+			//console.log(connection + ' is not listed in DroneBL.');
 			dns.resolve(efnetrbl, function(err, addresses) {
-			console.log('Checking IP ' + connection + ' with EFnet RBL.');
+			//console.log('Checking IP ' + connection + ' with EFnet RBL.');
 				if (!err) {
 					switch(addresses[0]){
 						case '127.0.0.1':
@@ -1468,7 +1468,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 								Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Open Proxy) IP: ' + connection);
 								ipbans.write('\n'+connection);
 							}
-							console.log(connection + ' is listed in EFnet RBL. (Open Proxy)');
+							//console.log(connection + ' is listed in EFnet RBL. (Open Proxy)');
 							break;
 						case '127.0.0.2':
 							if (ban) {
@@ -1477,7 +1477,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 								Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (spamtrap666) IP: ' + connection);
 								ipbans.write('\n'+connection);
 							}
-							console.log(connection + ' is listed in EFnet RBL. (spamtrap666)');
+							//console.log(connection + ' is listed in EFnet RBL. (spamtrap666)');
 							break;
 						case '127.0.0.3':
 							if (ban) {
@@ -1486,7 +1486,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 								Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (spamtrap50) IP: ' + connection);
 								ipbans.write('\n'+connection);
 							}
-							console.log(connection + ' is listed in EFnet RBL. (spamtrap50)');
+							//console.log(connection + ' is listed in EFnet RBL. (spamtrap50)');
 							break;
 						case '127.0.0.4':
 							if (ban) {
@@ -1495,7 +1495,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 								Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (TOR) IP: ' + connection);
 								ipbans.write('\n'+connection);
 							}
-							console.log(connection + ' is listed in EFnet RBL. (TOR)');
+							//console.log(connection + ' is listed in EFnet RBL. (TOR)');
 							break;
 						case '127.0.0.5':
 							if (ban) {
@@ -1504,14 +1504,14 @@ exports.blacklistLookup = function (connection, user, ban) {
 								Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Drones / Flooding) IP: ' + connection);
 								ipbans.write('\n'+connection);
 							}
-							console.log(connection + ' is listed in EFnet RBL. (Drones / Flooding)');
+							//console.log(connection + ' is listed in EFnet RBL. (Drones / Flooding)');
 							break;
 						}
 					}
 				if (err) {
-					console.log(connection + ' is not listed in EFnet RBL.');
+					//console.log(connection + ' is not listed in EFnet RBL.');
 					dns.resolve(ahbl, function(err, addresses) {
-					console.log('Checking IP ' + connection + ' with ahbl.');
+					//console.log('Checking IP ' + connection + ' with ahbl.');
 							if (!err) {
 								switch(addresses[0]){
 									case '127.0.0.2':
@@ -1521,7 +1521,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Open Relay) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Open Relay)');
+										//console.log(connection + ' is listed in ahbl. (Open Relay)');
 										break;
 									case '127.0.0.3':
 										if (ban) {
@@ -1530,7 +1530,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Open Proxy) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Open Proxy)');
+										//console.log(connection + ' is listed in ahbl. (Open Proxy)');
 										break;
 									case '127.0.0.4':
 										if (ban) {
@@ -1539,7 +1539,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Spam Source) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Spam Source)');
+										//console.log(connection + ' is listed in ahbl. (Spam Source)');
 										break;
 									case '127.0.0.5':
 										if (ban) {
@@ -1548,7 +1548,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Provisional Spam Source Listing block) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Provisional Spam Source Listing block)');
+										//console.log(connection + ' is listed in ahbl. (Provisional Spam Source Listing block)');
 										break;
 									case '127.0.0.7':
 										if (ban) {
@@ -1557,7 +1557,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Spam Supporter) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Spam Supporter)');
+										//console.log(connection + ' is listed in ahbl. (Spam Supporter)');
 										break;
 									case '127.0.0.8':
 										if (ban) {
@@ -1566,7 +1566,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Spam Supporter (indirect)) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Spam Supporter(indirect))');
+										//console.log(connection + ' is listed in ahbl. (Spam Supporter(indirect))');
 										break;
 									case '127.0.0.10':
 										if (ban) {
@@ -1575,7 +1575,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Shoot On Sight) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Shoot On Sight)');
+										//console.log(connection + ' is listed in ahbl. (Shoot On Sight)');
 										break;
 									case '127.0.0.14':
 										if (ban) {
@@ -1584,7 +1584,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Compromised System - DDoS) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Compromised System - DDoS)');
+										//console.log(connection + ' is listed in ahbl. (Compromised System - DDoS)');
 										break;
 									case '127.0.0.15':
 										if (ban) {
@@ -1593,7 +1593,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Compromised System - Relay) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Compromised System - Relay)');
+										//console.log(connection + ' is listed in ahbl. (Compromised System - Relay)');
 										break;
 									case '127.0.0.16':
 										if (ban) {
@@ -1602,7 +1602,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Compromised System - Autorooter/Scanner) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Compromised System - Autorooter/Scanner)');
+										//console.log(connection + ' is listed in ahbl. (Compromised System - Autorooter/Scanner)');
 										break;
 									case '127.0.0.18':
 										if (ban) {
@@ -1611,7 +1611,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Compromised System - Other virus) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Compromised System - Other virus)');
+										//console.log(connection + ' is listed in ahbl. (Compromised System - Other virus)');
 										break;
 									case '127.0.0.19':
 										if (ban) {
@@ -1620,7 +1620,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Open Proxy) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Open Proxy)');
+										//console.log(connection + ' is listed in ahbl. (Open Proxy)');
 										break;
 									case '127.0.0.127':
 										if (ban) {
@@ -1629,14 +1629,14 @@ exports.blacklistLookup = function (connection, user, ban) {
 											Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (Other) IP: ' + connection);
 											ipbans.write('\n'+connection);
 										}
-										console.log(connection + ' is listed in ahbl. (Other)');
+										//console.log(connection + ' is listed in ahbl. (Other)');
 										break;
 										}
 									}
 									if (err) {
-										console.log(connection + ' is not listed in ahbl.');
+										//console.log(connection + ' is not listed in ahbl.');
 										dns.resolve(spamhaus, function(err, addresses) {
-											console.log('Checking IP ' + connection + ' with spamhaus.');
+											//console.log('Checking IP ' + connection + ' with spamhaus.');
 											if (!err) {
 												switch(addresses[0]) {
 													case '127.0.0.2':
@@ -1646,7 +1646,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 															Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (IP Listed in sbl.spamhaus.org) IP: ' + connection);
 															ipbans.write('\n'+connection);
 														}
-														console.log(connection + ' is listed in spamhaus. (IP listed in sbl.spamhaus.org)');
+														//console.log(connection + ' is listed in spamhaus. (IP listed in sbl.spamhaus.org)');
 														break;
 													case '127.0.0.3':
 														if (ban) {
@@ -1655,7 +1655,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 															Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (IP Listed in css.spamhaus.org) IP: ' + connection);
 															ipbans.write('\n'+connection);
 														}
-														console.log(connection + ' is listed in spamhaus. (IP listed in css.spamhaus.org)');
+														//console.log(connection + ' is listed in spamhaus. (IP listed in css.spamhaus.org)');
 														break;
 												/*	case '127.0.0.4':
 														if (ban) {
@@ -1664,7 +1664,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 															Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (IP Listed in xbl.spamhaus.org) IP: ' + connection);
 															ipbans.write('\n'+connection);
 														}
-														console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
+														//console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
 														break;*/
 													case '127.0.0.5':
 														if (ban) {
@@ -1673,7 +1673,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 															Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (IP Listed in xbl.spamhaus.org) IP: ' + connection);
 															ipbans.write('\n'+connection);
 														}
-														console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
+														//console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
 														break;
 													case '127.0.0.6':
 														if (ban) {
@@ -1682,7 +1682,7 @@ exports.blacklistLookup = function (connection, user, ban) {
 															Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (IP Listed in xbl.spamhaus.org) IP: ' + connection);
 															ipbans.write('\n'+connection);
 														}
-														console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
+														//console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
 														break;
 													case '127.0.0.7':
 														if (ban) {
@@ -1691,12 +1691,12 @@ exports.blacklistLookup = function (connection, user, ban) {
 															Rooms.rooms.staff.add('['+(new Date().toJSON())+'] ' + user.name + ' was automatically banned (IP Listed in xbl.spamhaus.org) IP: ' + connection);
 															ipbans.write('\n'+connection);
 														}
-														console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
+														//console.log(connection + ' is listed in spamhaus. (IP listed in xbl.spamhaus.org)');
 														break;
 													}
 											}
 										if (err) {
-											console.log(connection + ' is not listed in spamhaus.');
+											//console.log(connection + ' is not listed in spamhaus.');
 											}
 									});
 								}	
