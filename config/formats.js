@@ -988,7 +988,7 @@ exports.Formats = [
 		},
 		ruleset: ['Random Battle']
 	}, 
-	{
+	/*{
 		name: "Average August",
 		section: "Seasonals",
 
@@ -1037,7 +1037,7 @@ exports.Formats = [
 				this.add('-fieldactivate', 'move: Perish Song');
 			}
 		}
-	},
+	},*/
 	{
 		name: "Custom Game",
 		section: "Custom Games",
