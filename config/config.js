@@ -209,7 +209,8 @@ exports.customavatars = {
 	'kaityberry':'kaity.gif',
 	'epicamerican':'america.jpg',
 	'mraka':'mraka.jpg',
-	'pidove':'pidove.png'
+	'pidove':'pidove.png',
+	'gymlederaaron':'aaron.png'
 	
 };
 
