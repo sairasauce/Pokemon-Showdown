@@ -1880,7 +1880,7 @@ var commands = exports.commands = {
 			return connection.sendTo('lobby','|html|<div class = "infobox">You may be missing out on some features! <br /> ' +
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
 			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
-			'Also, read <a href = "http://www.smogon.com/smog/issue29/howto_ps">this</a>. Please.</div>');
+			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');
 		}
 		if (target.toLowerCase() === "spamroom" && !user.can('declare')) {
 			return connection.sendTo(target, "|noinit|joinfailed|You cannot join this room.");
