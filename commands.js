@@ -1877,10 +1877,12 @@ var commands = exports.commands = {
 			return connection.sendTo(target, "|noinit|joinfailed|The room '"+target+"' could not be joined.");
 		}
 		if (target.toLowerCase() == "lobby") {
-			return connection.sendTo('lobby','|html|<div class = "infobox">You may be missing out on some features! <br /> ' +
+		/*	return connection.sendTo('lobby','|html|<div class = "infobox">You may be missing out on some features! <br /> ' +
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
 			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
-			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');
+			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');*/
+			return connection.sendTo('lobby','|html|<div class="infobox">Welcome to Amethyst! You should check out our <a href="http://amethyst.webuda.com/forums/">forums!</a><br />' +
+			'We now offer league rooms on request, contact an Administrator for more information!</div>');
 		}
 		if (target.toLowerCase() === "spamroom" && !user.can('declare')) {
 			return connection.sendTo(target, "|noinit|joinfailed|You cannot join this room.");
