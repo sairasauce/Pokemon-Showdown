@@ -3,7 +3,8 @@ var dnsblCache = {};
 
 exports.query = function queryDnsbl(ip, callback) {
 	if (ip in dnsblCache) {
-		callback(dnsblCache[ip]);
+		var reason = "Your IP is on our abuse list and is permanently banned. If you are using a proxy, stop.";
+		callback(dnsblCache[ip], reason);
 		return;
 	}
 	var reversedIp = ip.split('.').reverse().join('.');
