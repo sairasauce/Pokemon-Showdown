@@ -209,7 +209,8 @@ exports.customavatars = {
 	'epicamerican':'america.jpg',
 	'mraka':'mraka.jpg',
 	'pidove':'pidove.png',
-	'gymlederscout':'aaron.png'
+	'gymlederscout':'aaron.png',
+	'palpitoad707':'palpitoad707.png'
 	
 };
 
