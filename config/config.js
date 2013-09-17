@@ -191,7 +191,7 @@ exports.customavatars = {
 	'gymledervolkner':'volkner.png',
 	'coolasian':'cool.png',
 	'elitefournord':'nord.png',
-	'skymn':'skymn2.png',
+	'skymn':'skymin3.png',
 	'scizornician':'scizornician.png',
 	'tailz':'horse.gif',
 	'ultimatechimera':'chimera.jpg',
