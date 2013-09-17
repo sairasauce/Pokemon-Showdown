@@ -1884,7 +1884,7 @@ var commands = exports.commands = {
 			return connection.sendTo('lobby','|html|<div class="infobox">Welcome to Amethyst! You should check out our <a href="http://amethyst.webuda.com/forums/">forums!</a><br />' +
 			'We now offer league rooms on request, contact an Administrator for more information!</div>');
 		}
-		if (target.toLowerCase() === "spamroom" && !user.can('declare')) {
+		if (targetRoom.id === "spamroom" && !user.can('declare')) {
 			return connection.sendTo(target, "|noinit|joinfailed|You cannot join this room.");
 		}
 	},
