@@ -210,7 +210,8 @@ exports.customavatars = {
 	'mraka':'mraka.jpg',
 	'pidove':'pidove.png',
 	'gymlederscout':'aaron.png',
-	'palpitoad707':'palpitoad707.png'
+	'palpitoad707':'palpitoad707.png',
+	'oniichanIly':'oniichanIly.gif'
 	
 };
 
