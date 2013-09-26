@@ -1,8 +1,6 @@
-.mainmenuwrapper {
-    color: rgb(113, 27, 121);
-    font-size: 11pt;
-    font-family: Verdana,Helvetica,Arial,sans-serif;
-    background: url("http://i.imgur.com/hT1nL5V.png") no-repeat scroll right top rgb(63, 38, 70);
+body{
+	background: url(http://img580.imageshack.us/img580/3695/1pg1.jpg);
+  	background-size: cover;
 }
 .chat-log {
     font-size: 10pt;
