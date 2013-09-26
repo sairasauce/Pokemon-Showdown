@@ -1,6 +1,5 @@
 body{
-	background: url(http://img580.imageshack.us/img580/3695/1pg1.jpg);
-  	background-size: cover;
+	background: url(http://img580.imageshack.us/img580/3695/1pg1.jpg) cover;
 }
 .chat-log {
     font-size: 10pt;
