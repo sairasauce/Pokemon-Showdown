@@ -184,7 +184,7 @@ exports.customavatars = {
 	'theimmortal':'monster.png',
 	'higglybiggly':'biggly.gif',
 	'danano':'danano.png',
-	'theturtlelord':'turtlelord.png',
+	'theturtlelord':'toterra.gif',
 	'mizud':'mizu.png',
 	'mizukurage':'mizu1.png',
 	'malk':'malk.png',
@@ -211,7 +211,9 @@ exports.customavatars = {
 	'pidove':'pidove.png',
 	'gymlederscout':'aaron.png',
 	'palpitoad707':'palpitoad707.png',
-	'oniichanily':'oniichanIly.gif'
+	'oniichanily':'oniichanIly.gif',
+	'blizzardq':'blizzardq.gif',
+	'gymlederbayspot':'mamoswine.gif'
 	
 };
 
