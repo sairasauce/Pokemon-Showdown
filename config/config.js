@@ -213,7 +213,8 @@ exports.customavatars = {
 	'palpitoad707':'palpitoad707.png',
 	'oniichanily':'oniichanIly.gif',
 	'blizzardq':'blizzardq.gif',
-	'gymlederbayspot':'mamoswine.gif'
+	'gymlederbayspot':'mamoswine.gif',
+	'massman':'massman.jpeg'
 	
 };
 
