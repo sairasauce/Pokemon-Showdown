@@ -214,7 +214,8 @@ exports.customavatars = {
 	'oniichanily':'oniichanIly.gif',
 	'blizzardq':'blizzardq.gif',
 	'gymlederbayspot':'mamoswine.gif',
-	'massman':'massman.gif'
+	'massman':'massman.gif',
+	'masakaki':'masakaki.png'
 	
 };
 
