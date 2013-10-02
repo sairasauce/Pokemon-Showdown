@@ -138,7 +138,7 @@ exports.customavatars = {
 	'energ218':'2013.png',
 	'gymledervolkner':'4004.png',
 	'elitefourmustang':'8889.png',
-	'colonialmustang':'mustang.png',
+	'colonialmustang':'colonialmustang.jpg',
 	'gymledermoonracer':'5050.png',
 	'treecko37':'9999.png',
 	'gymlederdoyle':'8888.png',
