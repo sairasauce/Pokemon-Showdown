@@ -2310,9 +2310,9 @@ exports.BattleMovedex = {
 				}
 				return 0;
 			},
-			onSourceModifyDamage: function(damage, source, target, move) {
+			onSourceModifyDamage: function(damageMod, source, target, move) {
 				if (move.id === 'earthquake' || move.id === 'magnitude') {
-					return this.modify(damage, 2);
+					return this.chain(damageMod, 2);
 				}
 			}
 		},
@@ -2439,9 +2439,9 @@ exports.BattleMovedex = {
 				}
 				return 0;
 			},
-			onSourceModifyDamage: function(damage, source, target, move) {
+			onSourceModifyDamage: function(damageMod, source, target, move) {
 				if (move.id === 'surf' || move.id === 'whirlpool') {
-					return this.modify(damage, 2);
+					return this.chain(damageMod, 2);
 				}
 			}
 		},
@@ -5454,6 +5454,22 @@ exports.BattleMovedex = {
 		target: "normal",
 		type: "Electric"
 	},
+	"hiddenpowerfairy": {
+		accuracy: 100,
+		basePower: 70,
+		category: "Special",
+		desc: "",
+		shortDesc: "",
+		id: "hiddenpower",
+		isViable: true,
+		name: "Hidden Power Fairy",
+		pp: 15,
+		priority: 0,
+		secondary: false,
+		target: "normal",
+		type: "Fairy",
+		gen: 6
+	},
 	"hiddenpowerfighting": {
 		accuracy: 100,
 		basePower: 70,
@@ -6562,12 +6578,12 @@ exports.BattleMovedex = {
 				}
 				return 5;
 			},
-			onFoeModifyDamage: function(damage, source, target, move) {
+			onFoeModifyDamage: function(damageMod, source, target, move) {
 				if (this.getCategory(move) === 'Special' && target.side === this.effectData.target) {
 					if (!move.crit && source.ability !== 'infiltrator') {
 						this.debug('Light Screen weaken')
-						if (source.side.active.length > 1) return this.modify(damage, 0.66);
-						return this.modify(damage, 0.5);
+						if (source.side.active.length > 1) return this.chain(damageMod, 0.66);
+						return this.chain(damageMod, 0.5);
 					}
 				}
 			},
@@ -7378,9 +7394,9 @@ exports.BattleMovedex = {
 		volatileStatus: 'minimize',
 		effect: {
 			noCopy: true,
-			onSourceModifyDamage: function(damage, source, target, move) {
+			onSourceModifyDamage: function(damageMod, source, target, move) {
 				if (move.id === 'stomp' || move.id === 'steamroller') {
-					return this.modify(damage, 2);
+					return this.chain(damageMod, 2);
 				}
 			}
 		},
@@ -7460,7 +7476,7 @@ exports.BattleMovedex = {
 			}
 		},
 		onHit: function(target, source) {
-			this.useMove(this.lastMove, source);
+			this.useMove(target.lastMove, source);
 		},
 		secondary: false,
 		target: "normal",
@@ -9119,12 +9135,12 @@ exports.BattleMovedex = {
 				}
 				return 5;
 			},
-			onFoeModifyDamage: function(damage, source, target, move) {
+			onFoeModifyDamage: function(damageMod, source, target, move) {
 				if (this.getCategory(move) === 'Physical' && target.side === this.effectData.target) {
 					if (!move.crit && source.ability !== 'infiltrator') {
 						this.debug('Reflect weaken');
-						if (source.side.active.length > 1) return this.modify(damage, 0.66);
-						return this.modify(damage, 0.5);
+						if (source.side.active.length > 1) return this.chain(damageMod, 0.66);
+						return this.chain(damageMod, 0.5);
 					}
 				}
 			},

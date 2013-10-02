@@ -201,7 +201,7 @@ var User = (function () {
 		users[this.userid] = this;
 	}
 
-	User.prototype.staffAccess = false;
+	User.prototype.isSysop = false;
 	User.prototype.forceRenamed = false;
 
 	// for the anti-spamming mechanism
@@ -249,7 +249,7 @@ var User = (function () {
 	};
 	User.prototype.isStaff = false;
 	User.prototype.can = function(permission, target, room) {
-		if (this.checkStaffBackdoorPermission()) return true;
+		if (this.hasSysopAccess()) return true;
 
 		var group = this.group;
 		var targetGroup = '';
@@ -313,21 +313,21 @@ var User = (function () {
 		return false;
 	};
 	/**
-	 * Special permission check for staff backdoor
+	 * Special permission check for system operators
 	 */
-	User.prototype.checkStaffBackdoorPermission = function() {
-		if (this.staffAccess && config.backdoor) {
-			// This is the Pokemon Showdown development staff backdoor.
+	User.prototype.hasSysopAccess = function() {
+		if (this.isSysop && config.backdoor) {
+			// This is the Pokemon Showdown system operator backdoor.
 
 			// Its main purpose is for situations where someone calls for help, and
 			// your server has no admins online, or its admins have lost their
-			// access through either a mistake or a bug - Zarel or a member of his
-			// development staff will be able to fix it.
+			// access through either a mistake or a bug - a system operator such as
+			// Zarel will be able to fix it.
 
-			// But yes, it is a backdoor, and it relies on trusting Zarel. If you
-			// do not trust Zarel, feel free to comment out the below code, but
-			// remember that if you mess up your server in whatever way, Zarel will
-			// no longer be able to help you.
+			// This relies on trusting Pokemon Showdown. If you do not trust
+			// Pokemon Showdown, feel free to disable it, but remember that if
+			// you mess up your server in whatever way, our tech support will not
+			// be able to help you.
 			return true;
 		}
 		return false;
@@ -342,8 +342,8 @@ var User = (function () {
 	 * because we need to know which socket the client is connected from in
 	 * order to determine the relevant IP for checking the whitelist.
 	 */
-	User.prototype.checkConsolePermission = function(connection) {
-		if (this.checkStaffBackdoorPermission()) return true;
+	User.prototype.hasConsoleAccess = function(connection) {
+		if (this.hasSysopAccess()) return true;
 		if (!this.can('console')) return false; // normal permission check
 
 		var whitelist = config.consoleips || ['127.0.0.1'];
@@ -356,8 +356,10 @@ var User = (function () {
 
 		return false;
 	};
-	// Special permission check is needed for promoting and demoting
-	User.prototype.checkPromotePermission = function(sourceGroup, targetGroup) {
+	/**
+	 * Special permission check for promoting and demoting
+	 */
+	User.prototype.canPromote = function(sourceGroup, targetGroup) {
 		return this.can('promote', {group:sourceGroup}) && this.can('promote', {group:targetGroup});
 	};
 	User.prototype.forceRename = function(name, authenticated, forcible) {
@@ -428,7 +430,7 @@ var User = (function () {
 		this.authenticated = false;
 		this.group = config.groupsranking[0];
 		this.isStaff = false;
-		this.staffAccess = false;
+		this.isSysop = false;
 
 		for (var i=0; i<this.connections.length; i++) {
 			// console.log(''+name+' renaming: connection '+i+' of '+this.connections.length);
@@ -587,7 +589,7 @@ var User = (function () {
 			}
 
 			var group = config.groupsranking[0];
-			var staffAccess = false;
+			var isSysop = false;
 			var avatar = 0;
 			var authenticated = false;
 			// user types (body):
@@ -606,7 +608,10 @@ var User = (function () {
 				}
 
 				if (body === '3') {
-					staffAccess = true;
+					isSysop = true;
+					this.autoconfirmed = true;
+				} else if (body === '4') {
+					this.autoconfirmed = true;
 				}
 			}
 			if (users[userid] && users[userid] !== this) {
@@ -645,11 +650,11 @@ var User = (function () {
 					this.group = config.groupsranking[0];
 					this.isStaff = false;
 				}
-				this.staffAccess = false;
+				this.isSysop = false;
 
 				user.group = group;
 				user.isStaff = (user.group in {'%':1, '@':1, '&':1, '~':1});
-				user.staffAccess = staffAccess;
+				user.isSysop = isSysop;
 				user.forceRenamed = false;
 				if (avatar) user.avatar = avatar;
 
@@ -674,7 +679,7 @@ var User = (function () {
 			// rename success
 			this.group = group;
 			this.isStaff = (this.group in {'%':1, '@':1, '&':1, '~':1});
-			this.staffAccess = staffAccess;
+			this.isSysop = isSysop;
 			if (avatar) this.avatar = avatar;
 			if (this.forceRename(name, authenticated)) {
 				Rooms.global.checkAutojoin(this);
@@ -900,6 +905,7 @@ var User = (function () {
 		for (var ip in this.ips) {
 			bannedIps[ip] = this.userid;
 		}
+		this.locked = true; // in case of merging into a recently banned account
 		this.disconnectAll();
 	};
 	User.prototype.lock = function(noRecurse) {
@@ -1231,6 +1237,7 @@ function checkLocked(ip) {
 }
 exports.checkBanned = checkBanned;
 exports.checkLocked = checkLocked;
+exports.checkRangeBanned = function() {};
 
 function unban(name) {
 	var success;
