@@ -774,6 +774,24 @@ cute: {
 			}
 		}
 	},
+	monostatclause: {
+		effectType: 'Rule',
+		onStart: function() {
+			this.add('rule', 'Monostat Clause: Pokemon must all have the same highest base stat');
+		},
+		validateTeam: function(team, format) {
+			var problem = [];
+			for(var i = 0; i < team.length; i++) {
+				var template = this.getTemplate(team[i].species);
+				var stats = template.stats;
+				var a = Math.max(stats.spa,stats.spd,stats.atk,stats.hp,stats.def,stats.spe);
+				problem.push(a)
+			}
+			if(problem[0]) {		
+			return[problem];
+			}
+		}
+	},
 	haxclause: {
 		effectType: 'Rule',
 		onStart: function() {
