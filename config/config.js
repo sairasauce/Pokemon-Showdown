@@ -191,7 +191,7 @@ exports.customavatars = {
 	'gymledervolkner':'volkner.png',
 	'coolasian':'cool.png',
 	'elitefournord':'nord.png',
-	'skymn':'skymin3.png',
+	'skymn':'skysky.png',
 	'scizornician':'scizornician.png',
 	'tailz':'horse.gif',
 	'ultimatechimera':'chimera.jpg',
@@ -215,7 +215,8 @@ exports.customavatars = {
 	'blizzardq':'blizzardq.gif',
 	'gymlederbayspot':'mamoswine.gif',
 	'massman':'massman.gif',
-	'masakaki':'masakaki.png'
+	'masakaki':'masakaki.png',
+	'hostageclam':'clam.png'
 	
 };
 
