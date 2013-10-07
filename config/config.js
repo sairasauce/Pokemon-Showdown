@@ -216,7 +216,8 @@ exports.customavatars = {
 	'gymlederbayspot':'mamoswine.gif',
 	'massman':'massman.gif',
 	'masakaki':'masakaki.png',
-	'hostageclam':'clam.png'
+	'hostageclam':'clam.png',
+	'vileman':'vileman.gif'
 	
 };
 
