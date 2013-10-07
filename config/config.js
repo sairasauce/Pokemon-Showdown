@@ -212,7 +212,7 @@ exports.customavatars = {
 	'gymlederscout':'aaron.png',
 	'palpitoad707':'palpitoad707.png',
 	'oniichanily':'oniichanIly.gif',
-	'blizzardq':'blizzardq.gif',
+	'blizzardq':'blizzard.gif',
 	'gymlederbayspot':'mamoswine.gif',
 	'massman':'massman.gif',
 	'masakaki':'masakaki.png',
