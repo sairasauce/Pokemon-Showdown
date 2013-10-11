@@ -1585,7 +1585,10 @@ var commands = exports.commands = {
 				return false
 			}
 		}
-
+		
+		if (user.userid === 'aortega' && targetUser.userid === 'piiiikachuuu') {
+			return this.sendReply('LOLNOPE');
+		}
 		if (user.locked && !targetUser.can('lock', user)) {
 			return this.popupReply('You can only private message members of the moderation team (users marked by %, @, &, or ~) when locked.');
 		}
