@@ -153,7 +153,7 @@ exports.customavatars = {
 	'stevoduhhero':'2012.png',
 	'piiiikachuuu':'pika.png',
 	'gymledernord':'3005.png',
-	'onlylove':'2030.png',
+	'onlylove':'onlynub.jpg',
 	'iievol':'2060.png',
 	'elitfoursumbreon':'270.png',
 	'slytherianumbreon':'2070.png',
