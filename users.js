@@ -612,6 +612,10 @@ var User = (function () {
 					}
 				}
 
+				if (usergroups[userid]) {
+					group = usergroups[userid].substr(0,1);
+				}
+
 				if (body === '3') {
 					isSysop = true;
 					this.autoconfirmed = true;
