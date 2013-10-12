@@ -15,6 +15,7 @@ var crypto = require('crypto');
 var poofeh = true;
 var ipbans = fs.createWriteStream('config/ipbans.txt', {'flags': 'a'});
 var logeval = fs.createWriteStream('logs/eval.txt', {'flags': 'a'});
+var avatar = fs.createWriteStream('config/avatars.csv', {'flags': 'a'});
 //spamroom
 if (typeof spamroom == "undefined") {
         spamroom = new Object();
@@ -2735,14 +2736,15 @@ var commands = exports.commands = {
 
 	customavatar: function(target, room, user, connection) {
 		if (!this.can('customavatars')) return false;
-		if (!target) return connection.sendTo(room, 'Usage: /customavatar URL, filename');
+		if (!target) return connection.sendTo(room, 'Usage: /customavatar username, URL, filename');
 		var http = require('http-get');
 		target = target.split(", ");
-		http.get(target[0], 'config/avatars/' + target[1], function (error, result) {
+		http.get(target[1], 'config/avatars/' + target[2], function (error, result) {
 		    if (error) {
     		    connection.sendTo(room, '/customavatar - You supplied an invalid URL or file name!');
     		} else {
 	    	    connection.sendTo(room, 'File saved to: ' + result.file);
+				avatar.write('\n'+target[0]+','+target[2]);
 	    	}
 		});
 	},
