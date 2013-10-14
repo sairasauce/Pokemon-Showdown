@@ -1328,6 +1328,10 @@ var commands = exports.commands = {
 			matched = true;
 			this.sendReply('/permaban [username] - Permanently bans the user from the server. Bans placed by this command do not reset on server restarts.');
 		}
+		if (target === '&' || target === 'customavatar') {
+			matched = true;
+			this.sendReply('/customavatar [username], [URL], [filename] - Adds a custom avatar for the specified username. Requires: & ~');
+		}
 		if (target === '~' || target === 'hotpatch') {
 			matched = true;
 			this.sendReply('Hot-patching the game engine allows you to update parts of Showdown without interrupting currently-running battles. Requires: ~');

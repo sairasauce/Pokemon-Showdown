@@ -2739,12 +2739,14 @@ var commands = exports.commands = {
 		if (!target) return connection.sendTo(room, 'Usage: /customavatar username, URL, filename');
 		var http = require('http-get');
 		target = target.split(", ");
+		var username = Users.get(target[0]);
 		http.get(target[1], 'config/avatars/' + target[2], function (error, result) {
 		    if (error) {
     		    connection.sendTo(room, '/customavatar - You supplied an invalid URL or file name!');
     		} else {
 	    	    connection.sendTo(room, 'File saved to: ' + result.file);
 				avatar.write('\n'+target[0]+','+target[2]);
+				Users.users.username.avatar = target[2];
 	    	}
 		});
 	},
