@@ -2743,10 +2743,11 @@ var commands = exports.commands = {
 		http.get(target[1], 'config/avatars/' + target[2], function (error, result) {
 		    if (error) {
     		    connection.sendTo(room, '/customavatar - You supplied an invalid URL or file name!');
+			//	console.log(error);
     		} else {
-	    	    connection.sendTo(room, 'File saved to: ' + result.file);
-				avatar.write('\n'+target[0]+','+target[2]);
-				Users.users.username.avatar = target[2];
+	    	//  connection.sendTo(room, 'File saved to: ' + result.file);
+				avatar.write('\n'+username+','+target[2]);
+				Users.get(username).avatar = target[2];
 	    	}
 		});
 	},
