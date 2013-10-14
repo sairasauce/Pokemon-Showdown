@@ -656,7 +656,7 @@ var commands = exports.commands = {
 
 	avatars: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Your avatar can be changed using the Options menu (it looks like a gear) in the upper right of Pokemon Showdown.');
+		this.sendReplyBox('Your avatar can be changed using the Options menu (it looks like a gear) in the upper right of Pokemon Showdown. <br />Voice and above may also request a custom avatar by messaging a Leader or Administrator.');
 	},
 
 	introduction: 'intro',
