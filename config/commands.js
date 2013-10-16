@@ -1116,6 +1116,11 @@ var commands = exports.commands = {
 				'- /endhangman - ends the game if something goes wrong. Requires: +%@&~<br><br>' +
 				'PM me if you find any bugs. Have fun! - piiiikachuuu');
 		}
+		if (target === 'all' || target === 'regdate') {
+			matched = true;
+			this.sendReply('/regdate [username] - Shows you the date the username was registered on.');
+			this.sendReply('!regdate [username] - Broadcasts the date the username was registered on to the room. Requires: + % @ & ~');
+		}
 		if (target === 'all' || target === 'complaint' || target === 'complain') {
 			matched = true;
 			this.sendReply('/complain OR /complaint [message] - Adds a complaint to the list of complaints which will be reviewed by server staff.');
