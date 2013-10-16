@@ -254,7 +254,6 @@ var commands = exports.commands = {
 	 *********************************************************/
 	regdate: function(target, room, user, connection) { 
 		if (!this.canBroadcast()) return;
-		var data = '';
 		var util = require("util"),
     	http = require("http");
 
@@ -265,8 +264,9 @@ var commands = exports.commands = {
 		};
 
 		var content = "";   
-
+		var self = this;
 		var req = http.request(options, function(res) {
+			
 		    res.setEncoding("utf8");
 		    res.on("data", function (chunk) {
 	        content += chunk;
@@ -286,11 +286,11 @@ var commands = exports.commands = {
 			else {
 				data = target+' is not registered.';
 			}
-			connection.sendTo(room, '|raw|<div class="infobox" target="_blank">'+data+'</div>');
+			self.sendReplyBox(data);
 		    });
 		});
-
 		req.end();
+    	//this.sendReplyBox(data);
 	},
 
 	stats: 'data',
