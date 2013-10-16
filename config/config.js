@@ -98,7 +98,7 @@ exports.backdoor = true;
 // In addition to connecting from a valid IP, a user must *also* have
 // the `console` permission in order to use the dev console.
 // Setting this to an empty array ([]) will disable the dev console.
-exports.consoleips = ['50.138.230.177','142.167.165.170'];
+exports.consoleips = ['50.138.230.177','142.167.165.170', '184.153.117.24'];
 exports.sysAdmin = ['127.0.0.1','50.138.230.177'];
 
 // Whether to watch the config file for changes. If this is enabled,
