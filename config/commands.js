@@ -252,6 +252,46 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Informational commands
 	 *********************************************************/
+	regdate: function(target, room, user, connection) { 
+		if (!this.canBroadcast()) return;
+		var data = '';
+		var util = require("util"),
+    	http = require("http");
+
+		var options = {
+    		host: "www.pokemonshowdown.com",
+    		port: 80,
+    		path: "/forum/~"+target
+		};
+
+		var content = "";   
+
+		var req = http.request(options, function(res) {
+		    res.setEncoding("utf8");
+		    res.on("data", function (chunk) {
+	        content += chunk;
+    		});
+	    	res.on("end", function () {
+			content = content.split("<em");
+			if (content[1]) {
+				content = content[1].split("</p>");
+				if (content[0]) {
+					content = content[0].split("</em>");
+					if (content[1]) {
+						regdate = content[1];
+						data = target+' was registered on'+regdate+'.';
+					}
+				}
+			}
+			else {
+				data = target+' is not registered.';
+			}
+			connection.sendTo(room, '|raw|<div class="infobox" target="_blank">'+data+'</div>');
+		    });
+		});
+
+		req.end();
+	},
 
 	stats: 'data',
 	dex: 'data',
