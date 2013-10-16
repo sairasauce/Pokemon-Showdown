@@ -1335,7 +1335,7 @@ var commands = exports.commands = {
 		}
 		if (target === '&' || target === 'customavatar') {
 			matched = true;
-			this.sendReply('/customavatar [username], [URL], [filename] - Adds a custom avatar for the specified username. Requires: & ~');
+			this.sendReply('/customavatar [username], [URL] - Adds a custom avatar for the specified username. Requires: & ~');
 		}
 		if (target === '~' || target === 'hotpatch') {
 			matched = true;
