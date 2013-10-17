@@ -254,6 +254,7 @@ var commands = exports.commands = {
 	 *********************************************************/
 	regdate: function(target, room, user, connection) { 
 		if (!this.canBroadcast()) return;
+		target = target.replace(/\s+/g, '');
 		var util = require("util"),
     	http = require("http");
 
@@ -290,7 +291,6 @@ var commands = exports.commands = {
 		    });
 		});
 		req.end();
-    	//this.sendReplyBox(data);
 	},
 
 	stats: 'data',
