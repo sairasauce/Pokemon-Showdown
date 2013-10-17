@@ -2251,13 +2251,12 @@ var commands = exports.commands = {
 	
 	permaban: function(target, room, user) {
 		if (!target) return this.parse('/help permaban');
-		
+		if (!user.isSysadmin) return false;		
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
-		if (!this.can('permaban', targetUser)) return false;
 		if (Users.checkBanned(targetUser.latestIp) && !target && !targetUser.connected) {
 			var problem = ' but was already banned';
 			return this.privateModCommand('('+targetUser.name+' would be banned by '+user.name+problem+'.)');
