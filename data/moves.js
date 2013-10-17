@@ -2768,7 +2768,7 @@ exports.BattleMovedex = {
 	"dracometeor": {
 		num: 434,
 		accuracy: 90,
-		basePower: 140,
+		basePower: 130,
 		category: "Special",
 		desc: "Deals damage to one adjacent target and lowers the user's Special Attack by 2 stages.",
 		shortDesc: "Lowers the user's Sp. Atk by 2.",
@@ -3167,7 +3167,30 @@ exports.BattleMovedex = {
 		name: "Electric Terrain",
 		pp: 10,
 		priority: 0,
-		//todo
+		sideCondition: 'electricterrain',
+		effect: {
+			duration: 5,
+			durationCallback: function(target, source, effect) {
+				if (source && source.ability === 'persistent') {
+					return 7;
+				}
+				return 5;
+			},
+			onSetStatus: function(status, target, source, effect) {
+				if (status.id === 'slp' && source && source !== target && source.ability !== 'infiltrator' && !target.runImmunity('Ground')) {
+					this.debug('Interrupting sleep from Electric Terrain');
+					return false;
+				}
+			},
+			onStart: function(side) {
+				this.add('-sidestart', side, 'Electric Terrain');
+			},
+			onResidualOrder: 21,
+			onResidualSubOrder: 2,
+			onEnd: function(side) {
+				this.add('-sideend', side, 'Electric Terrain');
+			}
+		},
 		secondary: false,
 		target: "normal",
 		type: "Electric"
@@ -3184,7 +3207,21 @@ exports.BattleMovedex = {
 		name: "Electrify",
 		pp: 20,
 		priority: 0,
-		//todo
+		volatileStatus: 'electrify',
+		effect: {
+			duration: 1,
+			// TODO: Proper messages
+			onStart: function(pokemon) {
+				this.add('-start', pokemon, 'Electrify');
+			},
+			onModifyMove: function(move) {
+				this.debug('Electrify making move type electric');
+				move.type = 'Electric';
+			},
+			onEnd: function(pokemon) {
+				this.add('-end', pokemon, 'Electrify');
+			}
+		},
 		secondary: false,
 		target: "normal",
 		type: "Electric"
@@ -5788,10 +5825,10 @@ exports.BattleMovedex = {
 	"hex": {
 		num: 506,
 		accuracy: 100,
-		basePower: 50,
+		basePower: 60,
 		basePowerCallback: function(pokemon, target) {
-			if (target.status) return 100;
-			return 50;
+			if (target.status) return 120;
+			return 60;
 		},
 		category: "Special",
 		desc: "Deals damage to one adjacent target. Power doubles if the target has a major status problem.",
@@ -6865,7 +6902,7 @@ exports.BattleMovedex = {
 	"knockoff": {
 		num: 282,
 		accuracy: 100,
-		basePower: 55,
+		basePower: 65,
 		category: "Physical",
 		desc: "Deals damage to one adjacent target and causes it to drop its held item. This move cannot force Pokemon with the Ability Sticky Hold to lose their held item, or force a Giratina, an Arceus, or a Genesect to lose their Griseous Orb, Plate, or Drive, respectively. Items lost to this move cannot be regained with Recycle. Makes contact.",
 		shortDesc: "Removes the target's held item.",
@@ -9222,6 +9259,7 @@ exports.BattleMovedex = {
 		name: "PoisonPowder",
 		pp: 35,
 		priority: 0,
+		isPowder: true,
 		status: 'psn',
 		secondary: false,
 		target: "normal",
@@ -9292,6 +9330,7 @@ exports.BattleMovedex = {
 		name: "Powder",
 		pp: 20,
 		priority: 0,
+		isPowder: true,
 		isBounceable: true,
 		volatileStatus: 'powder',
 		effect: {
@@ -9952,6 +9991,7 @@ exports.BattleMovedex = {
 		name: "Rage Powder",
 		pp: 20,
 		priority: 3,
+		isPowder: true,
 		volatileStatus: 'followme',
 		secondary: false,
 		target: "self",
@@ -11697,6 +11737,7 @@ exports.BattleMovedex = {
 		name: "Sleep Powder",
 		pp: 15,
 		priority: 0,
+		isPowder: true,
 		status: 'slp',
 		secondary: false,
 		target: "normal",
@@ -12378,9 +12419,18 @@ exports.BattleMovedex = {
 		name: "Sticky Web",
 		pp: 20,
 		priority: 0,
-		//todo
+		isBounceable: true,
+		sideCondition: 'stickyweb',
+		effect: {
+			onStart: function(side) {
+				this.add('-sidestart', side, 'move: Sticky Web');
+			},
+			onSwitchIn: function(pokemon) {
+				this.boost({spe: -1}, pokemon, pokemon, this.getMove('stickyweb'));
+			}
+		},
 		secondary: false,
-		target: "normal",
+		target: "foeSide",
 		type: "Bug"
 	},
 	"stockpile": {
