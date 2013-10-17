@@ -254,6 +254,7 @@ var commands = exports.commands = {
 	 *********************************************************/
 	regdate: function(target, room, user, connection) { 
 		if (!this.canBroadcast()) return;
+		var username = target;
 		target = target.replace(/\s+/g, '');
 		var util = require("util"),
     	http = require("http");
@@ -280,12 +281,12 @@ var commands = exports.commands = {
 					content = content[0].split("</em>");
 					if (content[1]) {
 						regdate = content[1];
-						data = target+' was registered on'+regdate+'.';
+						data = username+' was registered on'+regdate+'.';
 					}
 				}
 			}
 			else {
-				data = target+' is not registered.';
+				data = username+' is not registered.';
 			}
 			self.sendReplyBox(data);
 		    });
