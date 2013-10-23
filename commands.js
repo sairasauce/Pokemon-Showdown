@@ -456,7 +456,7 @@ var commands = exports.commands = {
 	forum: 'forums',
 	forums: function(target, room, user) {
                 if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>The Amethyst Forums:</b><br /> - <a href = "http://amethyst.webuda.com/forums/" target = _blank>Forums</a>');
+                this.sendReplyBox('<b>The Amethyst Forums:</b><br /> - <a href = "http://amethystserver.freeforums.net/" target = _blank>Forums</a>');
                 },
 
 			
@@ -1031,13 +1031,25 @@ var commands = exports.commands = {
 		ougymleaders: 'ouleaders',
         ouleaders: function(target, room, user) {
                 if(!this.canBroadcast()) return;
-                this.sendReplyBox('A list of the active OU leaders can be found <a href = "http://amethyst.webuda.com/forums/showthread.php?tid=7" target = _blank>here</a>.');
-        },
+                this.sendReplyBox('A list of the active OU leaders can be found <a href = "hhttp://pastebin.com/4Vq73sst" target = _blank>here</a>.');
+        	},
         
 	uugymleaders: 'uuleaders',
 	uuleaders: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('A list of the active UU leaders can be found <a href = "http://amethyst.webuda.com/forums/showthread.php?tid=90" target = _blank>here</a>.');
+		this.sendReplyBox('A list of the active UU leaders can be found <a href = "http://pastebin.com/2EwGFFEW" target = _blank>here</a>.');
+		},
+		
+        nugymleaders: 'nuleaders',
+        nuleaders: function(target, room, user) {
+   		if (!this.canBroadcast()) return;
+		this.sendReplyBox('A list of active NU leaders can be found <a href = "http://pastebin.com/WwAmXACt" target = _blank>here</a>.');
+		},
+
+	rugymleaders: 'ruleaders',
+	ruleaders: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('A list of active RU leaders can be found < a href "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
 		},
  
         pika: 'chuuu',
