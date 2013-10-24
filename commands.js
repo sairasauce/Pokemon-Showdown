@@ -1029,24 +1029,32 @@ var commands = exports.commands = {
 		},
 		
 		ougymleaders: 'ouleaders',
+		ougl: 'ouleaders',
+		ou: 'ouleaders',
         ouleaders: function(target, room, user) {
                 if(!this.canBroadcast()) return;
-                this.sendReplyBox('A list of the active OU leaders can be found <a href = "hhttp://pastebin.com/4Vq73sst" target = _blank>here</a>.');
+                this.sendReplyBox('A list of the active OU leaders can be found <a href = "http://pastebin.com/4Vq73sst" target = _blank>here</a>.');
         	},
         
 	uugymleaders: 'uuleaders',
+	uugl: 'uuleaders',
+	uu: 'uuleaders',
 	uuleaders: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('A list of the active UU leaders can be found <a href = "http://pastebin.com/2EwGFFEW" target = _blank>here</a>.');
 		},
 		
         nugymleaders: 'nuleaders',
+        nugl: 'nuleaders',
+        nu: 'nuleaders',
         nuleaders: function(target, room, user) {
    		if (!this.canBroadcast()) return;
 		this.sendReplyBox('A list of active NU leaders can be found <a href = "http://pastebin.com/WwAmXACt" target = _blank>here</a>.');
 		},
 
 	rugymleaders: 'ruleaders',
+	rugl: 'ruleaders',
+	ru: 'ruleaders',
 	ruleaders: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('A list of active RU leaders can be found <a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
