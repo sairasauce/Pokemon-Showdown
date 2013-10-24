@@ -566,7 +566,7 @@ var commands = exports.commands = {
                
         ross: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Ross:</b><br />'+
+                this.sendReplyBox('<b>Information on Elite Four Ross:</b><br />'+
                                 'Type: Psychic<br />' +
                                 'Tier: Over Used (OU)<br />' +
                                 '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
@@ -972,7 +972,7 @@ var commands = exports.commands = {
 		
 	nord: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-				this.sendReplyBox('<b>Information on Gym Le@der Nord:</b><br />' +
+				this.sendReplyBox('<b>Information on Elite Four Nord:</b><br />' +
 							'Type: Ice<br />' +
 							'Tier: Over Used (OU)<br />' + 
 							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
@@ -1059,6 +1059,16 @@ var commands = exports.commands = {
                 'pm him if you need something to be changed or if you\'re a new gym leader/elite four and you need one.<br />'+
                                 '<img src="http://i1073.photobucket.com/albums/w394/HeechulBread/Pikachu_sprite_by_Momogirl_zpsf31aafb5.gif">');
                 },
+                
+         blizzard: 'blizzy',
+	 blizzy: function(target, room, user) {
+	 if(!this.canBroadcast()) return;
+	 this.sendReplyBox('<center> Trainer:blizzardq </center> <br />' +
+                  '<center> Ace: Keldeo </center <br />' +
+                  '<center> Catchphrase: pls. </center> <br />' +
+                  '<center> <img src="http://sprites.pokecheck.org/i/647.gif"> </center>'
+
+		},
 				
 	cry: 'complain',
 	bitch: 'complain',
