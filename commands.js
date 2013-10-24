@@ -1049,7 +1049,7 @@ var commands = exports.commands = {
 	rugymleaders: 'ruleaders',
 	ruleaders: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('A list of active RU leaders can be found < a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
+		this.sendReplyBox('A list of active RU leaders can be found <a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
 		},
  
         pika: 'chuuu',
