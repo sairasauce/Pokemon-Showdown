@@ -1059,16 +1059,7 @@ var commands = exports.commands = {
                 'pm him if you need something to be changed or if you\'re a new gym leader/elite four and you need one.<br />'+
                                 '<img src="http://i1073.photobucket.com/albums/w394/HeechulBread/Pikachu_sprite_by_Momogirl_zpsf31aafb5.gif">');
                 },
-                
-         blizzard: 'blizzy',
-	 blizzy: function(target, room, user) {
-	 if(!this.canBroadcast()) return;
-	 this.sendReplyBox('<center> Trainer:blizzardq </center> <br />' +
-                  '<center> Ace: Keldeo </center <br />' +
-                  '<center> Catchphrase: pls. </center> <br />' +
-                  '<center> <img src="http://sprites.pokecheck.org/i/647.gif"> </center>');
-
-		},
+               
 				
 	cry: 'complain',
 	bitch: 'complain',
