@@ -2057,6 +2057,7 @@ var commands = exports.commands = {
 	},
 
 	b: 'ban',
+	barn: 'ban',
 	ban: function(target, room, user) {
 		if (!target) return this.parse('/help ban');
 
