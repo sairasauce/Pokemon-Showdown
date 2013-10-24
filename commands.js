@@ -1025,7 +1025,7 @@ var commands = exports.commands = {
 	league: 'leagueintro',
 	leagueintro: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Welcome to the Amethyst League! To challenge the champion, you must win 12 badges and beat the Elite 4. Here are the <a href="http://gymleadermustang.wix.com/-amethystleague#!rules/c1w1e" target = _blank>rules</a>! Good luck!');
+		this.sendReplyBox('Welcome to the Amethyst League! To challenge the champion, you must win 10 badges and beat the Elite 4. Here are the <a href="http://gymleadermustang.wix.com/-amethystleague#!rules/c1w1e" target = _blank>rules</a>! Good luck!');
 		},
 		
 		ougymleaders: 'ouleaders',
@@ -1049,7 +1049,7 @@ var commands = exports.commands = {
 	rugymleaders: 'ruleaders',
 	ruleaders: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('A list of active RU leaders can be found < a href "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
+		this.sendReplyBox('A list of active RU leaders can be found < a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
 		},
  
         pika: 'chuuu',
