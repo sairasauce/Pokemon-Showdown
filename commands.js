@@ -1655,8 +1655,9 @@ var commands = exports.commands = {
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
 			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
 			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');*/
-			return connection.sendTo('lobby','|html|<div class="infobox">Welcome to Amethyst! You should check out our <a href="http://amethyst.webuda.com/forums/">forums!</a><br />' +
-			'We now offer league rooms on request, contact an Administrator for more information!</div>');
+			return connection.sendTo('lobby','|html|<div class="infobox">Welcome to Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a><br />' +
+			'We now offer league rooms on request, contact an Administrator for more information!<br />' +
+			'<img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></div>');
 		}
 		if (targetRoom.id === "spamroom" && !user.can('declare')) {
 			return connection.sendTo(target, "|noinit|joinfailed|You cannot join this room.");
@@ -3259,7 +3260,7 @@ var commands = exports.commands = {
 
 //poof functions, still not neat
 function getRandMessage(user){
-	var numMessages = 34; // numMessages will always be the highest case # + 1 //increasing this will make the default appear more often
+	var numMessages = 36; // numMessages will always be the highest case # + 1 //increasing this will make the default appear more often
 	var message = '~~ ';
 	switch(Math.floor(Math.random()*numMessages)){
 		case 0: message = message + user.name + ' has vanished into nothingness!';
@@ -3326,9 +3327,13 @@ function getRandMessage(user){
 		break;
 		case 31: message = message + user.name + ' was knocked out cold by Fallacies!';
 		break;
-		case 32: message = message + user.name + ' died making love to an EnerG218!'; //huehuehue how long until someone notices
+		case 32: message = message + user.name + ' died making love to an EnerG218!'; //huehuehue how long until someone notices 
 		break;
 		case 33: message = message + user.name + ' was glomped to death by Mizu!';
+		break;
+		case 34: message = message + user.name + ' was hit by a wrecking ball!';
+		break;
+		case 35: message = message + user.name + ' was killed by jd\'s swag!'; //huehue how long until some someone notices.~blizzy.
 		break;
 		default: message = message + user.name + ' fled from colonial mustang!';
 	};
