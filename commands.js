@@ -1066,7 +1066,7 @@ var commands = exports.commands = {
 	 this.sendReplyBox('<center> Trainer:blizzardq </center> <br />' +
                   '<center> Ace: Keldeo </center <br />' +
                   '<center> Catchphrase: pls. </center> <br />' +
-                  '<center> <img src="http://sprites.pokecheck.org/i/647.gif"> </center>'
+                  '<center> <img src="http://sprites.pokecheck.org/i/647.gif"> </center>');
 
 		},
 				
