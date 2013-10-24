@@ -1,6 +1,5 @@
-body{
-	background: url("http://img580.imageshack.us/img580/3695/1pg1.jpg");
-	background-size:cover;
+.mainmenuwrapper {
+	background: url("http://puu.sh/4XP2N");
 }
 .chat-log {
     font-size: 10pt;
