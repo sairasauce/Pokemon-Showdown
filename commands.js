@@ -615,7 +615,7 @@ var commands = exports.commands = {
             aikenka: 'aik',
 	aik: function(target, rom, user) {
 	if (!this.canBroadcast()) return;
-	this.sendReplyBox('Trainer: <font color="Aikenka<br />' +
+	this.sendReplyBox('Trainer: Aikenka<br />' +
 		  'Type: Water(OU)<br />' +
                   'Signature Pokemon: Dragonite<br />' +
                   'Catchphrase: My mom is my inspiration<br />' +
