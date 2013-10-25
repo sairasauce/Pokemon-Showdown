@@ -611,6 +611,20 @@ var commands = exports.commands = {
                                 'Badge: Aikido Badge<br />' +
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/145_zps5de2fc9e.png">');
                 },
+               
+            aikenka: 'aik',
+	aik: function(target, rom, user) {
+	if (!this.canBroadcast()) return;
+	this.sendReplyBox('Trainer: Aikenka<br />' +
+                  'Signature Pokemon: Dragonite<br />' +
+                  'Catchphrase: My mom is my inspiration<br />' +
+		  '<img src="https://www.pokecheck.org/i/anim/149.gif">');
+
+		},
+
+
+
+
         qseasons: 'seasons',   
         seasons: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
@@ -1049,7 +1063,7 @@ var commands = exports.commands = {
         nu: 'nuleaders',
         nuleaders: function(target, room, user) {
    		if (!this.canBroadcast()) return;
-		this.sendReplyBox('A list of active NU leaders can be found <a href = "http://pastebin.com/WwAmXACt" target = _blank>here</a>.');
+		this.sendReplyBox('A list of the active NU leaders can be found <a href = "http://pastebin.com/WwAmXACt" target = _blank>here</a>.');
 		},
 
 	rugymleaders: 'ruleaders',
@@ -1057,7 +1071,7 @@ var commands = exports.commands = {
 	ru: 'ruleaders',
 	ruleaders: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('A list of active RU leaders can be found <a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
+		this.sendReplyBox('A list of the active RU leaders can be found <a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
 		},
  
         pika: 'chuuu',
