@@ -612,16 +612,33 @@ var commands = exports.commands = {
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/145_zps5de2fc9e.png">');
                 },
                
-            aikenka: 'aik',
-	aik: function(target, rom, user) {
-	if (!this.canBroadcast()) return;
-	this.sendReplyBox('Trainer: Aikenka<br />' +
+        	 aikenka: 'aik',
+		aik: function(target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: Aikenka<br />' +
 		  'Type: Water(OU)<br />' +
                   'Signature Pokemon: Dragonite<br />' +
                   'Catchphrase: My mom is my inspiration<br />' +
 		  '<img src="http://www.smogon.com/download/sprites/bwmini/149.gif">');
 
 		},
+		
+		malk: function(target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: Malk<br />' +
+                  'Signature Pokemon: Zebstrika<br />' +
+                  'Catchphrase:idk about catchphrase though<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/523.gif">');
+		},
+
+		mater: function(target, rom, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: Mater9000<br />' +
+                  'Signature Pokemon: Linoone<br />' +
+                  'Catchphrase: Catch<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/264.gif">');
+		},
+
 		
 		blizzard: 'blizzy',
 		blizzy: function(target, rom, user) {
