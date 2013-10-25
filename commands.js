@@ -615,12 +615,34 @@ var commands = exports.commands = {
             aikenka: 'aik',
 	aik: function(target, rom, user) {
 	if (!this.canBroadcast()) return;
-	this.sendReplyBox('Trainer: Aikenka<br />' +
+	this.sendReplyBox('Trainer: <font color="Aikenka<br />' +
+		  'Type: Water(OU)<br />' +
                   'Signature Pokemon: Dragonite<br />' +
                   'Catchphrase: My mom is my inspiration<br />' +
-		  '<img src="https://www.pokecheck.org/i/anim/149.gif">');
+		  '<img src="http://www.smogon.com/download/sprites/bwmini/149.gif">');
 
 		},
+		
+		blizzard: 'blizzy',
+		blizzy: function(target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: blizzardq<br />' +
+                  'Signature Pokemon: Keldeo<br />' +
+                  'Catchphrase: I made some of these commands bitch.<br />' + 
+		'<img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
+		},
+
+		miloticnob: 'nob',
+		nob: function(target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: miloticnob<br />' +
+                  'Type: Bug(OU), Grass(RU)<br />' +
+                  'Signature Pokemon: Whimsicott and Milotic<br />' +
+                  'Catchphrase: pidove ily bby<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/547.gif"> <img src="http://www.smogon.com/download/sprites/bwmini/350.gif">');
+		},
+		
+		
 
 
 
