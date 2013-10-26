@@ -1170,12 +1170,12 @@ var commands = exports.commands = {
 		room.addRaw('<div class="infobox"><div class="broadcast-green"><font size = 3><b>Come join us for trivia!</b><br><div class="notice"><button name="joinRoom" value="trivia">Click here to join the Trivia room!</button></font></div></div></div>');
 		},
 		
-		coding: function (target, room, user) {
+		blizzafk: function (target, room, user) {
 		if (user.userid != 'blizzardq') {
       			return this.sendReply('nope.');
 		}
-		delete Users.users.blizzycoding;
-		user.forceRename('blizzy coding', user.authenticated);
+		delete Users.users.afkblizzard;
+		user.forceRename('afk blizzard', user.authenticated);
 	},
 
 	mizu: function (target, room, user) {
