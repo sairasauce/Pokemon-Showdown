@@ -649,6 +649,13 @@ var commands = exports.commands = {
 		'<img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
 		},
 		
+		smelly: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox ('Trainer: mrSmellyfeet100<br />' +
+                   'Ace: Foongus<br />' +
+                   'Catchphrase: smell ya later!<br />' +
+                   '<img src="http://www.smogon.com/download/sprites/bwmini/590.gif">');
+		},
 		darkgirafarig: 'dg',
 		dg: function(target, rom, user) {
 		if(!this.canBroadcast()) return;
