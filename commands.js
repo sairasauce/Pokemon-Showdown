@@ -635,7 +635,7 @@ var commands = exports.commands = {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('Trainer: Mater9000<br />' +
                   'Signature Pokemon: Linoone<br />' +
-                  'Catchphrase: Catch<br />' +
+                  'Catchphrase: linooooooooooone<br />' +
                   '<img src="http://www.smogon.com/download/sprites/bwmini/264.gif">');
 		},
 
@@ -647,6 +647,36 @@ var commands = exports.commands = {
                   'Signature Pokemon: Keldeo<br />' +
                   'Catchphrase: I made some of these commands bitch.<br />' + 
 		'<img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
+		},
+		
+		darkgirafarig: 'dg',
+		dg: function(target, rom, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: Dark Girafarig<br />' +
+                  'Types: Fighting (OU), Water(RU), Psychic(NU E4)<br />' +                 
+                  'Signature Pokemon: Mew<br />' +
+                  'Catchphrase: How it all began... and how I\'ll begin again.<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/151.gif">');
+		},
+
+		hope: 'silver',
+		silver: function(target, rom, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: Silver<br />' +
+                  'Types: Normal(OU), Psychic(RU E4), Psychic (UU E4)<br />' +
+                  'Signature Pokemon: AOrtega<br />' +
+                  'Catchphrase: vini vidi vici<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/68.gif">');
+		},
+
+		hostageclam: 'hg',
+		hg: function(target, rom, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: hostageclam<br />' +
+                  'Types: Bug(UU),Bug(RU)<br />' +
+                  'Signature Pokemon: Typhlosion<br />' +
+                  'Catchphrase: Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange?<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/157.gif">');
 		},
 
 		miloticnob: 'nob',
