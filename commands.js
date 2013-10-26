@@ -618,7 +618,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: The TurtleLord</center><br />' +
                   '<center>Types: Poison (RU E4)</center><br />' +
-                  '<center>Ace: Torterra</center><br />' +
+                  '<center>Signature Pokemon: Torterra</center><br />' +
                   '<center>Catchphrase:my turtles will smash yo\' ass</center><br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/389.gif"></center>');
 		},
@@ -629,10 +629,18 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center>Trainer: hostageclam</center><br />' +
                   '<center>Types: Bug(UU),Bug(RU)</center><br />' +
                   '<center>Signature Pokemon: Typhlosion</center><br />' +
-                  '<center>Catchphrase: Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange?</center><br />' +
+                  '<center>Catchphrase: "Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange? - Llama</center><br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/157.gif"></center>');
 		},
 		
+		bay: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer: Bayspot</center><br />' +
+                  '<center>Types: Ice(OU UU), Flying(RU)</center><br />' +
+                  '<center>Signature Pokemon: Mamoswine</center><br />' +
+                  '<center>Catchphrase:Burns like Ice</center><br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/473.gif"></center>');
+},
 		finny: function(target, rom, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: Finny</center><br />' +
@@ -648,9 +656,19 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center>Trainer: miloticnob</center><br />' +
                   '<center>Types: Bug(OU), Grass(RU)</center><br />' +
                   '<center>Signature Pokemon: Milotic and Whimsicott</center><br />' +
-                  '<center>Catchpharse: solor and pidove ily bby</center><br />' +
+                  '<center>Catchpharse:excuse me I have some dick to suck</center><br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/350.gif"><img src="http://www.smogon.com/download/sprites/bwmini/547.gif"></center>');
 		},
+		
+		pidove: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer:Pidove</center><br />' +
+                  '<center>Ace:Shelgon</center><br />' +
+                  '<center>Catchphrase: not bad not bad at all</center<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/372.gif"></center>');
+		},
+
+
 
 		solor: function(target, rom, user) {
 		if (!this.canBroadcast()) return;
