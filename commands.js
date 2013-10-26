@@ -460,17 +460,7 @@ var commands = exports.commands = {
                 },
 
 			
-	marlon: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-        this.sendReplyBox('<b>Information on Gym Le@der Marlon:</b><br />'+
-							'Type: Water<br />' +
-							'Tier: Over Used (OU)<br />' +
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-							'Signature Pokemon: Milotic<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/350.png"><br />' +
-                                'Badge: Tidal Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/083_zps6aa5effc.png">');
-                },
+	
 			anarky: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>Information on Elite Four Anarky:</b><br />'+
@@ -483,17 +473,7 @@ var commands = exports.commands = {
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/060_zps66636c1f.png">');
                 },
                
-        r12m: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der R12M:</b><br />'+
-                                'Type: Normal<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Chansey<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/113.png"><br />' +
-                                'Badge: Clear Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/S115_zpsc5c27be8.png">');
-                },
+      
                 
 	riles: function(target, room, user) {
 	if(user.userid === 'riles') {
@@ -503,18 +483,7 @@ var commands = exports.commands = {
 	}
 	},
                
-        bobbyv: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Bobby V:</b><br />'+
-                                'Type: Steel<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Metagross<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/376.png"><br />' +
-                                'Badge: Titanium Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/134_zpsf585594f.png">');
-                },
-               
+        
         ewok: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>Information on Gym Le@der Ewok:</b><br />'+
@@ -527,66 +496,10 @@ var commands = exports.commands = {
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/K146_zpsb8afafa3.png">');
                 },
                
-        delibird: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Delibird:</b><br />'+
-                                'Type: Flying<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Delibird<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/225.png"><br />' +
-                                'Badge: Beak Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/074_zps0f23d5ac.png">');
-                },
-                
-      	boss: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Boss:</b><br />'+
-                                'Type: Fire<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Infernape<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/392.png"><br />' +
-                                'Badge: Inferno Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/006_zps6f18aed3.png"><br />');
-                },
+      
+      	
                
-	n: function(target, rom, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on Gym Le@der N:</b><br />'+
-                                'Type: Dragon<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                             	'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Dragonite<br />' +
-                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/149.png"><br />' +
-                             	'Badge: Draco Badge<br />' +
-                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/555Reshiram_zps4cfa3ecc.png">');
-		},
-		
-               
-        ross: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Elite Four Ross:</b><br />'+
-                                'Type: Psychic<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Victini<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/494.png"><br />' +
-                                'Badge: Volcano Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/001_zpsed6f1c0f.png">');
-                },
-                     
-        miner0: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Elite Four Miner0:</b><br />'+
-                                'Type: Fire<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Darmanitan<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/555.png"><br />' +
-                                'Badge: Eta Carinae Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/099_zps94a606e2.png">');
-                },
+     
         colonialmustang: 'mustang',
         mustang: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
@@ -611,6 +524,33 @@ var commands = exports.commands = {
                                 'Badge: Aikido Badge<br />' +
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/145_zps5de2fc9e.png">');
                 },
+                
+                ross: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox ('Trainer: Ross<br />' +
+                   'Types: Psychic (OU E4), Dark (UU E4), Rock (RU E4), Grass(NU)<br />' +
+                   'Signature Pokemon: Victini<br />' +
+                   'Catchphrase: I\'ll swallow swords spit up my pride, I follow through again this time. I\'ll be just fine...<br />' +
+                   '<img src="http://www.smogon.com/download/sprites/bwmini/494.gif">');
+		},
+		nord: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox ('Trainer: Nord<br />' + 
+                   'Types: Ice(OU E4)<br />' +
+                   'Signature Pokemon: Regice<br />' +
+                   'Catchphrase: I like ice<br />' +
+                   '<img src="http://www.smogon.com/download/sprites/bwmini/378.gif">');
+		},
+		miner: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox ('Trainer: Miner0<br />' +
+                   'Types: Fire(OU E4), Flying(UU E4),Bug (RU E4)<br />' +
+                    'Ace: Darmanitan<br />' +
+                    'Catchphrase:  It doesn\'t matter on the types in the begining, only the outcome does.<br />' +
+                    '<img src="http://www.smogon.com/download/sprites/bwmini/555.gif">');
+		},
+
+
                
         	 aikenka: 'aik',
 		aik: function(target, rom, user) {
@@ -725,54 +665,7 @@ var commands = exports.commands = {
                 		':D');
                 },
                
-        aaron: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Aaron:</b><br />'+
-                                'Type: Bug<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Vespiquen<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/416.png"><br />' +
-                                'Badge: Hive Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/030_zpse335231b.png">');
-                },
-               
-        bluejob: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der BlueJob:</b><br />'+
-                                'Type: Psychic<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Starmie<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/121.png"><br />' +
-                                'Badge: Cognate Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/2d0fgxx_zpsca0442cd.png">');
-                },
-               
-        sbb: 'smash',
-        smashbrosbrawl: 'smash',
-        smash: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Smash:</b><br />'+
-                                'Type: Steel<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Lucario<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/448.png"><br />' +
-                                'Badge: Steel Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/065_zpsd830d811.png">');
-                },
-		 massman: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Massman:</b><br />'+
-                                'Type: Ice<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Cloyster<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/091.png"><br />' +
-                                'Badge: Glacier Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/094_zps0f297808.png">');
-                },
+       
                
         sam: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
@@ -785,30 +678,8 @@ var commands = exports.commands = {
                                 'Badge: Forest Badge<br />' +
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/500TsutajaSide_zpsb8d59e72.png">');
                 },
-        scizornician: 'pyro',  
-        pyro: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Pyro:</b><br />'+
-                                'Type: Ghost<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Gengar<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/094.png"><br />' +
-                                'Badge: Poltergeist Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/094_zps992c377f.png">');
-                },
-               
-        sweet: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Sweet:</b><br />'+
-                                'Type: Poison<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Muk<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/089.png"><br />' +
-                                'Badge: Pollution Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/089_zpsd3d163fc.png">');
-                },
+      
+        
  
         talon: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
@@ -822,17 +693,7 @@ var commands = exports.commands = {
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/142_zpsea0762e7.png">');
                 },
        
-        brawl: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Brawl:</b><br />'+
-                                'Type: Fighting<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Gallade<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/475.png"><br />' +
-                                'Badge: Focus Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/091_zpsc55ac97a.png">');
-                },
+      
 		cuddly: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>Information on Gym Le@der Cuddly:</b><br />'+
@@ -845,17 +706,7 @@ var commands = exports.commands = {
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/114_zps7313774a.png">');
                 },
                
-        eon: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Eon:</b><br />'+
-                                'Type: Dragon<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Latios<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/381.png"><br />' +
-                                'Badge: Rapier Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/130_zpsce775186.png">');
-                },
+       
        
         energ218: 'energ',
         enernub: 'energ',
@@ -871,18 +722,7 @@ var commands = exports.commands = {
                                 'Badge: NubNub Badge<br />' +
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/103_zps3f304ae8.png">');
                 },
-               
-        hope: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Hope:</b><br />'+
-                                'Type: Normal<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Meloetta<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/648.png"><br />' +
-                                'Badge: Hax Badge<br />' +
-                                '<img src="http://i1228.photobucket.com/albums/ee449/JCKane/meloettab_zpse6f71e13.png">');
-                },
+        
                
         onlylove: 'love',      
         love: function(target, rom, user) {
@@ -896,17 +736,7 @@ var commands = exports.commands = {
                                 'Badge: Attract Badge<br />' +
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/K003_zps16041652.png">');
                 },
-	gomewex: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on Gym Le@der Gomewex:</b><br />' +
-							'Type: Steel<br />' +
-							'Tier: Over Used (OU)<br />' +
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Registeel<br />' +
-                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/379.png"><br />' +
-							'Badge: Titanium Badge<br />' +
-                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/106_zps1cf253b1.png"><br />');
-		},
+
 		
 	selecao: 'modernwolf',
 	modernwolf: function(target, room, user) {
@@ -921,44 +751,8 @@ var commands = exports.commands = {
                            	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/146_zps098d23fa.png">');
 		},
 		
-	elyte: 'electrolyte',
-	electrolyte: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on Gym Le@der E-Lyte:</b><br />'+
-                                'Type: Flying<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                             	'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Thundurus-T<br />' +
-                        	'<img src="http://sprites.pokecheck.org/icon/642-therian.png"><br />' +
-                             	'Badge: Cataegis Badge<br />' +
-                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/Zapmolcuno_zps229d8b2a.png">');
-		},
-	auraburst: 'magma',	
-	magma: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on Gym Le@der Magma:</b><br />' +
-				'Type: Fire<br />' +
-				'Tier: Over Used (OU)<br />' + 
-				'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Heatran<br />' +
-                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/485.png"><br />' +
-				'Badge: Magma Flare Badge<br />' +
-                           	'<img src="http://i.imgur.com/V0gp7hJ.png"><br />');
-		},
-		
 
 	
-			topazio: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-				this.sendReplyBox('<b>Information on Gym Le@der Topazio:</b><br />' +
-							'Type: Ground<br />' +
-							'Tier: Over Used (OU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Gliscor<br />' +
-							'<img src="http://www.poke-amph.com/black-white/sprites/small/472.png"><br />' +
-							'Badge: Soil Badge<br />' +
-						 	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/037_zps7830eeed.png">'	);
-		},
 		
 			gray: function(target, room, user) {
 		if(!this.canBroadcast()) return;
@@ -1019,26 +813,7 @@ var commands = exports.commands = {
 							'Badge: TM28: Tombstoner Badge<br />');
 		},
 		
-		uuminer0: 'uuminer',
-		uuminer: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on UU Elite F@ur Miner0:</b><br />' +
-							'Type: Flying<br />' +
-							'Tier: Under Used (UU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-							'Badge: Cloud Badge<br />');
-		},
-		
-		uuross: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on UU Le@der Ross:</b><br />' +
-							'Type: Poison<br />' +
-							'Tier: Under Used (UU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Weezing<br />' +
-	'<img src="http://www.poke-amph.com/black-white/sprites/small/110.png"><br />' +
-							'Badge: Toxic Badge<br />');
-		},
+	
 		
 		batman: 'aortega',
 		ao: 'aortega',
@@ -1064,39 +839,7 @@ var commands = exports.commands = {
 							'Badge: ESP Badge<br />');
 		},
 		
-	nord: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-				this.sendReplyBox('<b>Information on Elite Four Nord:</b><br />' +
-							'Type: Ice<br />' +
-							'Tier: Over Used (OU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Regice<br />' +
-							'<img src="http://www.poke-amph.com/black-white/sprites/small/378.png"><br />' +
-							'Badge: Berg Badge<br />');
-		},
-		
-	uunord: function(target, room, user) {
-			if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on UU Le@der Nord:</b><br />' +
-							'Type: Ice<br />' +
-							'Tier: Under Used (UU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Glaceon<br />' +
-							'<img src="http://www.poke-amph.com/black-white/sprites/small/471.png"><br />' +
-							'Badge: Snow Badge<br />');
-		},
-		
-		uumiloticnob: 'uunob',
-		uunob: function(target, room, user) {
-			if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on UU Le@der Nob:</b><br />' +
-							'Type: Steel<br />' +
-							'Tier: Under Used (UU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Empoleon<br />' +
-							'<img src="http://www.poke-amph.com/black-white/sprites/small/395.png"><br />' +
-							'Badge: Iron Badge<br />');
-		},
+
 		
 		dark: 'darkgirafarig',
 		darkgirafarig: function(target, room, user) {
@@ -1183,6 +926,15 @@ var commands = exports.commands = {
 		}
 		delete Users.users.afkblizzard;
 		user.forceRename('afk blizzard', user.authenticated);
+	},
+	
+	unblizzafk: function (target, room, user) {
+		if (user.userid !='afkblizzard') {
+			return this.sendReply('nope.');
+		}
+	delete Users.users.afkblizzard;
+	user.forceRename('blizzardq',user.authenticated);
+	this.parse('back');
 	},
 
 	mizu: function (target, room, user) {
