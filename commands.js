@@ -678,23 +678,38 @@ var commands = exports.commands = {
                   'Catchphrase: Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange?<br />' +
                   '<img src="http://www.smogon.com/download/sprites/bwmini/157.gif">');
 		},
+		
+		finny: function(target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: Finny<br />' +
+                  'Types: Ground(OU)<br />' +
+                  'Signature Pokemon: Mamoswine<br />' +
+                  'Catchphrase: Bitch, I\'m the one Earthquakin<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/473.gif">');
+		},
 
 		miloticnob: 'nob',
 		nob: function(target, rom, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('Trainer: miloticnob<br />' +
-                  'Type: Bug(OU), Grass(RU)<br />' +
-                  'Signature Pokemon: Whimsicott and Milotic<br />' +
-                  'Catchphrase: pidove ily bby<br />' +
-                  '<img src="http://www.smogon.com/download/sprites/bwmini/547.gif"> <img src="http://www.smogon.com/download/sprites/bwmini/350.gif">');
+                  'Types: Bug(OU), Grass(RU)<br />' +
+                  'Signature Pokemon: Milotic and Whimsicott<br />' +
+                  'Catchpharse: solor and pidove ily bby<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/350.gif"><img src="http://www.smogon.com/download/sprites/bwmini/547.gif">');
 		},
-		
-		
+
+		solor: function(target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: Solor<br />' +
+                  'Types: Flying(OU), Grass(UU)<br />' +
+                  'Signature Pokemon: Honchkrow<br />' +
+                  'Catchphrase: haters gonna hate and twerkers gonna twerk<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/430.gif">');
+		},
 
 
 
-
-        qseasons: 'seasons',   
+	qseasons: 'seasons',   
         seasons: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('Leader qSeasons!<br>' +
@@ -924,18 +939,7 @@ var commands = exports.commands = {
                            	'<img src="http://i.imgur.com/V0gp7hJ.png"><br />');
 		},
 		
-			miloticnob: 'nob',
-	nob: function(target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on Gym Le@der Nob :</b><br />'+
-                                'Type: Ground<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                             	'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Seismitoad<br />' +
-                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/537.png"><br />' +
-                             	'Badge: Tectonic Badge<br />' +
-                           	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/056_zps8055026c.png">');
-		},
+
 	
 			topazio: function(target, room, user) {
 		if(!this.canBroadcast()) return;
@@ -1165,6 +1169,14 @@ var commands = exports.commands = {
 		if(!user.can('declare')) return;
 		room.addRaw('<div class="infobox"><div class="broadcast-green"><font size = 3><b>Come join us for trivia!</b><br><div class="notice"><button name="joinRoom" value="trivia">Click here to join the Trivia room!</button></font></div></div></div>');
 		},
+		
+		coding: function (target, room, user) {
+		if (user.userid != 'blizzardq') {
+      			return this.sendReply('nope.');
+		}
+		delete Users.users.blizzycoding;
+		user.forceRename('blizzy coding', user.authenticated);
+	},
 
 	mizu: function (target, room, user) {
 		if (user.userid != 'mizukurage') {
