@@ -513,17 +513,14 @@ var commands = exports.commands = {
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/132_zpsb8a73a6e.png">');
                 },
                
-        kozman: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Elite Four Kozm@n:</b><br />'+
-                                'Type: Fighting<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Mienshao<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/620.png"><br />' +
-                                'Badge: Aikido Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/145_zps5de2fc9e.png">');
-                },
+		 koz: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('Trainer: Kozman<br />' +
+                  'Types: Fighting(OU E4)<br />' +
+                  'Ace: Mienshao<br />' + 
+                  'Catchphrase: Everyone has an inner Amethyst... You just need to unlock it.<br />' +
+                  '<img src="http://www.smogon.com/download/sprites/bwmini/620.gif">');
+		},
                 
                 ross: function (target, rom, user) {
 		if (!this.canBroadcast()) return;
@@ -920,22 +917,7 @@ var commands = exports.commands = {
 		room.addRaw('<div class="infobox"><div class="broadcast-green"><font size = 3><b>Come join us for trivia!</b><br><div class="notice"><button name="joinRoom" value="trivia">Click here to join the Trivia room!</button></font></div></div></div>');
 		},
 		
-		blizzafk: function (target, room, user) {
-		if (user.userid != 'blizzardq') {
-      			return this.sendReply('nope.');
-		}
-		delete Users.users.afkblizzard;
-		user.forceRename('afk blizzard', user.authenticated);
-	},
-	
-	unblizzafk: function (target, room, user) {
-		if (user.userid !='afkblizzard') {
-			return this.sendReply('nope.');
-		}
-	delete Users.users.afkblizzard;
-	user.forceRename('blizzardq',user.authenticated);
-	this.parse('back');
-	},
+		
 
 	mizu: function (target, room, user) {
 		if (user.userid != 'mizukurage') {
