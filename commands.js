@@ -601,7 +601,7 @@ var commands = exports.commands = {
 		this.sendReplyBox ('<center>Trainer: mrSmellyfeet100</center><br />' +
                    '<center>Ace: Foongus</center><br />' +
                    '<center>Catchphrase: smell ya later!</center><br />' +
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/590.gif"></center>');
+                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/435.gif"></center>');
 		},
 		darkgirafarig: 'dg',
 		dg: function(target, rom, user) {
