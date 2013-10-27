@@ -535,7 +535,7 @@ var commands = exports.commands = {
 		this.sendReplyBox ('<center>Trainer: Nord</center><br />' + 
                    '<center>Types: Ice(OU E4)</center><br />' +
                    '<center>Signature Pokemon: Regice</center><br />' +
-                   '<center>Catchphrase: I like ice</center><br />' +
+                   '<center>Catchphrase: Fabuuuuuuuuuuuloussssssssssssssss</center><br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/378.gif"></center>');
 		},
 		miner: function (target, rom, user) {
@@ -581,7 +581,7 @@ var commands = exports.commands = {
 		this.sendReplyBox ('<center>Trainer: Skymin</center><br />' +
                    '<center>Ace: Shaymin-Sky</center><br />' +
                    '<center>Catchphrase:This will be the end of me</center><br />' +
-                   '<center><a href="http://www.listenonrepeat.com/watch/?v=MddZVXk8oSY">Theme Song.</a></center><br />' +
+                   '<center><a href="http://www.listenonrepeat.com/watch/?v=MddZVXk8oSY">Theme Song</a>.</center><br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></center>');
 		},
 
@@ -620,6 +620,7 @@ var commands = exports.commands = {
                   '<center>Types: Normal(OU), Psychic(RU E4), Psychic (UU E4)</center><br />' +
                   '<center>Signature Pokemon: AOrtega</center><br />' +
                   '<center>Catchphrase: vini vidi vici</center><br />' +
+                  '<center><a href="http://www.youtube.com/watch?v=gwlC89-X-oc">Theme Song</a></center><br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/68.gif"></center>');
 		},
 		
@@ -1529,9 +1530,9 @@ var commands = exports.commands = {
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
 			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
 			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');*/
-			return connection.sendTo('lobby','|html|<div class="infobox">Welcome to Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a><br />' +
-			'We now offer league rooms on request, contact an Administrator for more information!<br />' +
-			'<img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></div>');
+			return connection.sendTo('lobby','|html|<div class="infobox"><center>Welcome to Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
+			'<center>We now offer league rooms on request, contact an Administrator for more information!</center><br />' +
+			'<center><img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></center></div>');
 		}
 		if (targetRoom.id === "spamroom" && !user.can('declare')) {
 			return connection.sendTo(target, "|noinit|joinfailed|You cannot join this room.");
@@ -3208,7 +3209,7 @@ function getRandMessage(user){
 		break;
 		case 34: message = message + user.name + ' was hit by a wrecking ball!';
 		break;
-		case 35: message = message + user.name + ' was killed by jd\'s swag!'; //huehue how long until some someone notices.~blizzy.
+		case 35: message = message + user.name + ' was killed by lexie\'s swag!'; //huehue how long until some someone notices.~blizzy.
 		break;
 		default: message = message + user.name + ' fled from colonial mustang!';
 	};
