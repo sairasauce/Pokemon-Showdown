@@ -599,7 +599,7 @@ var commands = exports.commands = {
 		smelly: function (target, rom, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer: mrSmellyfeet100</center><br />' +
-                   '<center>Ace: Foongus</center><br />' +
+                   '<center>Ace: Skuntank</center><br />' +
                    '<center>Catchphrase: smell ya later!</center><br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/435.gif"></center>');
 		},
@@ -656,9 +656,9 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: Finny</center><br />' +
                   '<center>Types: Ground(OU)</center><br />' +
-                  '<center>Signature Pokemon: Mamoswine</center><br />' +
+                  '<center>Signature Pokemon: Victini</center><br />' +
                   '<center>Catchphrase: Bitch, I\'m the one Earthquakin</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/473.gif"></center>');
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif"></center>');
 		},
 
 		miloticnob: 'nob',
