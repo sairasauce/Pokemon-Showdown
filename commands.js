@@ -575,6 +575,16 @@ var commands = exports.commands = {
                   '<center>Catchphrase: linooooooooooone</center><br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/264.gif"></center>');
 		},
+		
+		skymin: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox ('<center>Trainer: Skymin</center><br />' +
+                   '<center>Ace: Shaymin-Sky</center><br />' +
+                   '<center>Catchphrase:This will be the end of me</center><br />' +
+                   '<center><a href="http://www.listenonrepeat.com/watch/?v=MddZVXk8oSY">Theme Song.</a></center><br />' +
+                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></center>');
+		},
+
 
 		
 		blizzard: 'blizzy',
