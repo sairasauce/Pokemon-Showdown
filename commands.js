@@ -584,6 +584,15 @@ var commands = exports.commands = {
                    '<center><a href="http://www.listenonrepeat.com/watch/?v=MddZVXk8oSY">Theme Song</a>.</center><br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></center>');
 		},
+		
+		mizu: function (target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox ('<center>Trainer:Mizu :D</center><br />' +
+                   '<center>Types: Flying (UU)</center><br />' +
+                   '<center>Ace: Togekiss</center><br />' +
+                   '<center>Catchphrase: /me glomps jd</center><br />' +                  
+                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif"></center>');
+		},
 
 
 		
