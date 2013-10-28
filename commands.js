@@ -524,7 +524,7 @@ var commands = exports.commands = {
                 
                 ross: function (target, rom, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: Ross</center><br />' +
+		this.sendReplyBox ('<center>Trainer: <font color="#5A13CD">Ross</font></center><br />' +
                    '<center>Types: Psychic (OU E4), Dark (UU E4), Rock (RU E4), Grass(NU)</center><br />' +
                    '<center>Signature Pokemon: Victini<br />' +
                    '<center>Catchphrase: I\'ll swallow swords spit up my pride, I follow through again this time. I\'ll be just fine...</center><br />' +
@@ -578,10 +578,10 @@ var commands = exports.commands = {
 		
 		skymin: function (target, rom, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: Skymin</center><br />' +
+		this.sendReplyBox ('<center>Trainer: <font color="#199461">Skymin</font></center><br />' +
                    '<center>Ace: Shaymin-Sky</center><br />' +
-                   '<center>Catchphrase:This will be the end of me</center><br />' +
-                   '<center><a href="http://www.listenonrepeat.com/watch/?v=MddZVXk8oSY">Theme Song</a>.</center><br />' +
+                   '<center>Catchphrase:Things aren\'t the way they were before. You wouldn\'t even recognize me anymore. Not that you knew me back then, but it all comes back to me in the end.</center><br />' +
+                   '<center><a href="http://www.listenonrepeat.com/watch?v=KRaRv7Zhwiw">Battle Theme</a></center><br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></center>');
 		},
 		
@@ -599,7 +599,7 @@ var commands = exports.commands = {
 		blizzard: 'blizzy',
 		blizzy: function(target, rom, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: blizzardq</center><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#2610B7">blizzardq</font></center><br />' +
                   '<center>Signature Pokemon: Keldeo</center><br />' +
                   '<center>Catchphrase: I made some of these commands.</center><br />' + 
 		'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif"></center>');
@@ -646,7 +646,7 @@ var commands = exports.commands = {
 		hostageclam: 'hg',
 		hg: function(target, rom, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: hostageclam</center><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#1B7E15">hostageclam</font></center><br />' +
                   '<center>Types: Bug(UU),Bug(RU)</center><br />' +
                   '<center>Signature Pokemon: Typhlosion</center><br />' +
                   '<center>Catchphrase: "Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange? - Llama</center><br />' +
