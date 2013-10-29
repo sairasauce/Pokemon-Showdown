@@ -816,7 +816,7 @@ var commands = exports.commands = {
 	zact94: 'zact',	
 	zact: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox(this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font>>center><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font>>center><br />' +
       '<center>Types: Ghost(UU)</center><br />' +
       '<center>Ace: Cofagrigus</center><br />' +
       '<center>Catchphrase: I love Ghost Pokemon</center><br />' +
