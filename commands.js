@@ -500,7 +500,7 @@ var commands = exports.commands = {
                      '<center>Ace:(Mega)Houndoom</center><br />' +
                      '<center>Catchphrase:Its better to burn out then fade away</center><br />' + 
                      '<center><img src="http://www.smogon.com/download/sprites/bwmini/229.gif"></center>');
-    
+    },
        
         colonialmustang: 'mustang',
         mustang: function(target, rom, user) {
