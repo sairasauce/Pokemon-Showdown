@@ -544,7 +544,7 @@ var commands = exports.commands = {
 		glomp: 'mizud',
 		mizud: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: <font color="pink"><b>Mizu :D</b></font></center><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#C11FA9"><b>Mizu :D</b></font></center><br />' +
                   '<center>Types: Flying(UU)</center><br />' +
                   '<center>Ace: Togekiss</center><br />' +
                   '<center>Catchphrase: /me glomps jd</center><br />' +
@@ -564,7 +564,7 @@ var commands = exports.commands = {
         	 aikenka: 'aik',
 		aik: function(target, rom, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: <font color="#C71A20"><b>Aikenka</b></font></center><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#C71A20"><b>Aikenká</b></font></center><br />' +
 		  '<center>Type: Water(OU)</center><br />' +
                   '<center>Signature Pokemon: Damion the Dragonite</center><br />' +
                   '<center>Catchphrase: My mom is my inspiration</center><br />' +
