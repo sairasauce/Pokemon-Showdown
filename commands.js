@@ -534,11 +534,21 @@ var commands = exports.commands = {
 		},
 		nord: function (target, rom, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: Nord</center><br />' + 
+		this.sendReplyBox ('<center>Trainer: <font color="#1A5370"><b>Nord</b></center><br />' + 
                    '<center>Types: Ice(OU E4)</center><br />' +
                    '<center>Signature Pokemon: Regice</center><br />' +
                    '<center>Catchphrase: Fabuuuuuuuuuuuloussssssssssssssss</center><br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/378.gif"></center>');
+		},
+		
+		glomp: 'mizud',
+		mizud: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer: <font color="pink"><b>Mizu :D</b></font></center><br />' +
+                  '<center>Types: Flying(UU)</center><br />' +
+                  '<center>Ace: Togekiss</center><br />' +
+                  '<center>Catchphrase: /me glomps jd</center><br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif"></center>');
 		},
 		miner: function (target, rom, user) {
 		if (!this.canBroadcast()) return;
@@ -556,7 +566,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#C71A20"><b>Aikenka</b></font></center><br />' +
 		  '<center>Type: Water(OU)</center><br />' +
-                  '<center>Signature Pokemon: Dragonite</center><br />' +
+                  '<center>Signature Pokemon: Damion the Dragonite</center><br />' +
                   '<center>Catchphrase: My mom is my inspiration</center><br />' +
 		  '<center><img src="http://www.smogon.com/download/sprites/bwmini/149.gif"></center>');
 
