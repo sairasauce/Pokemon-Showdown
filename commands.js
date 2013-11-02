@@ -484,22 +484,8 @@ var commands = exports.commands = {
 	},
                
         
-        ewok: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Ewok:</b><br />'+
-                                'Type: Fire<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Typhlosion<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/157.png"><br />' +
-                                'Badge: Eruption Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/K146_zpsb8afafa3.png">');
-                },
-               
-      
-      	
-               
-     
+   
+       
         colonialmustang: 'mustang',
         mustang: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
@@ -513,174 +499,194 @@ var commands = exports.commands = {
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/132_zpsb8a73a6e.png">');
                 },
                
-		 koz: function (target, rom, user) {
+		 koz: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Kozman</center><br />' +
-                  '<center>Types: Fighting(OU E4)</center><br />' +
-                  '<center>Ace: Mienshao</center><br />' + 
-                  '<center>Catchphrase: Everyone has an inner Amethyst... You just need to unlock it.</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/620.gif"></center>');
+		this.sendReplyBox('<center>Trainer: Kozman<br />' +
+                  '<center>Types: Fighting(OU E4)<br />' +
+                  '<center>Ace: <font color="purple"><b>Mienshao</b></font><br />' + 
+                  '<center>Catchphrase: Everyone has an inner Amethyst... You just need to unlock it.<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/620.gif">');
 		},
                 
-                ross: function (target, rom, user) {
+                ross: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: <font color="#5A13CD">Ross</font></center><br />' +
-                   '<center>Types: Psychic (OU E4), Dark (UU E4), Rock (RU E4), Grass(NU)</center><br />' +
-                   '<center>Signature Pokemon: Victini<br />' +
-                   '<center>Catchphrase: I\'ll swallow swords spit up my pride, I follow through again this time. I\'ll be just fine...</center><br />' +
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif"></center>');
+		this.sendReplyBox ('<center>Trainer:<font color="#5A13CD"><b>Ross</b></font><br />' +
+                   '<center>Types: Psychic (OU E4), Dark (UU E4), Rock (RU E4), Grass(NU)<br />' +
+                   '<center>Signature Pokemon: <font color="red"><b>Victini</b></font><br />' +
+                   '<center>Catchphrase: I\'ll swallow swords spit up my pride, I follow through again this time. I\'ll be just fine...><br />' +
+                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif">');
 		},
-		nord: function (target, rom, user) {
+		nord: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: Nord</center><br />' + 
-                   '<center>Types: Ice(OU E4)</center><br />' +
-                   '<center>Signature Pokemon: Regice</center><br />' +
-                   '<center>Catchphrase: Fabuuuuuuuuuuuloussssssssssssssss</center><br />' +
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/378.gif"></center>');
+		this.sendReplyBox ('<center>Trainer: <font color="#1A5370"><b>Nord</b><br />' + 
+                   '<center>Types: Ice(OU E4)<br />' +
+                   '<center>Signature Pokemon: <font color="#6E69D1"><b>Regice</b></font><br />' +
+                   '<center>Catchphrase: Fabuuuuuuuuuuuloussssssssssssssss<br />' +
+                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/378.gif">');
 		},
-		miner: function (target, rom, user) {
+		
+		glomp: 'mizud',
+		mizud: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: Miner0</center><br />' +
-                   '<center>Types: Fire(OU E4), Flying(UU E4),Bug (RU E4)</center><br />' +
-                    '<center>Ace: Darmanitan</center><br />' +
-                    '<center>Catchphrase:  It doesn\'t matter on the types in the begining, only the outcome does.</center><br />' +
-                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/555.gif"></center>');
+		this.sendReplyBox('<center>Trainer: <font color="#C11FA9"><b>Mizu :D</b></font><br />' +
+                  '<center>Types: Flying(UU)<br />' +
+                  '<center>Ace: Togekiss<br />' +
+                  '<center>Catchphrase: /me glomps jd<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
+		},
+		miner: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox ('<center>Trainer:<font color="#750292"><b>Miner0</b></font><br />' +
+                   '<center>Types: Fire(OU E4), Flying(UU E4),Bug (RU E4)<br />' +
+                    '<center>Ace: <font color="red"><b>Darmanitan</b></font><br />' +
+                    '<center>Catchphrase:  It doesn\'t matter on the types in the begining, only the outcome does.<br />' +
+                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/555.gif">');
 		},
 
 
                
         	 aikenka: 'aik',
-		aik: function(target, rom, user) {
+		aik: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Aikenka</center><br />' +
-		  '<center>Type: Water(OU)</center><br />' +
-                  '<center>Signature Pokemon: Dragonite</center><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#C71A20"><b>Aikenká</b></font><br />' +
+		  '<center>Type: Water(OU)<<br />' +
+                  '<center>Signature Pokemon: Damion the Dragonite<br />' +
                   '<center>Catchphrase: My mom is my inspiration</center><br />' +
-		  '<center><img src="http://www.smogon.com/download/sprites/bwmini/149.gif"></center>');
+		  '<center><img src="http://www.smogon.com/download/sprites/bwmini/149.gif">');
 
 		},
 		
-		malk: function(target, rom, user) {
+		malk: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Malk</center><br />' +
-                  '<center>Signature Pokemon: Zebstrika</center><br />' +
-                  '<center>Catchphrase:idk about catchphrase though</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/523.gif"></center>');
+		this.sendReplyBox('<center>Trainer: <font color="#B7C21E"><b>Malk</b></font><br />' +
+                  '<center>Signature Pokemon: <b>Zebstrika</b><br />' +
+                  '<center>Catchphrase:idk about catchphrase though<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/523.gif">');
 		},
 
-		mater: function(target, rom, user) {
+		mater: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Mater9000</center><br />' +
+		this.sendReplyBox('<center>Trainer: Mater9000<br />' +
                   '<center>Signature Pokemon: Linoone</center><br />' +
-                  '<center>Catchphrase: linooooooooooone</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/264.gif"></center>');
+                  '<center>Catchphrase: linooooooooooone<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/264.gif">');
 		},
 		
-		skymin: function (target, rom, user) {
+		skymin: 'sky',
+		sky: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: <font color="#199461">Skymin</font></center><br />' +
-                   '<center>Ace: Shaymin-Sky</center><br />' +
-                   '<center>Catchphrase:Things aren\'t the way they were before. You wouldn\'t even recognize me anymore. Not that you knew me back then, but it all comes back to me in the end.</center><br />' +
-                   '<center><a href="http://www.listenonrepeat.com/watch?v=KRaRv7Zhwiw">Battle Theme</a></center><br />' +
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></center>');
+		this.sendReplyBox ('<center>Trainer: <font color="#199461"><b>Skymin</b></font><br />' +
+                   '<center>Ace: <font color="#86E3B1"><b>Shaymin-Sky</b></font></center><br />' +
+                   '<center>Catchphrase:Things aren\'t the way they were before. You wouldn\'t even recognize me anymore. Not that you knew me back then, but it all comes back to me in the end.<br />' +
+                   '<center><a href="http://www.listenonrepeat.com/watch?v=KRaRv7Zhwiw">Battle Theme</a><br />' +
+                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif">');
 		},
 		
-		mizu: function (target, rom, user) {
+		mizu: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer:Mizu :D</center><br />' +
-                   '<center>Types: Flying (UU)</center><br />' +
-                   '<center>Ace: Togekiss</center><br />' +
-                   '<center>Catchphrase: /me glomps jd</center><br />' +                  
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif"></center>');
+		this.sendReplyBox ('<center>Trainer:<font color="#F2A8F5"><b>Mizu :D</b></font><br />' +
+                   '<center>Types: Flying (UU)<br />' +
+                   '<center>Ace: Togekiss<br />' +
+                   '<center>Catchphrase: /me glomps jd<br />' +                  
+                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
 		},
 
 
 		
 		blizzard: 'blizzy',
-		blizzy: function(target, rom, user) {
+		blizzy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: <font color="#2610B7">blizzardq</font></center><br />' +
-                  '<center>Signature Pokemon: Keldeo</center><br />' +
-                  '<center>Catchphrase: I made some of these commands.</center><br />' + 
-		'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif"></center>');
+		this.sendReplyBox('<center>Trainer:<font color="#2610B7"><b>blizzardq</b></font><br />' +
+                  '<center>Signature Pokemon: <font color="blue"><b>Keldeo</b></font><br />' +
+                  '<center>Catchphrase: I made some of these commands.<br />' + 
+		'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
 		},
 		
-		smelly: function (target, rom, user) {
+		smelly: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: mrSmellyfeet100</center><br />' +
-                   '<center>Ace: Skuntank</center><br />' +
-                   '<center>Catchphrase: smell ya later!</center><br />' +
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/435.gif"></center>');
+		this.sendReplyBox ('<center>Trainer: mrSmellyfeet100<br />' +
+                   '<center>Ace: <font color="purple"><b>Skuntank</b></font><br />' +
+                   '<center>Catchphrase: smell ya later!<br />' +
+                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/435.gif">');
 		},
 		darkgirafarig: 'dg',
-		dg: function(target, rom, user) {
+		dg: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Dark Girafarig</center><br />' +
-                  '<center>Types: Fighting (OU), Water(RU), Psychic(NU E4)</center><br />' +                 
-                  '<center>Signature Pokemon: Mew</center><br />' +
-                  '<center>Catchphrase: How it all began... and how I\'ll begin again.</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/151.gif"></center>');
-		},
-
-		hope: 'silver',
-		silver: function(target, rom, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Silver</center><br />' +
-                  '<center>Types: Normal(OU), Psychic(RU E4), Psychic (UU E4)</center><br />' +
-                  '<center>Signature Pokemon: AOrtega</center><br />' +
-                  '<center>Catchphrase: vini vidi vici</center><br />' +
-                  '<center><a href="http://www.youtube.com/watch?v=gwlC89-X-oc">Theme Song</a></center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/68.gif"></center>');
+		this.sendReplyBox('<center>Trainer: <font color="#0C8334"><b>Dark Girafarig</b></font><br />' +
+                  '<center>Types: Fighting (OU), Water(RU), Psychic(NU E4)<br />' +                 
+                  '<center>Signature Pokemon: <font color="#C11FA9"><b>Mew</b></font><br />' +
+                  '<center>Catchphrase: How it all began... and how I\'ll begin again.<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/151.gif">');
 		},
 		
+		sam: function (target, room, user) {
+	 	if (!this.canBroadcast()) return;
+      		this.sendReplyBox ('<center>Trainer: <font color="#8D6007"><b>Sam</b><br />' +
+                     '<center>Types: Grass(OU)<br />' + 
+                     '<center>Ace:<font color="green"><b>Breloom</b></font><br />' + 
+                     '<center>Catchphrase:Persona!<br />' + 
+                     '<center><img src="http://www.smogon.com/download/sprites/bwmini/286.gif">');
+		 },
+      
+    		ewok: function (target, room, user) {
+		 if (!this.canBroadcast()) return;
+     		this.sendReplyBox ('<center>Trainer: <font color="#928216"><b>Ewok</b><br />' + 
+                     '<center>Types: Fire(OU), Poison(UU)><br />' +
+                     '<center>Ace:<b>(Mega)Houndoom</b><br />' +
+                     '<center>Catchphrase:Its better to burn out then fade away<br />' + 
+                     '<center><img src="http://www.smogon.com/download/sprites/bwmini/229.gif">');
+    		},
+
+		
 		turtlelord: 'tl',
-		tl: function (target, rom, user) {
+		torterrasaks:'tl',
+		tl: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: The TurtleLord</center><br />' +
-                  '<center>Types: Poison (RU E4)</center><br />' +
-                  '<center>Signature Pokemon: Torterra</center><br />' +
-                  '<center>Catchphrase:my turtles will smash yo\' ass</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/389.gif"></center>');
+		this.sendReplyBox('<center>Trainer: The TurtleLord<br />' +
+                  '<center>Types: Poison (RU E4)<br />' +
+                  '<center>Signature Pokemon: <font color="green"><b>Torterra</b></font><br />' +
+                  '<center>Catchphrase:my turtles will smash yo\' ass<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/389.gif">');
 		},
 
 		hostageclam: 'hg',
-		hg: function(target, rom, user) {
+		hg: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: <font color="#1B7E15">hostageclam</font></center><br />' +
-                  '<center>Types: Bug(UU),Bug(RU)</center><br />' +
-                  '<center>Signature Pokemon: Typhlosion</center><br />' +
-                  '<center>Catchphrase: "Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange? - Llama</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/157.gif"></center>');
+		this.sendReplyBox('<center>Trainer: <font color="#1B7E15">hostageclam</font><br />' +
+                  '<center>Types: Bug(UU),Bug(RU)<br />' +
+                  '<center>Signature Pokemon: <font color="red"><b>Typhlosion</b></center><br />' +
+                  '<center>Catchphrase: "Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange? - Llama<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/157.gif">');
 		},
 		
-		bay: function (target, rom, user) {
+		bay: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Bayspot</center><br />' +
-                  '<center>Types: Ice(OU UU), Flying(RU)</center><br />' +
-                  '<center>Signature Pokemon: Mamoswine</center><br />' +
-                  '<center>Catchphrase:Burns like Ice</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/473.gif"></center>');
+		this.sendReplyBox('<center>Trainer: Bayspot<br />' +
+                  '<center>Types: Ice(OU UU), Flying(RU)<br />' +
+                  '<center>Signature Pokemon: <font color="brown"><b>Mamoswine</b></font><br />' +
+                  '<center>Catchphrase:Burns like Ice<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/473.gif">');
 },
-		finny: function(target, rom, user) {
+		finny: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Finny</center><br />' +
-                  '<center>Types: Ground(OU)</center><br />' +
-                  '<center>Signature Pokemon: Victini</center><br />' +
-                  '<center>Catchphrase: Bitch, I\'m the one Earthquakin</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif"></center>');
+		this.sendReplyBox('<center>Trainer: Finny<br />' +
+                  '<center>Types: Ground(OU)<br />' +
+                  '<center>Signature Pokemon: <b>Victini</b><br />' +
+                  '<center>Catchphrase: Bitch, I\'m the one Earthquakin<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif">');
 		},
 
 		miloticnob: 'nob',
-		nob: function(target, rom, user) {
+		nob: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: miloticnob</center><br />' +
-                  '<center>Types: Bug(OU), Grass(RU)</center><br />' +
-                  '<center>Signature Pokemon: Milotic and Whimsicott</center><br />' +
-                  '<center>Catchpharse:excuse me I have some dick to suck</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/350.gif"><img src="http://www.smogon.com/download/sprites/bwmini/547.gif"></center>');
+		this.sendReplyBox('<center>Trainer:<font color="#C11FA9"><b>miloticnob</b></font><br />' +
+                  '<center>Types: Bug(OU), Grass(RU)<br />' +
+                  '<center>Signature Pokemon: <font color="blue"><b>Milotic</b></font> and <font color="green"><b>Whimsicott</b></font><br />' +
+                  '<center>Catchpharse:excuse me I have some dick to suck<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/350.gif"><img src="http://www.smogon.com/download/sprites/bwmini/547.gif">');
 		},
 		
-		pidove: function (target, rom, user) {
+		pidove: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:Pidove</center><br />' +
                   '<center>Ace:Shelgon</center><br />' +
@@ -690,13 +696,13 @@ var commands = exports.commands = {
 
 
 
-		solor: function(target, rom, user) {
+		solor: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Solor</center><br />' +
-                  '<center>Types: Flying(OU), Grass(UU)</center><br />' +
-                  '<center>Signature Pokemon: Honchkrow</center><br />' +
-                  '<center>Catchphrase: haters gonna hate and twerkers gonna twerk</center><br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/430.gif"></center>');
+		this.sendReplyBox('<center>Trainer: <font color="#15A20B"><b>Solor</b></font></center><br />' +
+                  '<center>Types: Flying(OU), Grass(UU)<br />' +
+                  '<center>Signature Pokemon: <font color="purple"><b>Honchkrow<b></font><br />' +
+                  '<center>Catchphrase: haters gonna hate and twerkers gonna twerk<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/430.gif">');
 		},
 
 
@@ -711,20 +717,7 @@ var commands = exports.commands = {
                 },
                
        
-               
-        sam: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Sam:</b><br />'+
-                                'Type: Grass<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Breloom<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/286.png"><br />' +
-                                'Badge: Forest Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/500TsutajaSide_zpsb8d59e72.png">');
-                },
       
-        
  
         talon: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
@@ -826,13 +819,11 @@ var commands = exports.commands = {
 	zact94: 'zact',	
 	zact: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on UU Le@der ZacT94:</b><br />' +
-							'Type: Ghost<br />' +
-							'Tier: Under Used (UU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Cofagrigus<br />' +
-                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/563.png"><br />' +
-							'Badge: Spook Badge<br />');
+		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font></center><br />' +
+      '<center>Types: Ghost(UU)</center><br />' +
+      '<center>Ace: <font color="yellow">Cofagrigus</font></center><br />' +
+      '<center>Catchphrase:Damn it my cat won\'t stop walking on my keyboard!</center><br />' +
+      '<center><img src="http://www.smogon.com/download/sprites/bwmini/563.gif"></center>');
 		},
 		
 		aidenpyralis: 'aiden',
@@ -1541,8 +1532,9 @@ var commands = exports.commands = {
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
 			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
 			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');*/
-			return connection.sendTo('lobby','|html|<div class="infobox"><center>Welcome to Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
+			return connection.sendTo('lobby','|html|<div class="infobox"><center>Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
 			'<center>We now offer league rooms on request, contact an Administrator for more information!</center><br />' +
+			'<center>For the best experience use our custom client <a href="http://amethyst-server.no-ip.org">here!</a></center><br />' +
 			'<center><img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></center></div>');
 		}
 		if (targetRoom.id === "spamroom" && !user.can('declare')) {
