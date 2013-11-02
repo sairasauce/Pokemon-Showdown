@@ -450,6 +450,8 @@ module.exports = (function () {
 		var limit1 = true;
 		var sketch = false;
 
+		var sometimesPossible = false; // is this move in the learnset at all?
+
 		// This is a pretty complicated algorithm
 
 		// Abstractly, what it does is construct the union of sets of all
@@ -475,6 +477,7 @@ module.exports = (function () {
 			if (format.id === 'gen5stabmons' && template.types.indexOf(this.getMove(move).type) > -1) return false;
 			if (template.learnset) {
 				if (template.learnset[move] || template.learnset['sketch']) {
+					sometimesPossible = true;
 					var lset = template.learnset[move];
 					if (!lset || template.speciesid === 'smeargle') {
 						lset = template.learnset['sketch'];
@@ -484,7 +487,7 @@ module.exports = (function () {
 
 					for (var i=0, len=lset.length; i<len; i++) {
 						var learned = lset[i];
-						if (learned.charAt(0) === '6' && format.noPokebank) continue;
+						if (format.noPokebank && learned.charAt(0) !== '6') continue;
 						if (learned.substr(0,2) in {'4L':1,'5L':1,'6L':1}) {
 							// gen 4-6 level-up moves
 							if (level >= parseInt(learned.substr(2),10)) {
@@ -493,7 +496,7 @@ module.exports = (function () {
 								// we're past the required level to learn it
 								return false;
 							}
-							if (!template.gender || template.gender === 'F') {
+							if (!template.gender || template.gender === 'F' || this.gen >= 6) {
 								// available as egg move
 								learned = learned.charAt(0)+'Eany';
 							} else {
@@ -514,7 +517,8 @@ module.exports = (function () {
 						} else if (learned.charAt(1) in {E:1,S:1,D:1}) {
 							// egg, event, or DW moves:
 							//   only if that was the source
-							if (learned.charAt(0) === 'E') {
+							if (move === 'extremespeed' && format.noPokebank) continue;
+							if (learned.charAt(1) === 'E') {
 								// it's an egg move, so we add each pokemon that can be bred with to its sources
 								var eggGroups = template.eggGroups;
 								if (!eggGroups) continue;
@@ -598,6 +602,7 @@ module.exports = (function () {
 
 		// Now that we have our list of possible sources, intersect it with the current list
 		if (!sourcesBefore && !sources.length) {
+			if (format.noPokebank && sometimesPossible) return {type:'pokebank'};
 			return true;
 		}
 		if (!sources.length) sources = null;
@@ -803,7 +808,9 @@ module.exports = (function () {
 			set.level = maxLevel;
 		}
 
-		set.species = set.species || set.name || 'Bulbasaur';
+		var nameTemplate = this.getTemplate(set.name);
+		if (nameTemplate.exists && nameTemplate.name.toLowerCase() === set.name.toLowerCase()) set.name = null;
+		set.species = set.species;
 		set.name = set.name || set.species;
 		var name = set.species;
 		if (set.species !== set.name) name = set.name + " ("+set.species+")";
@@ -919,6 +926,8 @@ module.exports = (function () {
 							}
 						} else if (problem.type === 'oversketched') {
 							problemString = problemString.concat(" because it can only sketch "+problem.maxSketches+" move"+(problem.maxSketches>1?"s":"")+".");
+						} else if (problem.type === 'pokebank') {
+							problemString = problemString.concat(" because it's not possible to transfer pokemon from earlier games to XY yet (Pokébank comes out in December).");
 						} else {
 							problemString = problemString.concat(".");
 						}
@@ -966,7 +975,7 @@ module.exports = (function () {
 				} else {
 					var compatibleSource = false;
 					for (var i=0,len=lsetData.sources.length; i<len; i++) {
-						if (lsetData.sources[i].substr(0,2) === '5E' || (lsetData.sources[i].substr(0,2) === '5D' && set.level >= 10)) {
+						if (lsetData.sources[i].charAt(1) === 'E' || (lsetData.sources[i].substr(0,2) === '5D' && set.level >= 10)) {
 							compatibleSource = true;
 							break;
 						}
