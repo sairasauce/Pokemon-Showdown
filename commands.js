@@ -518,7 +518,7 @@ var commands = exports.commands = {
 		},
 		nord: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer: <font color="#1A5370"><b>Nord</b><br />' + 
+		this.sendReplyBox ('<center>Trainer: <font color="#1A5370"><b>Nord</b></font><br />' + 
                    '<center>Types: Ice(OU E4)<br />' +
                    '<center>Signature Pokemon: <font color="#6E69D1"><b>Regice</b></font><br />' +
                    '<center>Catchphrase: Fabuuuuuuuuuuuloussssssssssssssss<br />' +
@@ -549,7 +549,7 @@ var commands = exports.commands = {
 		aik: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#C71A20"><b>Aikenká</b></font><br />' +
-		  '<center>Type: Water(OU)<<br />' +
+		  '<center>Type: Water(OU)<br />' +
                   '<center>Signature Pokemon: Damion the Dragonite<br />' +
                   '<center>Catchphrase: My mom is my inspiration</center><br />' +
 		  '<center><img src="http://www.smogon.com/download/sprites/bwmini/149.gif">');
@@ -816,14 +816,14 @@ var commands = exports.commands = {
 							'Badge: Crazy Badge<br />');
 		},
 		
-	zact94: 'zact',	
-	zact: function(target, room, user) {
+	zact94: 'zac',	
+	zac: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font></center><br />' +
-      '<center>Types: Ghost(UU)</center><br />' +
-      '<center>Ace: <font color="yellow">Cofagrigus</font></center><br />' +
-      '<center>Catchphrase:Damn it my cat won\'t stop walking on my keyboard!</center><br />' +
-      '<center><img src="http://www.smogon.com/download/sprites/bwmini/563.gif"></center>');
+		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font><br />' +
+      '<center>Types: Ghost(UU)<br />' +
+      '<center>Ace: <font color="yellow">Cofagrigus</font><br />' +
+      '<center>Catchphrase:Damn it my cat won\'t stop walking on my keyboard!<br />' +
+      '<center><img src="http://www.smogon.com/download/sprites/bwmini/563.gif">');
 		},
 		
 		aidenpyralis: 'aiden',
