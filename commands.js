@@ -513,6 +513,7 @@ var commands = exports.commands = {
  		 if (!this.canBroadcast()) return;
  		 this.sendReplyBox('<center>Trainer: <font color="#986C1B"><b>Saira</b></font><br />' +
                            '<center>Types: Psychic(OU)<br />' +
+                           '<center>Catchphrase:bloom to blossom, bloom to perish<b />' +
                            '<center>Signature Pokemon: <font color="#933BDB"><b>Gengar</b></font><br />' +
                            '<center><img src="http://www.smogon.com/download/sprites/bwmini/94.gif"><br />');
 		 },
@@ -669,7 +670,7 @@ var commands = exports.commands = {
 		
 		bay: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Bayspot<br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#491CAB"><b>Bayspot</b></font><br />' +
                   '<center>Types: Ice(OU UU), Flying(RU)<br />' +
                   '<center>Signature Pokemon: <font color="brown"><b>Mamoswine</b></font><br />' +
                   '<center>Catchphrase:Burns like Ice<br />' +
@@ -872,7 +873,8 @@ var commands = exports.commands = {
 			this.sendReplyBox('Gym Le@der AOrtega: UU, Fighting type, etc etc.');
 		},
 		
-		stopspammingaortega: function(target, room, user) {
+		stopspammingaortega: 'aostrip',
+		aostrip: function(target, room, user) {
 			this.sendReply('ffs we know he strips.');
 			},
 		
