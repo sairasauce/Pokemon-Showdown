@@ -514,7 +514,7 @@ var commands = exports.commands = {
  		 this.sendReplyBox('<center>Trainer: <font color="#986C1B"><b>Saira</b></font><br />' +
                            '<center>Types: Psychic(OU)<br />' +
                            '<center>Signature Pokemon: <font color="#933BDB"><b>Gengar</b></font><br />' +
-                           '<center><img src="http://www.smogon.com/download/sprites/bwmini/94"><br />');
+                           '<center><img src="http://www.smogon.com/download/sprites/bwmini/94.gif"><br />');
 		 },
                 ross: function (target, room, user) {
 		if (!this.canBroadcast()) return;
@@ -677,7 +677,7 @@ var commands = exports.commands = {
 },
 		finny: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Finny<br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#6D2231"><b>Finny</b></font><br />' +
                   '<center>Types: Ground(OU)<br />' +
                   '<center>Signature Pokemon: <font color="red"><b>Victini</b></font><br />' +
                   '<center>Catchphrase: Bitch, I\'m the one Earthquakin<br />' +
@@ -685,7 +685,7 @@ var commands = exports.commands = {
 		},
 		
 		   slut: function (target, room, user) {
- 	    this.sendReply('AO, Nob, pidove, .....everyone on Amethyst except blizzy');
+ 	    this.sendReply('AO, Nob, pidove,ross, ....everyone on Amethyst except blizzy.');
 		      },
 
 		miloticnob: 'nob',
@@ -873,7 +873,7 @@ var commands = exports.commands = {
 		},
 		
 		stopspammingaortega: function(target, room, user) {
-			this.sendReply('ffs stop trying to say he strips');
+			this.sendReply('ffs we know he strips.');
 			},
 		
 			uuhope: function(target, room, user) {
