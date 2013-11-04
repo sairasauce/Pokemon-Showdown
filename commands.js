@@ -575,8 +575,8 @@ var commands = exports.commands = {
 
 		mater: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Mater9000<br />' +
-                  '<center>Signature Pokemon: Linoone</center><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#289F75"><b>Mater9000</b></font><br />' +
+                  '<center>Signature Pokemon: <b>Linoone</b><br />' +
                   '<center>Catchphrase: linooooooooooone<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/264.gif">');
 		},
