@@ -539,7 +539,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#C11FA9"><b>Mizu :D</b></font><br />' +
                   '<center>Types: Flying(UU)<br />' +
-                  '<center>Ace: Togekiss<br />' +
+                  '<center>Ace: <font color="#C11FA9"><b>Togekiss</b></font><br />' +
                   '<center>Catchphrase: /me glomps jd<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
 		},
@@ -585,7 +585,7 @@ var commands = exports.commands = {
 		sky: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer: <font color="#199461"><b>Skymin</b></font><br />' +
-                   '<center>Ace: <font color="#86E3B1"><b>Shaymin-Sky</b></font></center><br />' +
+                   '<center>Ace: <font color="#86E3B1"><b>Shaymin-Sky</b></font><br />' +
                    '<center>Catchphrase:Things aren\'t the way they were before. You wouldn\'t even recognize me anymore. Not that you knew me back then, but it all comes back to me in the end.<br />' +
                    '<center><a href="http://www.listenonrepeat.com/watch?v=KRaRv7Zhwiw">Battle Theme</a><br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif">');
@@ -701,10 +701,10 @@ var commands = exports.commands = {
 		
 		pidove: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer:Pidove</center><br />' +
-                  '<center>Ace:Shelgon</center><br />' +
-                  '<center>Catchphrase: not bad not bad at all</center<br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/372.gif"></center>');
+		this.sendReplyBox('<center>Trainer:<font color="#051694"<<b>Pidove</b></font><br />' +
+                  '<center>Ace:<b>Shelgon</b><br />' +
+                  '<center>Catchphrase: not bad not bad at all<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/372.gif">');
 		},
 
 
@@ -829,8 +829,8 @@ var commands = exports.commands = {
 							'Badge: Crazy Badge<br />');
 		},
 		
-	zact94: 'zacc',	
-	zacc: function(target, room, user) {
+	zact94: 'zac',	
+	zac: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font><br />' +
       '<center>Types: Ghost(UU)<br />' +
