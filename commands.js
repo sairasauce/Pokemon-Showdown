@@ -508,6 +508,14 @@ var commands = exports.commands = {
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/620.gif">');
 		},
                 
+                 
+		    saira: function (target, room, user) {
+ 		 if (!this.canBroadcast()) return;
+ 		 this.sendReplyBox('<center>Trainer: <font color="#986C1B"><b>Saira</b></font><br />' +
+                           '<center>Types: Psychic(OU)<br />' +
+                           '<center>Signature Pokemon: <font color="#933BDB"><b>Gengar</b></font><br />' +
+                           '<center><img src="http://www.smogon.com/download/sprites/bwmini/94"><br />');
+		 },
                 ross: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer:<font color="#5A13CD"><b>Ross</b></font><br />' +
@@ -671,10 +679,14 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: Finny<br />' +
                   '<center>Types: Ground(OU)<br />' +
-                  '<center>Signature Pokemon: <b>Victini</b><br />' +
+                  '<center>Signature Pokemon: <font color="red"><b>Victini</b></font><br />' +
                   '<center>Catchphrase: Bitch, I\'m the one Earthquakin<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif">');
 		},
+		
+		   slut: function (target, room, user) {
+ 	    this.sendReply('AO, Nob, pidove, .....everyone on Amethyst except blizzy');
+		      },
 
 		miloticnob: 'nob',
 		nob: function(target, room, user) {
@@ -821,7 +833,7 @@ var commands = exports.commands = {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font><br />' +
       '<center>Types: Ghost(UU)<br />' +
-      '<center>Ace: <font color="yellow">Cofagrigus</font><br />' +
+      '<center>Ace: <font color="yellow"><b>Cofagrigus</b></font><br />' +
       '<center>Catchphrase:Damn it my cat won\'t stop walking on my keyboard!<br />' +
       '<center><img src="http://www.smogon.com/download/sprites/bwmini/563.gif">');
 		},
@@ -1532,7 +1544,7 @@ var commands = exports.commands = {
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
 			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
 			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');*/
-			return connection.sendTo('lobby','|html|<div class="infobox"><center>Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
+			return connection.sendTo('lobby','|html|<div class="infobox"><center>Welcome to Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
 			'<center>We now offer league rooms on request, contact an Administrator for more information!</center><br />' +
 			'<center>For the best experience use our custom client <a href="http://amethyst-server.no-ip.org">here!</a></center><br />' +
 			'<center><img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></center></div>');
