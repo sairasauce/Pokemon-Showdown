@@ -1549,6 +1549,7 @@ var commands = exports.commands = {
 			return connection.sendTo('lobby','|html|<div class="infobox"><center>Welcome to Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
 			'<center>We now offer league rooms on request, contact an Administrator for more information!</center><br />' +
 			'<center>For the best experience use our custom client <a href="http://amethyst-server.no-ip.org">here!</a></center><br />' +
+			'<center>We are hosting awards called the <b>Amies</b>! Vote <a href="http://amethystserver.freeforums.net/board/26/award-categories">here</a>!<br />' +
 			'<center><img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></center></div>');
 		}
 		if (targetRoom.id === "spamroom" && !user.can('declare')) {
