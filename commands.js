@@ -640,7 +640,7 @@ var commands = exports.commands = {
     		ewok: function (target, room, user) {
 		 if (!this.canBroadcast()) return;
      		this.sendReplyBox ('<center>Trainer: <font color="#928216"><b>Ewok</b></font><br />' + 
-                     '<center>Types: Fire(OU), Poison(UU)><br />' +
+                     '<center>Types: Fire(OU), Poison(UU)<br />' +
                      '<center>Ace:<b>(Mega)Houndoom</b><br />' +
                      '<center>Catchphrase:Its better to burn out then fade away<br />' + 
                      '<center><img src="http://www.smogon.com/download/sprites/bwmini/229.gif">');
@@ -651,7 +651,7 @@ var commands = exports.commands = {
 		torterrasaks:'tl',
 		tl: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: The TurtleLord<br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#776C08"><b>The TurtleLord</b></font><br />' +
                   '<center>Types: Poison (RU E4)<br />' +
                   '<center>Signature Pokemon: <font color="green"><b>Torterra</b></font><br />' +
                   '<center>Catchphrase:my turtles will smash yo\' ass<br />' +
