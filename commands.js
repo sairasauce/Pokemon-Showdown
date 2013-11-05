@@ -513,7 +513,7 @@ var commands = exports.commands = {
  		 if (!this.canBroadcast()) return;
  		 this.sendReplyBox('<center>Trainer: <font color="#986C1B"><b>Saira</b></font><br />' +
                            '<center>Types: Psychic(OU)<br />' +
-                           '<center>Catchphrase:bloom to blossom, bloom to perish<b />' +
+                           '<center>Catchphrase:bloom to blossom, bloom to perish<br />' +
                            '<center>Signature Pokemon: <font color="#933BDB"><b>Gengar</b></font><br />' +
                            '<center><img src="http://www.smogon.com/download/sprites/bwmini/94.gif"><br />');
 		 },
@@ -711,7 +711,7 @@ var commands = exports.commands = {
 
 		solor: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: <font color="#15A20B"><b>Solor</b></font></center><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#15A20B"><b>Solor</b></font><br />' +
                   '<center>Types: Flying(OU), Grass(UU)<br />' +
                   '<center>Signature Pokemon: <font color="purple"><b>Honchkrow<b></font><br />' +
                   '<center>Catchphrase: haters gonna hate and twerkers gonna twerk<br />' +
