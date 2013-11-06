@@ -226,7 +226,7 @@ exports.customavatars = {
 // appealurl - specify a URL containing information on how users can appeal
 // disciplinary actions on your section. You can also leave this blank, in
 // which case users won't be given any information on how to appeal.
-exports.appealurl = 'http://amethyst.webuda.com/forums/forumdisplay.php?fid=33';
+exports.appealurl = 'http://amethystserver.freeforums.net/board/24/ban-appeals';
 
 // permissions and groups:
 //   Each entry in `groupsranking' specifies the ranking of the groups.
