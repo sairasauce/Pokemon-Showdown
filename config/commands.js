@@ -679,7 +679,7 @@ var commands = exports.commands = {
 	groups: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('± <b>Gym Leader</b> - These are the Gym Leaders of the server. <br />' +
-		        '$ <b>Champion</b> - They are the champion of one of the Amethyst League Tiers. They can use some ! commands.<br />' +
+		        '$ <b>Champion</b> - They are the champions of the Amethyst League. They can use some ! commands.<br />' +
 			'+ <b>Voice</b> - They can use ! commands like !groups, and talk during moderated chat.<br />' +
 			'% <b>Driver</b> - The above, and they can also mute and lock users and check for alts.<br />' +
 			'@ <b>Moderator</b> - The above, and they can ban users.<br />' +
