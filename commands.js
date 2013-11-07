@@ -759,21 +759,15 @@ var commands = exports.commands = {
                
        
        
-        energ218: 'energ',
-        enernub: 'energ',
-        nubnub: 'energ,',
-        energ: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der EnerG218:</b><br />'+
-                                'Type: Bug<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Galvantula<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/596.png"><br />' +
-                                'Badge: NubNub Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/103_zps3f304ae8.png">');
-                },
-        
+		 nub: 'energ218',
+		nubnub: 'energ218',
+		energ218: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer:<font color="blue"><b>EnerG218</b><br />'
+		'<center>Types: Nub(OU,UU,RU,NU)<br />' +
+		'<center>Signature Pokemon:<b>Nub</b><br />' +
+		'<center>Catchphrase: nubnubnubnubnubnubnubnubnubnubnubnubnubnub');
+		}, 
                
         onlylove: 'love',      
         love: function(target, rom, user) {
