@@ -1120,7 +1120,7 @@ var commands = exports.commands = {
 		if (user.locked) return this.sendReply('You cannot use this command while locked.');
 		if (user.forceRenamed) return this.sendReply('You cannot use this command while under a name that you have been forcerenamed to.');
 		if (!target) return this.parse('/help tell');
-		
+		if (target.length > 268) return this.sendReply('Your message must be less than 250 characters long.');
 		var targets = target.split(',');
 		if (!targets[1]) return this.parse('/help tell');
 		var targetUser = toId(targets[0]);
