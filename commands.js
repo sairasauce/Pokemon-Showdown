@@ -501,7 +501,7 @@ var commands = exports.commands = {
                
 		 koz: function (target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: Kozman<br />' +
+		this.sendReplyBox('<center>Trainer: <font color="purple"><b>Kozman</b></font><br />' +
                   '<center>Types: Fighting(OU E4)<br />' +
                   '<center>Ace: <font color="purple"><b>Mienshao</b></font><br />' + 
                   '<center>Catchphrase: Everyone has an inner Amethyst... You just need to unlock it.<br />' +
@@ -560,7 +560,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center>Trainer: <font color="#C71A20"><b>Aikenká</b></font><br />' +
 		  '<center>Type: Water(OU)<br />' +
                   '<center>Signature Pokemon: Damion the Dragonite<br />' +
-                  '<center>Catchphrase: My mom is my inspiration</center><br />' +
+                  '<center>Catchphrase: My mom is my inspiration<br />' +
 		  '<center><img src="http://www.smogon.com/download/sprites/bwmini/149.gif">');
 
 		},
@@ -686,7 +686,7 @@ var commands = exports.commands = {
 		},
 		
 		   slut: function (target, room, user) {
- 	    this.sendReply('AO, Nob, pidove,ross, ....everyone on Amethyst except blizzy.');
+ 	    this.add('AO, Nob, pidove, Ross, Solor,  ....everyone on Amethyst except blizzy and musty.');
 		      },
 
 		miloticnob: 'nob',
