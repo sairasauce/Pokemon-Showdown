@@ -759,7 +759,7 @@ var commands = exports.commands = {
 		nubnub: 'energ218',
 		energ218: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer:<font color="blue"><b>EnerG218</b><br />' +
+		this.sendReplyBox('<center>Trainer:<font color="blue"><b>EnerG218</b></font><br />' +
 		'<center>Types: Nub(OU, UU, RU, NU)<br />' +
 		'<center>Signature Pokemon:<b>Nub</b><br />' +
 		'<center>Catchphrase: nubnubnubnubnubnubnubnubnubnubnubnubnubnub');
@@ -811,7 +811,7 @@ var commands = exports.commands = {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font><br />' +
       '<center>Types: Ghost(UU)<br />' +
-      '<center>Ace: <font color="yellow"><b>Cofagrigus</b></font><br />' +
+      '<center>Ace: <font color="#D9D50D"><b>Cofagrigus</b></font><br />' +
       '<center>Catchphrase:Damn it my cat won\'t stop walking on my keyboard!<br />' +
       '<center><img src="http://www.smogon.com/download/sprites/bwmini/563.gif">');
 		},
@@ -897,7 +897,7 @@ var commands = exports.commands = {
 		ou: 'ouleaders',
         ouleaders: function(target, room, user) {
                 if(!this.canBroadcast()) return;
-                this.sendReplyBox('A list of the active OU leaders can be found <a href = "http://pastebin.com/4Vq73sst" target = _blank>here</a>.');
+                this.sendReplyBox('A list of the active OU leaders can be found <a href = "http://pastebin.com/4Vq73sst" target = _blank>here</a> and <a href="http://amethystserver.freeforums.net/thread/32/ou-gym-leaders-elite">here</a>.');
         	},
         
 	uugymleaders: 'uuleaders',
@@ -905,7 +905,7 @@ var commands = exports.commands = {
 	uu: 'uuleaders',
 	uuleaders: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('A list of the active UU leaders can be found <a href = "http://pastebin.com/2EwGFFEW" target = _blank>here</a>.');
+		this.sendReplyBox('A list of the active UU leaders can be found <a href = "http://pastebin.com/2EwGFFEW" target = _blank>here</a> and <a href="http://amethystserver.freeforums.net/thread/2/league-leaders-elite">here</a>.');
 		},
 		
         nugymleaders: 'nuleaders',
@@ -913,7 +913,7 @@ var commands = exports.commands = {
         nu: 'nuleaders',
         nuleaders: function(target, room, user) {
    		if (!this.canBroadcast()) return;
-		this.sendReplyBox('A list of the active NU leaders can be found <a href = "http://pastebin.com/WwAmXACt" target = _blank>here</a>.');
+		this.sendReplyBox('A list of the active NU leaders can be found <a href = "http://pastebin.com/WwAmXACt" target = _blank>here</a>. RIP NU League.');
 		},
 
 	rugymleaders: 'ruleaders',
@@ -921,7 +921,7 @@ var commands = exports.commands = {
 	ru: 'ruleaders',
 	ruleaders: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('A list of the active RU leaders can be found <a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a>.');
+		this.sendReplyBox('A list of the active RU leaders can be found <a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a> and <a href="http://amethystserver.freeforums.net/thread/65/ru-gls-e4s">here</a>.');
 		},
  
         pika: 'chuuu',
@@ -996,6 +996,12 @@ var commands = exports.commands = {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<font size = 3><b>Cutemons</b></font><br><font size = 2>by Mizu :D and hostageclam</font><br>A metagame created by Mizu :D, Cutemons is a tier in which only Pokemon deemed cute enough are allowed. Many Pokemon also gain new abilities. A changelog can be found here: <a href = "https://dl.dropboxusercontent.com/u/165566535/cutemons.html">here</a>.<br>Have fun!');
 	},
+	
+	mail: 'ktm',
+	ktm: function (target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<font size=3><b>Kill the Mailman</b></font><br><font size=2>By platinumCheesecake</font><br>Sinces the rules are in limbo, the rules can be found <a href="http://amethystserver.freeforums.net/thread/77/mailman-tier?page=1&scrollTo=331">here</a>. Enjoy!');
+		},
 	
 	fb: 'facebook',
 	facebook: function(target, room, user) {
