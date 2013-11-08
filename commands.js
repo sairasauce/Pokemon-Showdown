@@ -684,10 +684,6 @@ var commands = exports.commands = {
                   '<center>Catchphrase: Bitch, I\'m the one Earthquakin<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif">');
 		},
-		
-		   slut: function (target, room, user) {
- 	    this.add('AO, Nob, pidove, Ross, Solor,  ....everyone on Amethyst except blizzy and musty.');
-		      },
 
 		miloticnob: 'nob',
 		nob: function(target, room, user) {
@@ -763,8 +759,8 @@ var commands = exports.commands = {
 		nubnub: 'energ218',
 		energ218: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer:<font color="blue"><b>EnerG218</b><br />'
-		'<center>Types: Nub(OU,UU,RU,NU)<br />' +
+		this.sendReplyBox('<center>Trainer:<font color="blue"><b>EnerG218</b><br />' +
+		'<center>Types: Nub(OU, UU, RU, NU)<br />' +
 		'<center>Signature Pokemon:<b>Nub</b><br />' +
 		'<center>Catchphrase: nubnubnubnubnubnubnubnubnubnubnubnubnubnub');
 		}, 
@@ -797,19 +793,6 @@ var commands = exports.commands = {
 		},
 		
 
-	
-		
-			gray: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-				this.sendReplyBox('<b>Information on Gym Le@der Gray:</b><br />' +
-							'Type: Electric<br />' +
-							'Tier: Over Used (OU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Luxray<br />' +
-							'<img src="http://www.poke-amph.com/black-white/sprites/small/405.png"><br />' +
-							'Badge: Kirin Badge<br />' +
-						 	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/019_zps1c48a4cf.png">'	);
-		},
 	//uu leaders
 		cc: 'crazyclown',
 	crazyclown: function(target, room, user) {
