@@ -600,7 +600,6 @@ var commands = exports.commands = {
                    '<center>Catchphrase:Things aren\'t the way they were before. You wouldn\'t even recognize me anymore. Not that you knew me back then, but it all comes back to me in the end.<br />' +
                    '<center><a href="http://www.listenonrepeat.com/watch?v=KRaRv7Zhwiw">Battle Theme</a><br />' +
                    '<center><a href="http://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></a>');
-                    );
 		},
 		
 		mizu: function (target, room, user) {
