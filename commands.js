@@ -1008,11 +1008,10 @@ var commands = exports.commands = {
 		this.sendReplyBox('<font size = 3><b>Cutemons</b></font><br><font size = 2>by Mizu :D and hostageclam</font><br>A metagame created by Mizu :D, Cutemons is a tier in which only Pokemon deemed cute enough are allowed. Many Pokemon also gain new abilities. A changelog can be found here: <a href = "https://dl.dropboxusercontent.com/u/165566535/cutemons.html">here</a>.<br>Have fun!');
 	},
 	
-	mail: 'ktm',
-	ktm: function (target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<font size=3><b>Kill the Mailman</b></font><br><font size=2>By platinumCheesecake</font><br>Sinces the rules are in limbo, the rules can be found <a href="http://amethystserver.freeforums.net/thread/77/mailman-tier?page=1&scrollTo=331">here</a>. Enjoy!');
-		},
+	mail: function(target, room, user) { 
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<font size=3><b>Kill the Mailman</b></font><br><font size=2>by platinumCheesecake</font><br>A list of the rules for Kill the Milkman can be found <a href="http://amethystserver.freeforums.net/thread/77/mailman-tier">here</a>.');
+	},
 	
 	fb: 'facebook',
 	facebook: function(target, room, user) {
@@ -1031,6 +1030,7 @@ var commands = exports.commands = {
 	
 //it's not formatted neatly, but whatever
 	poof: 'd',
+	flee: 'd',
 	d: function(target, room, user){
 		if(room.id !== 'lobby') return false;
 		var btags = '<strong><font color='+hashColor(Math.random().toString())+'" >';
@@ -3234,7 +3234,7 @@ function getRandMessage(user){
 		break;
 		case 34: message = message + user.name + ' was hit by a wrecking ball!';
 		break;
-		case 35: message = message + user.name + ' was killed by lexie\'s swag!'; //huehue how long until some someone notices.~blizzy.
+		case 35: message = message + user.name + ' was Flare Blitzed by miners\'s Darmanitan!'; //huehue how long until some someone notices.~blizzy.
 		break;
 		default: message = message + user.name + ' fled from colonial mustang!';
 	};
