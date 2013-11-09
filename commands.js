@@ -54,6 +54,17 @@ var commands = exports.commands = {
 		var result = Math.floor(Math.random() * targets.length);
 		return this.sendReplyBox(targets[result].trim());
 	},
+	
+	masspm: function(target, room, user) {
+		if (!this.can('hotpatch')) return this.sendReply('You do not have enough authority to do this.');
+		if (!target) return this.sendReply('/masspm [message] - sends a PM to all connected users.');
+		for (var u in Users.users) {
+			if (Users.get(u).connected) {
+				var message = '|pm|~PM bot ('+user.name+')|'+Users.get(u).getIdentity()+'|'+target;
+                Users.get(u).send(message);
+			}
+		}
+	},
 	/*********************************************************
 	 * Badge System Base                                     *
 	 *********************************************************/
