@@ -599,7 +599,8 @@ var commands = exports.commands = {
                    '<center>Ace: <font color="#86E3B1"><b>Shaymin-Sky</b></font><br />' +
                    '<center>Catchphrase:Things aren\'t the way they were before. You wouldn\'t even recognize me anymore. Not that you knew me back then, but it all comes back to me in the end.<br />' +
                    '<center><a href="http://www.listenonrepeat.com/watch?v=KRaRv7Zhwiw">Battle Theme</a><br />' +
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif">');
+                   '<center><a href="http://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></a>');
+                    );
 		},
 		
 		mizu: function (target, room, user) {
@@ -720,9 +721,9 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#15A20B"><b>Solor</b></font><br />' +
                   '<center>Types: Flying(OU), Grass(UU)<br />' +
-                  '<center>Signature Pokemon: <font color="purple"><b>Honchkrow<b></font><br />' +
+                  '<center>Signature Pokemon: <font color="#4928C9"><b>Gyarados<b></font><br />' +
                   '<center>Catchphrase: haters gonna hate and twerkers gonna twerk<br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/430.gif">');
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/130.gif">');
 		},
 
 
