@@ -569,20 +569,20 @@ var commands = exports.commands = {
 		aik: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#C71A20"><b>Aikenká</b></font><br />' +
-		 '<center>Signature Pokemon: Damion the Dragonite<br />' +
+		 '<center>Signature Pokemon: <font color="brown"><b>Damion the Dragonite</b></font><br />' +
                   '<center>Catchphrase: My mom is my inspiration<br />' +
 		  '<center><img src="http://www.smogon.com/download/sprites/bwmini/149.gif">');
 
 		},
 		
-		boss: function(target, room, user) {
- 		if(!this.canBroadcast()) return;
- 		this.sendReplyBox('<center>Trainer: <font color="#64C918"><b>Ch@mpion Boss</b></font><br />' + 
-                  '<center>Type: Water(OU)<br />' +
-                   '<center>Signature Pokemon: <font color="red"><b>Blaziken</b></font><br />' +
-                   '<center>Catchphrase:  you still haven\'t figured it out yet...<br />' +
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/257.gif">');
-                   },
+	boss: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer: <font color="#1FA352"><b>Gym Le@der Boss</b></font><br />' +
+                  '<center>Types: Water(OU)<br />' +
+                  '<center>Signature Pokemon: <font color="blue"><b>Kingdra</b></font><br />' +
+                  '<center>Catchphrase: The one who is prepared is the one who wins.<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/230.gif">');
+		},
 		
 		malk: function(target, room, user) {
 		if (!this.canBroadcast()) return;
