@@ -134,7 +134,7 @@ exports.Formats = [
 	},
 	{
 		name: "OU Monotype",
-		section: "Other Metagames",
+		section: "XY Singles",
 
 		ruleset: ['Pokemon', 'Standard Pokebank', 'Same Type Clause', 'Evasion Abilities Clause', 'Team Preview'],
 		banlist: ['Uber', 'Soul Dew']
