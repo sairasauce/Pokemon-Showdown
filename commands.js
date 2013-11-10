@@ -687,7 +687,7 @@ var commands = exports.commands = {
                   '<center>Signature Pokemon:<font color="#C6CF1D"><b>Galvantula</b></font><br />' +
                   '<center>Catchphrase:  procrastination... is a virtue<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/596.gif">');
-                  }
+                  },
 
 		hostageclam: 'hg',
 		hg: function(target, room, user) {
