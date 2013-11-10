@@ -118,7 +118,7 @@ exports.BattleAliases = {
 	"scarf": "Choice Scarf",
 	"specs": "Choice Specs",
 	"yache": "Yache Berry",
-	"av": "Assault 	Vest",
+	"av": "Assault Vest",
 	
 
 	// pokemon
