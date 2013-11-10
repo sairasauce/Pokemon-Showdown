@@ -7,16 +7,16 @@ body {
 }
 
 .mainmenuwrapper {
-	background: url("http://i.imgur.com/AqgkJs3.png") bottom center no-repeat;
+	background: url("http://i.imgur.com/8TtcktH.png") bottom center no-repeat;
 }
 
 
 .chat-log{
-	background: url("http://i.imgur.com/ewkQIkZ.png") right bottom no-repeat;
+	background: url("http://i.imgur.com/HZ5cmhe.png") right bottom no-repeat;
 }
 
 .chat-log-add{
-        background:#b155ff 
+        background:#b4a3ff
 }
   
 .menugroup .button{
@@ -34,7 +34,7 @@ body {
 
 .userlist{
         border-left:1px solid #D5DDE4;
-        background:#b155ff
+        background:#b4a3ff
 }
 
 .userlist li button:hover {
