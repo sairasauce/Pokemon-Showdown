@@ -637,7 +637,7 @@ var commands = exports.commands = {
 		
 		umbreon: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: TrainerUmbreon<br />' +
+		this.sendReplyBox('<center>Trainer:<font color="#0DD3A5"><b>TrainerUmbreon</b></font><br />' +
                   '<center>Signature Pokemon:<b>Umbreon</b>' +
                   '<center>Catchphrase: Roar :)<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/197.gif">');
