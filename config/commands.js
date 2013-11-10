@@ -252,8 +252,10 @@ var commands = exports.commands = {
 	/*********************************************************
 	 * Informational commands
 	 *********************************************************/
-	regdate: function(target, room, user, connection) { 
+
+	regdate: function(target, room, user, connection) { 
 		if (!this.canBroadcast()) return;
+		if (!target || target == "." || target == "," || target == "'") return this.sendReply('/regdate - Please specify a valid username.'); //temp fix for symbols that break the command
 		var username = target;
 		target = target.replace(/\s+/g, '');
 		var util = require("util"),
@@ -293,6 +295,7 @@ var commands = exports.commands = {
 		});
 		req.end();
 	},
+
 
 	stats: 'data',
 	dex: 'data',
