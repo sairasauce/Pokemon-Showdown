@@ -3221,7 +3221,7 @@ function getRandMessage(user){
 		break;
 		case 34: message = message + user.name + ' was hit by a wrecking ball!';
 		break;
-		case 35: message = message + user.name + ' was Flare Blitzed by miners\'s Darmanitan!'; //huehue how long until some someone notices.~blizzy.
+		case 35: message = message + user.name + ' was Flare Blitzed by miner0\'s Darmanitan!'; //huehue how long until some someone notices.~blizzy.
 		break;
 		default: message = message + user.name + ' fled from colonial mustang!';
 	};
