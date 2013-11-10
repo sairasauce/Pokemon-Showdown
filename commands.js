@@ -628,7 +628,8 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#2610B7"><b>blizzardq</b></font><br />' +
                   '<center>Signature Pokemon: <font color="blue"><b>Keldeo</b></font><br />' +
-                  '<center>Catchphrase: I made some of these commands.<br />' + 
+                  '<center>Catchphrase:猛吹雪.<br />' + 
+                  '<center>Staff and Gym Leaders, if you need something coded, PM me. I am a coder in training. <br />' +
 		'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
 		},
 		
@@ -676,7 +677,7 @@ var commands = exports.commands = {
                   '<center>Types: Poison (RU E4)<br />' +
                   '<center>Signature Pokemon: <font color="green"><b>Torterra</b></font><br />' +
                   '<center>Catchphrase:my turtles will smash yo\' ass<br />' +
-                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/389.gif">');
+                  '<center><a href="http://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="http://www.smogon.com/download/sprites/bwmini/389.gif"></a>');
 		},
 
 		hostageclam: 'hg',
