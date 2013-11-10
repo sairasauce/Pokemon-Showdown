@@ -1307,7 +1307,7 @@ var commands = exports.commands = {
 		}
 		if (target === '@' || target === 'ban' || target === 'b') {
 			matched = true;
-			this.sendReply('/ban OR /b [username], [reason] - Kick user from all rooms and ban user\'s IP address with reason. Requires: @ & ~');
+			this.sendReply('/ban /barn OR /b [username], [reason] - Kick user from all rooms and ban user\'s IP address with reason. Requires: @ & ~');
 		}
 		if (target === '&' || target === 'banip') {
 			matched = true;
@@ -1355,8 +1355,8 @@ var commands = exports.commands = {
 		}
 		if (target === '~' || target === 'forcerenameto' || target === 'frt') {
 			matched = true;
-			this.sendReply('/forcerenameto OR /frt [username] - Force a user to choose a new name. Requires: & ~');
-			this.sendReply('/forcerenameto OR /frt [username], [new name] - Forcibly change a user\'s name to [new name]. Requires: & ~');
+			this.sendReply('/forcerenameto OR /frt [username] - Force a user to choose a new name. Requires: ~');
+			this.sendReply('/forcerenameto OR /frt [username], [new name] - Forcibly change a user\'s name to [new name]. Requires: ~');
 		}
 		if (target === '&' || target === 'forcetie') {
 			matched = true;
