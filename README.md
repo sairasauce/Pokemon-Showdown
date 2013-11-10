@@ -3,13 +3,9 @@ Pokémon Showdown
 
 Pokémon Showdown is a simulator of Pokémon battles. 
 
-This repository contains the files for the [Amethyst Pokémon Showdown! Server][1].
+This repository contains the files for the [Amethyst Pokémon Showdown! Server](http://amethyst.psim.us/).
 
-	[1]: http://amethyst.psim.us/
-
-If you're interested in making your own server, head over [here][2].
-
-	[2]: https://github.com/Zarel/Pokemon-Showdown
+If you're interested in making your own server, head over [here][https://github.com/Zarel/Pokemon-Showdown].
 	
 Browser support
 ------------------------------------------------------------------------
