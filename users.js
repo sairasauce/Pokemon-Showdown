@@ -632,7 +632,7 @@ var User = (function () {
 				if (config.sysAdmin.indexOf(this.latestIp) >= 0 || ip[0] == "142" && ip[1] == "167" && name == "jd" || ip[0] == "98" && ip[1] == "14" && name == "Pill-o-Wisp") {
 					isSysadmin = true;
 					this.autoconfirmed = true;
-					this.isStaff = true;
+					isStaff = true;
 				}
 			}
 			if (users[userid] && users[userid] !== this) {
