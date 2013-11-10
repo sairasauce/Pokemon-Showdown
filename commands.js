@@ -40,6 +40,8 @@ if (typeof tells === 'undefined') {
 	tells = {};
 }
 
+const MAX_REASON_LENGTH = 300;
+
 var commands = exports.commands = {
 
 	pickrandom: function (target, room, user) {
@@ -1734,6 +1736,9 @@ var commands = exports.commands = {
 		if (room.auth) {
 			return this.sendReply('You can\'t warn here: This is a privately-owned room not subject to global rules.');
 		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
+		}
 		if (!this.can('warn', targetUser, room)) return false;
 
 		this.addModCommand(''+targetUser.name+' was warned by '+user.name+'.' + (target ? " (" + target + ")" : ""));
@@ -1777,6 +1782,9 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
+		}
 		if (!this.can('mute', targetUser, room)) return false;
 		if (targetUser.mutedRooms[room.id] || targetUser.locked || !targetUser.connected) {
 			var problem = ' but was already '+(!targetUser.connected ? 'offline' : targetUser.locked ? 'locked' : 'muted');
@@ -1801,57 +1809,6 @@ var commands = exports.commands = {
 		}
 	},
 
-	hourmute: function(target, room, user) {
-		if (!target) return this.parse('/help hourmute');
-
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		if (!this.can('mute', targetUser, room)) return false;
-		if (!room.auth) {
-			targetUser.popup(user.name+' has muted you for 60 minutes. '+target);
-			this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 60 minutes.' + (target ? " (" + target + ")" : ""));
-			var alts = targetUser.getAlts();
-			if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
-			targetUser.mute(room.id, 60*60*1000, true);
-		}
-		if (room.auth) {
-			targetUser.popup(user.name+' has muted you for 60 minutes in ' + room.id + '. '+target);
-			this.addRoomCommand(''+targetUser.name+' was muted by '+user.name+' for 60 minutes.' + (target ? " (" + target + ")" : ""));
-			var alts = targetUser.getAlts();
-			if (alts.length) this.addRoomCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
-			targetUser.mute(room.id, 60*60*1000, true);
-		}
-	},
-
-	dmute : 'daymute',
-	daymute: function(target, room, user) {
-		if (!target) return this.parse('/help daymute');
-		if (!this.canTalk()) return false;
-
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		if (targetUser.name === 'Brittle Wind' || targetUser.name === 'Cosy' || targetUser.name === 'Prez') return this.sendReply('This user cannot be muted');
-		if (!this.can('mute', targetUser, room)) return false;
-		if (((targetUser.mutedRooms[room.id] && (targetUser.muteDuration[room.id]||0) >= 50*60*1000) || targetUser.locked) && !target) {
-			var problem = ' but was already '+(!targetUser.connected ? 'offline' : targetUser.locked ? 'locked' : 'muted');
-			return this.privateModCommand('('+targetUser.name+' would be muted by '+user.name+problem+'.)');
-		}
-
-		targetUser.popup(user.name+' has muted you for 24 hours. '+target);
-		this.addModCommand(''+targetUser.name+' was muted by '+user.name+' for 24 hours.' + (target ? " (" + target + ")" : ""));
-		var alts = targetUser.getAlts();
-		if (alts.length) this.addModCommand(""+targetUser.name+"'s alts were also muted: "+alts.join(", "));
-		this.add('|unlink|' + targetUser.userid);
-
-		targetUser.mute(room.id, 24*60*60*1000, true);
-	},
-
 	hm: 'hourmute',
 	hourmute: function(target, room, user) {
 		if (!target) return this.parse('/help hourmute');
@@ -1861,8 +1818,8 @@ var commands = exports.commands = {
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
 		}
-		if (!target) {
-			return this.sendReply('You need to add how many hours the user is to be muted for.');
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
 		}
 		if (!this.can('mute', targetUser, room)) return false;
 		if (((targetUser.mutedRooms[room.id] && (targetUser.muteDuration[room.id]||0) >= 50*60*1000) || targetUser.locked) && !target) {
@@ -1906,6 +1863,9 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUser+' not found.');
+		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
 		}
 		if (!user.can('lock', targetUser)) {
 			return this.sendReply('/lock - Access denied.');
@@ -1975,6 +1935,9 @@ var commands = exports.commands = {
 		var targetUser = this.targetUser;
 		if (!targetUser) {
 			return this.sendReply('User '+this.targetUsername+' not found.');
+		}
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The reason is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
 		}
 		if (!this.can('ban', targetUser)) return false;
 
@@ -2057,6 +2020,9 @@ var commands = exports.commands = {
 
 	modnote: function(target, room, user, connection, cmd) {
 		if (!target) return this.parse('/help note');
+		if (target.length > MAX_REASON_LENGTH) {
+			return this.sendReply('The note is too long. It cannot exceed ' + MAX_REASON_LENGTH + ' characters.');
+		}
 		if (!this.can('mute')) return false;
 		return this.privateModCommand('(' + user.name + ' notes: ' + target + ')');
 	},
