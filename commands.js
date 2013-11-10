@@ -1560,7 +1560,9 @@ var commands = exports.commands = {
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
 			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
 			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');*/
-			return connection.sendTo('lobby','|html|<div class="infobox"><center>Welcome to Amethyst! You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
+			return connection.sendTo('lobby','|html|<div class="infobox"> <center><font size=4><b>WELCOME TO <font color="purple">AMETHYST</b></font></center><br />' +
+		'<center>We have restarted the OU League! To register, PM <b>Ross</b> or <b>Miloticnob</b>!</center><br />' + 
+		'<center>You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
 			'<center>We now offer league rooms on request, contact an Administrator for more information!</center><br />' +
 			'<center>For the best experience use our custom client <a href="http://amethyst-server.no-ip.org">here!</a></center><br />' +
 			'<center>We are hosting awards called the <b>Amies</b>! Vote <a href="http://amethystserver.freeforums.net/board/26/award-categories">here</a>!<br />' +
