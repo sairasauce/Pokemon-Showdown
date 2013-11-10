@@ -635,6 +635,14 @@ var commands = exports.commands = {
 		'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
 		},
 		
+		umbreon: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer: TrainerUmbreon<br />' +
+                  '<center>Signature Pokemon:<b>Umbreon</b>' +
+                  '<center>Catchphrase: Roar :)<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/197.gif">');
+                  },
+		
 		smelly: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer: mrSmellyfeet100<br />' +
@@ -1032,7 +1040,7 @@ var commands = exports.commands = {
 	
 	mail: function(target, room, user) { 
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('<font size=3><b>Kill the Mailman</b></font><br><font size=2>by platinumCheesecake</font><br>A list of the rules for Kill the Milkman can be found <a href="http://amethystserver.freeforums.net/thread/77/mailman-tier">here</a>.');
+		this.sendReplyBox('<font size=3><b>Kill the Mailman</b></font><br><font size=2>by platinumCheesecake</font><br>A list of the rules for Kill the Mailman can be found <a href="http://amethystserver.freeforums.net/thread/77/mailman-tier">here</a>.');
 	},
 	
 	fb: 'facebook',
@@ -1271,6 +1279,14 @@ var commands = exports.commands = {
 		
 		if (target.indexOf('invite') != -1 && target.indexOf('spamroom') != -1) {
 			return user.sendTo('lobby', '|popup|You cannot invite people there.');
+		}
+		
+		if (targetUser.userid === 'piiiikachuuu') {
+			if (!user.isStaff && user.tries === 0) {
+				user.sendTo('lobby', '|popup|Are you sure this is the right person to PM? Unless it\'s a real issue, your problem can probably be solved by messaging a member of the moderation staff. If you really need to message this user, try again.');
+				user.tries = 1;
+				return false
+			}
 		}
 		
 		if (user.locked && !targetUser.can('lock', user)) {
