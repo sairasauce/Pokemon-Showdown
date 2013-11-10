@@ -29,6 +29,7 @@ exports.BattleAliases = {
 	"megapinsir": "Pinsir-Mega",
 	"megascizor": "Scizor-Mega",
 	"megatyranitar": "Tyranitar-Mega",
+	"megattar": "Tyranitar-Mega",
 	"megavenusaur": "Venusaur-Mega",
 
 	// formes
@@ -71,6 +72,7 @@ exports.BattleAliases = {
 	"wormadamground": "Wormadam-Sandy",
 	"wormadams": "Wormadam-Trash",
 	"wormadamsteel": "Wormadam-Trash",
+	
 
 	// base formes
 	"nidoranfemale": "Nidoran-F",
@@ -116,6 +118,8 @@ exports.BattleAliases = {
 	"scarf": "Choice Scarf",
 	"specs": "Choice Specs",
 	"yache": "Yache Berry",
+	"av": "Assault 	Vest",
+	
 
 	// pokemon
 	"aboma": "Abomasnow",
@@ -135,6 +139,8 @@ exports.BattleAliases = {
 	"rank": "Reuniclus",
 	"ttar": "Tyranitar",
 	"zam": "Alakazam",
+	"aegi": "Aegislash",
+	"gastro": "Gastrodon",
 
 	// moves
 	"bpass": "Baton Pass",
