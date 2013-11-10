@@ -1,4 +1,50 @@
+#header{
+        background:url("http://i.imgur.com/irQaRAv.png");
+}
+
+body {
+        background:url("http://i.imgur.com/J4ALaW9.png");
+}
+
 .mainmenuwrapper {
+	background: url("http://i.imgur.com/AqgkJs3.png") bottom center no-repeat;
+}
+
+
+.chat-log{
+	background: url("http://i.imgur.com/ewkQIkZ.png") right bottom no-repeat;
+}
+
+.chat-log-add{
+        background:#b155ff 
+}
+  
+.menugroup .button{
+        background:#903191;
+		border: 1px solid #570058
+}
+
+.menugroup .menugroup{
+        text-align:center
+}
+
+.menugroup .button:hover {
+        background:#a91dab
+}
+
+.userlist{
+        border-left:1px solid #D5DDE4;
+        background:#b155ff
+}
+
+.userlist li button:hover {
+        background:#8164ff
+}
+
+.message-announce {
+        background:#000000
+}
+/*.mainmenuwrapper {
 	background: url("http://puu.sh/4XP2N");
 }
 .chat-log {
@@ -234,4 +280,4 @@ margin: 7px 0px 0 2px;
 {
         background: #62A9FA;
         margin: 0 0 0 -1px;
-}
+}*/
