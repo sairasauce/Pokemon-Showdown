@@ -44,6 +44,9 @@ body {
 .message-announce {
         background:#000000
 }
+.userlist li em.group {
+    color:#666376
+}
 /*.mainmenuwrapper {
 	background: url("http://puu.sh/4XP2N");
 }
