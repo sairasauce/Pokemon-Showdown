@@ -679,13 +679,22 @@ var commands = exports.commands = {
                   '<center>Catchphrase:my turtles will smash yo\' ass<br />' +
                   '<center><a href="http://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="http://www.smogon.com/download/sprites/bwmini/389.gif"></a>');
 		},
+		
+		dach: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer:<font color="#AB3821"><b>Dach</b></font><br />' +
+                  '<center>Types: Electric(UU)<br />' +
+                  '<center>Signature Pokemon:<font color="#C6CF1D"><b>Galvantula</b></font><br />' +
+                  '<center>Catchphrase:  procrastination... is a virtue<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/596.gif">');
+                  }
 
 		hostageclam: 'hg',
 		hg: function(target, room, user) {
 		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<center>Trainer: <font color="#1B7E15">hostageclam</font><br />' +
+		this.sendReplyBox('<center>Trainer: <font color="#1B7E15"><b>hostageclam</b></font><br />' +
                   '<center>Types: Bug(UU),Bug(RU)<br />' +
-                  '<center>Signature Pokemon: <font color="red"><b>Typhlosion</b></center><br />' +
+                  '<center>Signature Pokemon: <font color="red"><b>Typhlosion</b></font><br />' +
                   '<center>Catchphrase: "Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange? - Llama<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/157.gif">');
 		},
