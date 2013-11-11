@@ -622,6 +622,14 @@ var commands = exports.commands = {
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
 		},
 
+	cheese: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer:<font color=" #0772CF"><b>platinumCheesecake</b></font><br />' +
+                  '<center>Types: Poison(NU, RU), Fairy(OU)<br />' +
+                  '<center>Signature Pokemon:<font color="#C11FA9"><b>Togekiss</b></font><br />' +
+                  '<center>Catchphrase: wait so i can put anything i want here?<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
+                  },
 
 		
 		blizzard: 'blizzy',
@@ -722,7 +730,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center>Trainer: <font color="#6D2231"><b>Finny</b></font><br />' +
                   '<center>Types: Ground(OU)<br />' +
                   '<center>Signature Pokemon: <font color="red"><b>Victini</b></font><br />' +
-                  '<center>Catchphrase: Bitch, I\'m the one Earthquakin<br />' +
+                  '<center>Catchphrase: Abc, I got a D<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif">');
 		},
 
