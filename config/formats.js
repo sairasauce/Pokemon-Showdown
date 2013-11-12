@@ -75,6 +75,38 @@ exports.Formats = [
 		ruleset: ['Cute', 'Standard Cutemons', 'Team Preview', 'Cutemons Clause'],
 		banlist: ['Drizzle ++ Swift Swim', 'Soul Dew']
 	},
+	{
+		name: "Kill The Mailman",
+		section: "Amethyst Metas",
+		
+		onFaint: function(pokemon) {
+			if (pokemon.side.pokemon[0].item === 'mail') {
+				var name = '';
+				var winner = '';
+				if (pokemon.side.id === 'p1') {
+					if (battle.p2.pokemon[0].item === 'mail') {
+						winner = 'p2';
+						name = battle.p2.name;
+					} else {
+						winner = 'p1';
+						name = pokemon.side.name;
+					}
+				} else {
+					if (battle.p1.pokemon[0].item === 'mail') {
+						winner = 'p1';
+						name = battle.p1.name;
+					} else {
+						winner = 'p2';
+						name = pokemon.side.name;
+					}
+				}
+				this.add('message', 'The mailman of '+name+' fainted.');
+				pokemon.battle.win(winner);
+			}
+		},
+		ruleset: ['Pokemon', 'Standard Pokebank', 'Evasion Abilities Clause', 'Team Preview', 'Mailman Clause'],
+		banlist: ['Uber', 'Soul Dew', 'Frisk', 'Explosion', 'Self-Destruct', 'Final Gambit', 'Arena Trap', 'Shedinja', 'Perish Song']
+	},
 	// XY Singles
 	///////////////////////////////////////////////////////////////////
 
