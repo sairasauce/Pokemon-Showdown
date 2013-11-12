@@ -82,7 +82,7 @@ exports.Formats = [
 		name: "OU (beta)",
 		section: "XY Singles",
 
-		ruleset: ['Pokemon', 'Standard', 'Evasion Abilities Clause', 'Team Preview'],
+		ruleset: ['Pokemon', 'Standard', 'Team Preview'],
 		noPokebank: true,
 		banlist: ['Uber', 'Soul Dew']
 	},
@@ -92,7 +92,7 @@ exports.Formats = [
 
 		ruleset: ['Pokemon', 'Standard Ubers', 'Team Preview'],
 		noPokebank: true,
-		banlist: ['']
+		banlist: []
 	},
 	{
 		name: "LC (beta)",
@@ -104,10 +104,35 @@ exports.Formats = [
 		banlist: ['Sonicboom', 'Dragon Rage', 'Scyther']
 	},
 	{
+		name: "XY Battle Spot Special (beta)",
+		section: "XY Singles",
+
+		onBegin: function() {
+			this.debug('cutting down to 3');
+			this.p1.pokemon = this.p1.pokemon.slice(0,3);
+			this.p1.pokemonLeft = this.p1.pokemon.length;
+			this.p2.pokemon = this.p2.pokemon.slice(0,3);
+			this.p2.pokemonLeft = this.p2.pokemon.length;
+		},
+		maxForcedLevel: 50,
+		ruleset: ['Pokemon', 'Standard GBU', 'Team Preview GBU'],
+		noPokebank: true,
+		banlist: [], // The neccessary bans are in Standard GBU
+		validateTeam: function(team, format) {
+			for (var i = 0; i < team.length; i++) {
+				var template = this.getTemplate(team[i].species);
+				if (template.num < 650) {
+					return ['You may only use Pokemon from Gen 6'];
+				}
+			}
+			if (team.length < 3) return ['You must bring at least 3 Pokemon.'];
+		}
+	},
+	{
 		name: "Pokebank OU (beta)",
 		section: "XY Singles",
 
-		ruleset: ['Pokemon', 'Standard Pokebank', 'Evasion Abilities Clause', 'Team Preview'],
+		ruleset: ['Pokemon', 'Standard Pokebank', 'Team Preview'],
 		banlist: ['Uber', 'Soul Dew']
 	},
 	{
@@ -115,7 +140,7 @@ exports.Formats = [
 		section: "XY Singles",
 
 		ruleset: ['Pokemon', 'Standard Pokebank', 'Team Preview'],
-		banlist: ['']
+		banlist: []
 	},
 	{
 		name: "Pokebank LC (beta)",
@@ -129,7 +154,7 @@ exports.Formats = [
 		name: "CAP (beta)",
 		section: "XY Singles",
 
-		ruleset: ['CAP Pokemon', 'Standard Pokebank', 'Evasion Abilities Clause', 'Team Preview'],
+		ruleset: ['CAP Pokemon', 'Standard Pokebank', 'Team Preview'],
 		banlist: ['Uber']
 	},
 	{
