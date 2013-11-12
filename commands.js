@@ -643,6 +643,15 @@ var commands = exports.commands = {
 		'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
 		},
 		
+		absol: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer:<font color="#741E99"><b>Absol-utelyEmily</b></font><br />' +
+                  '<center>Types: Normal(OU)<br />' +
+                  '<center>Signature Pokemon: <font color="red"><b>Porygon2</b></font><br />' +
+                  '<center>Catchphrase: This thing is Absol-utely one bulky mofo<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/233.gif">');
+},
+		
 		umbreon: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#0DD3A5"><b>TrainerUmbreon</b></font><br />' +
