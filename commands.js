@@ -957,7 +957,7 @@ var commands = exports.commands = {
 		if (!target) {
 			this.sendReply('/nature [nature] - tells you the increase and decrease of that nature. If you find a bug, pm blizzardq.');
 		}
-		if (!match) {
+		if (!matched) {
 			this.sendReply('Nature "'+target+'" not found. Check your spelling?');
 		}
 	},
