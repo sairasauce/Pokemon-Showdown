@@ -82,23 +82,19 @@ exports.Formats = [
 		mod: 'mailman',
 		onFaint: function(pokemon) {
 			if (pokemon.side.pokemon[0].item === 'mail') {
-				var name = '';
+				var name = pokemon.side.name;
 				var winner = '';
 				if (pokemon.side.id === 'p1') {
 					if (this.p2.pokemon[0].item === 'mail') {
-						winner = 'p1';
-						name = this.p2.name;
+						winner = 'p2';
 					} else {
 						winner = 'p1';
-						name = this.p1.name;
 					}
 				} else {
 					if (this.p1.pokemon[0].item === 'mail') {
 						winner = 'p1';
-						name = this.p2.name;
 					} else {
 						winner = 'p2';
-						name = this.p2.name;
 					}
 				}
 				this.add('message', 'The mailman of '+name+' fainted.');
