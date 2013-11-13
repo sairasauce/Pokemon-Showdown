@@ -1010,6 +1010,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<font size = 3><b>Cutemons</b></font><br><font size = 2>by Mizu :D and hostageclam</font><br>A metagame created by Mizu :D, Cutemons is a tier in which only Pokemon deemed cute enough are allowed. Many Pokemon also gain new abilities. A changelog can be found here: <a href = "https://dl.dropboxusercontent.com/u/165566535/cutemons.html">here</a>.<br>Have fun!');
 	},
 	
+	'ktm': 'mail',
 	mail: function(target, room, user) { 
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<font size=3><b>Kill the Mailman</b></font><br><font size=2>by platinumCheesecake</font><br>A list of the rules for Kill the Mailman can be found <a href="http://amethystserver.freeforums.net/thread/77/mailman-tier">here</a>.<br />Contact piiiikachuuu with any problems.');
