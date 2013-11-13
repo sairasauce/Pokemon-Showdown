@@ -352,12 +352,12 @@ exports.BattleFormats = {
 				if (team[i].item === 'Mail') {
 					mailman.push(i);
 				}
-				if (mailman.length > 1) {
-					problems.push('You can only have one mailman.');
-				}
-				if (mailman.length < 1) {
-					problems.push('One of your Pokemon must be holding Mail.');
-				}
+			}
+			if (mailman.length > 1) {
+				problems.push('You can only have one mailman.');
+			}
+			if (mailman.length < 1) {
+				problems.push('One of your Pokemon must be holding Mail.');
 			}
 			if (mailman.length === 1) {
 				var i = mailman[0];
