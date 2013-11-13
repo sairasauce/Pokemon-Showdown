@@ -336,6 +336,43 @@ exports.BattleFormats = {
 			}
 		}
 	},
+	mailmanclause: {
+		effectType: 'Rule',
+		validateTeam: function(team, format) {
+			var problems = [];
+			var mailman = [];
+			for (var i = 0; i < team.length; i++) {
+				var template = this.getTemplate(team[i].species);
+				if (!team[i]) {
+					problems.push('You do not have enough Pokemon.\n');
+				}
+				if (team[i].level < 100) {
+					problems.push('Your Pokemon must all be at level 100.\n');
+				}
+				if (team[i].item === 'Mail') {
+					mailman.push(i);
+				}
+				if (mailman.length > 1) {
+					problems.push('You can only have one mailman.');
+				}
+				if (mailman.length < 1) {
+					problems.push('One of your Pokemon must be holding Mail.');
+				}
+			}
+			if (mailman.length === 1) {
+				var i = mailman[0];
+				for (var c = 0; c < team[i].moves.length; c++) {
+					var move = this.getMove(team[i].moves[c]);
+					if (move.category === 'Status') {	
+						problems.push('Your mailman cannot have status moves.');
+					}
+				}
+			}
+			if (problems[0] != undefined) {
+				return problems;
+			}
+		}
+	},
 	standard: {
 		effectType: 'Banlist',
 		ruleset: ['Sleep Clause Mod', 'Species Clause', 'OHKO Clause', 'Moody Clause', 'Evasion Moves Clause', 'HP Percentage Mod'],
