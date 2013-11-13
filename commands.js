@@ -73,147 +73,147 @@ var commands = exports.commands = {
 	showbadges: function(target, room, user, connection) {
 	if (!this.canBroadcast()) return;
 	if (!target) {
-	var data = fs.readFileSync('config/badges.csv','utf8')
-		var match = false;
-		var numBadges = 0;
-		var stuff = (''+data).split("\n");
-		for (var i = stuff.length; i > -1; i--) {
-			if (!stuff[i]) continue;
-			var row = stuff[i].split(",");
-			var userid = toUserid(row[0]);
-			if (user.userid == userid) {
-			var x = Number(row[1]);
-			var numBadges = x;
-			match = true;
+		var data = fs.readFileSync('config/badges.csv','utf8')
+			var match = false;
+			var numBadges = 0;
+			var stuff = (''+data).split("\n");
+			for (var i = stuff.length; i > -1; i--) {
+				if (!stuff[i]) continue;
+				var row = stuff[i].split(",");
+				var userid = toUserid(row[0]);
+				if (user.userid == userid) {
+				var x = Number(row[1]);
+				var numBadges = x;
+				match = true;
+				if (match === true) {
+					break;
+				}
+				}
+			}
 			if (match === true) {
-				break;
+				this.sendReplyBox(user.name + ' has ' + numBadges + ' badge(s).');
 			}
+			if (match === false) {
+				connection.sendTo(room, 'You have no badges.');
 			}
-		}
-		if (match === true) {
-			this.sendReplyBox(user.name + ' has ' + numBadges + ' badge(s).');
-		}
-		if (match === false) {
-			connection.sendTo(room, 'You have no badges.');
-		}
-		user.badges = numBadges;
-	} else {
-	var data = fs.readFileSync('config/badges.csv','utf8')
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		var match = false;
-		var numBadges = 0;
-		var stuff = (''+data).split("\n");
-		for (var i = stuff.length; i > -1; i--) {
-			if (!stuff[i]) continue;
-			var row = stuff[i].split(",");
-			var userid = toUserid(row[0]);
-			if (targetUser.userid == userid || target == userid) {
-			var x = Number(row[1]);
-			var numBadges = x;
-			match = true;
+			user.badges = numBadges;
+		} else {
+			var data = fs.readFileSync('config/badges.csv','utf8')
+			target = this.splitTarget(target);
+			var targetUser = this.targetUser;
+			if (!targetUser) {
+				return this.sendReply('User '+this.targetUsername+' not found.');
+			}
+			var match = false;
+			var numBadges = 0;
+			var stuff = (''+data).split("\n");
+			for (var i = stuff.length; i > -1; i--) {
+				if (!stuff[i]) continue;
+				var row = stuff[i].split(",");
+				var userid = toUserid(row[0]);
+				if (targetUser.userid == userid || target == userid) {
+				var x = Number(row[1]);
+				var numBadges = x;
+				match = true;
+				if (match === true) {
+					break;
+				}
+				}
+			}
 			if (match === true) {
-				break;
+				this.sendReplyBox(targetUser.name + ' has ' + numBadges + ' badge(s).');
 			}
+			if (match === false) {
+				connection.sendTo(room, '' + targetUser.name + ' has no badges.');
 			}
+			Users.get(targetUser.userid).badges = numBadges;
 		}
-		if (match === true) {
-			this.sendReplyBox(targetUser.name + ' has ' + numBadges + ' badge(s).');
-		}
-		if (match === false) {
-			connection.sendTo(room, '' + targetUser.name + ' has no badges.');
-		}
-		Users.get(targetUser.userid).badges = numBadges;
-	}
 	},
 	
 	givebadge: function(target, room, user, connection) {
 		if (ougymleaders.indexOf(user.userid) != -1 || admins.indexOf(user.userid) != -1) {
 		if (!target) {
-		var data = fs.readFileSync('config/badges.csv','utf8')
-		var match = false;
-		var numBadges = 0;
-		var stuff = (''+data).split("\n");
-		var line = '';
-		for (var i = stuff.length; i > -1; i--) {
-			if (!stuff[i]) continue;
-			var row = stuff[i].split(",");
-			var userid = toUserid(row[0]);
-			if (user.userid == userid) {
-			var x = Number(row[1]);
-			var numBadges = x;
-			match = true;
+			var data = fs.readFileSync('config/badges.csv','utf8')
+			var match = false;
+			var numBadges = 0;
+			var stuff = (''+data).split("\n");
+			var line = '';
+			for (var i = stuff.length; i > -1; i--) {
+				if (!stuff[i]) continue;
+				var row = stuff[i].split(",");
+				var userid = toUserid(row[0]);
+				if (user.userid == userid) {
+				var x = Number(row[1]);
+				var numBadges = x;
+				match = true;
+				if (match === true) {
+					line = line + stuff[i];
+					break;
+				}
+				}
+			}
+			user.badges = numBadges;
+			user.badges = user.badges + 1;
 			if (match === true) {
-				line = line + stuff[i];
-				break;
+				var re = new RegExp(line,"g");
+				fs.readFile('config/badges.csv', 'utf8', function (err,data) {
+					if (err) {
+						return console.log(err);
+					}
+					var result = data.replace(re, user.userid+','+user.badges);
+					fs.writeFile('config/badges.csv', result, 'utf8', function (err) {
+					if (err) return console.log(err);
+					});
+				});
+			} else {
+				var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
+				log.write("\n"+user.userid+','+user.badges);
 			}
-			}
-		}
-		user.badges = numBadges;
-		user.badges = user.badges + 1;
-		if (match === true) {
-		var re = new RegExp(line,"g");
-		fs.readFile('config/badges.csv', 'utf8', function (err,data) {
-			if (err) {
-				return console.log(err);
-			}
-			var result = data.replace(re, user.userid+','+user.badges);
-			fs.writeFile('config/badges.csv', result, 'utf8', function (err) {
-			if (err) return console.log(err);
-			});
-		});
+			return this.sendReply('You were given a badge. You now have ' + user.badges + ' badges.');
 		} else {
-			var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
-			log.write("\n"+user.userid+','+user.badges);
-		}
-		return this.sendReply('You were given a badge. You now have ' + user.badges + ' badges.');
-	} else {
-		if (target.indexOf(',') === -1) {
-		var data = fs.readFileSync('config/badges.csv','utf8')
-		target = this.splitTarget(target);
-		var targetUser = this.targetUser;
-		if (!targetUser) {
-			return this.sendReply('User '+this.targetUsername+' not found.');
-		}
-		var match = false;
-		var numBadges = 0;
-		var stuff = (''+data).split("\n");
-		var line = '';
-		for (var i = stuff.length; i > -1; i--) {
-			if (!stuff[i]) continue;
-			var row = stuff[i].split(",");
-			var userid = toUserid(row[0]);
-			if (targetUser.userid == userid) {
-			var x = Number(row[1]);
-			var numBadges = x;
-			match = true;
+			if (target.indexOf(',') === -1) {
+			var data = fs.readFileSync('config/badges.csv','utf8')
+			target = this.splitTarget(target);
+			var targetUser = this.targetUser;
+			if (!targetUser) {
+				return this.sendReply('User '+this.targetUsername+' not found.');
+			}
+			var match = false;
+			var numBadges = 0;
+			var stuff = (''+data).split("\n");
+			var line = '';
+			for (var i = stuff.length; i > -1; i--) {
+				if (!stuff[i]) continue;
+				var row = stuff[i].split(",");
+				var userid = toUserid(row[0]);
+				if (targetUser.userid == userid) {
+				var x = Number(row[1]);
+				var numBadges = x;
+				match = true;
+				if (match === true) {
+					line = line + stuff[i];
+					break;
+				}
+				}
+			}
+			Users.get(targetUser.userid).badges = numBadges;
+			Users.get(targetUser.userid).badges = Users.get(targetUser.userid).badges + 1;
 			if (match === true) {
-				line = line + stuff[i];
-				break;
+			var re = new RegExp(line,"g");
+			fs.readFile('config/badges.csv', 'utf8', function (err,data) {
+				if (err) {
+					return console.log(err);
+				}
+				var result = data.replace(re, targetUser.userid+','+Users.get(targetUser.userid).badges);
+				fs.writeFile('config/badges.csv', result, 'utf8', function (err) {
+				if (err) return console.log(err);
+				});
+			});} else {
+				var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
+				log.write("\n"+targetUser.userid+','+Users.get(targetUser.userid).badges);
 			}
+			return this.sendReply(targetUser + ' was given a badge.');
 			}
-		}
-		Users.get(targetUser.userid).badges = numBadges;
-		Users.get(targetUser.userid).badges = Users.get(targetUser.userid).badges + 1;
-		if (match === true) {
-		var re = new RegExp(line,"g");
-		fs.readFile('config/badges.csv', 'utf8', function (err,data) {
-			if (err) {
-				return console.log(err);
-			}
-			var result = data.replace(re, targetUser.userid+','+Users.get(targetUser.userid).badges);
-			fs.writeFile('config/badges.csv', result, 'utf8', function (err) {
-			if (err) return console.log(err);
-			});
-		});} else {
-			var log = fs.createWriteStream('config/badges.csv', {'flags': 'a'});
-			log.write("\n"+targetUser.userid+','+Users.get(targetUser.userid).badges);
-		}
-		return this.sendReply(targetUser + ' was given a badge.');
-		}
 		}
 		}
 		else {
@@ -230,7 +230,7 @@ var commands = exports.commands = {
 		if (isNaN(parts[1])) {
 			return this.sendReply('Very funny, now use a real number.');
 		}
-	var data = fs.readFileSync('config/badges.csv','utf8')
+		var data = fs.readFileSync('config/badges.csv','utf8')
 		var match = false;
 		var numBadges = 0;
 		var stuff = (''+data).split("\n");
@@ -273,13 +273,13 @@ var commands = exports.commands = {
 		else {
 			return this.sendReply('No.');
 		}
-		},
+	},
 		
 	badgesystem: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b><font size = 3>The Badge System</font></b><br>' +
 							'A work in progress, the badge system is a way to keep track of how many badges a user has. It is simply a number, nothing more, but it can easily show whether you have the twelve required badges. At the moment, this system is for the OU league only. Other leagues will be supported sometime in the future. Any OU gym leader can use the /givebadge command to give a user a badge. Users can use /showbadges to view their badges. Gym leaders can also give multiple badges, a way to implement users onto this new database. For instance, if a user has 6 badges, someone can do /givebadge [user], 6 to give them 6 badges. PM pika with any questions you have about this.');
-			},
+	},
 	
 	/*********************************************************
 	 * Rock-Paper-Scissors                                   *
@@ -300,115 +300,111 @@ var commands = exports.commands = {
 	shoot: function(target, room, user) {
 		if(gamestart === false) {
 			return this.sendReply('There is currently no game of rock-paper-scissors going on.');
-		}
-		else {
+		} else {
 			if(user.userid === rpsplayersid[0]) {
 				if(player1response[0]) {
 					return this.sendReply('You have already responded.');
 				}
-			if(target === 'rock') {
-				player1response.push('rock');
+				if(target === 'rock') {
+					player1response.push('rock');
+					if(player2response[0]) {
+						return this.parse('/compare');
+					}
+					return this.sendReply('You responded with rock.');
+				} 
+				if(target === 'paper') {
+					player1response.push('paper');
+									if(player2response[0]) {
+						return this.parse('/compare');
+					}
+					return this.sendReply('You responded with paper.');
+				}
+				if(target === 'scissors') {
+					player1response.push('scissors');
+									if(player2response[0]) {
+						return this.parse('/compare');
+					}
+					return this.sendReply('You responded with scissors.');
+				} else {
+					return this.sendReply('Please respond with one of the following: rock, paper, or scissors.');
+				}
+			}
+			if(user.userid === rpsplayersid[1]) {
 				if(player2response[0]) {
-					return this.parse('/compare');
+					return this.sendReply('You have already responded.');
 				}
-				return this.sendReply('You responded with rock.');
-			} 
-			if(target === 'paper') {
-				player1response.push('paper');
-								if(player2response[0]) {
-					return this.parse('/compare');
+				if(target === 'rock') {
+					player2response.push('rock');
+					if(player1response[0]) {
+						return this.parse('/compare');
+					}
+					return this.sendReply('You responded with rock.');
+				} 
+				if(target === 'paper') {
+					player2response.push('paper');
+									if(player1response[0]) {
+						return this.parse('/compare');
+					}
+					return this.sendReply('You responded with paper.');
 				}
-				return this.sendReply('You responded with paper.');
-			}
-			if(target === 'scissors') {
-				player1response.push('scissors');
-								if(player2response[0]) {
-					return this.parse('/compare');
+				if(target === 'scissors') {
+					player2response.push('scissors');
+									if(player1response[0]) {
+						return this.parse('/compare');
+					}
+					return this.sendReply('You responded with scissors.');
 				}
-				return this.sendReply('You responded with scissors.');
-			}
-			else {
-			return this.sendReply('Please respond with one of the following: rock, paper, or scissors.');
+				else {
+				return this.sendReply('Please respond with one of the following: rock, paper, or scissors.');
+				}
+			} else {
+				return this.sendReply('You are not in this game of rock-paper-scissors.');
 			}
 		}
-		if(user.userid === rpsplayersid[1]) {
-			if(player2response[0]) {
-				return this.sendReply('You have already responded.');
-			}
-			if(target === 'rock') {
-				player2response.push('rock');
-				if(player1response[0]) {
-					return this.parse('/compare');
-				}
-				return this.sendReply('You responded with rock.');
-			} 
-			if(target === 'paper') {
-				player2response.push('paper');
-								if(player1response[0]) {
-					return this.parse('/compare');
-				}
-				return this.sendReply('You responded with paper.');
-			}
-			if(target === 'scissors') {
-				player2response.push('scissors');
-								if(player1response[0]) {
-					return this.parse('/compare');
-				}
-				return this.sendReply('You responded with scissors.');
-			}
-			else {
-			return this.sendReply('Please respond with one of the following: rock, paper, or scissors.');
-			}
-		}
-		else return this.sendReply('You are not in this game of rock-paper-scissors.');
-	}
 	},
 		
 	compare: function(target, room, user) {
 		if(gamestart === false) {
 			return this.sendReply('There is no rock-paper-scissors game going on right now.');
-		}
-		else {
-		if(player1response[0] === undefined && player2response[0] === undefined) {
-			return this.sendReply('Neither ' + rpsplayers[0] + ' nor ' + rpsplayers[1] + ' has responded yet.');
-		}
-		if(player1response[0] === undefined) {
-			return this.sendReply(rpsplayers[0] + ' has not responded yet.');
-		}
-		if(player2response[0] === undefined) {
-			return this.sendReply(rpsplayers[1] + ' has not responded yet.');
-		}
-		else {
-			if(player1response[0] === player2response[0]) {
-				this.add('Both players responded with \'' + player1response[0] + '\', so the game of rock-paper-scissors between ' + rpsplayers[0] + ' and ' + rpsplayers[1] + ' was a tie!');
+		} else {
+			if(player1response[0] === undefined && player2response[0] === undefined) {
+				return this.sendReply('Neither ' + rpsplayers[0] + ' nor ' + rpsplayers[1] + ' has responded yet.');
 			}
-			if(player1response[0] === 'rock' && player2response[0] === 'paper') {
-				this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
+			if(player1response[0] === undefined) {
+				return this.sendReply(rpsplayers[0] + ' has not responded yet.');
 			}
-			if(player1response[0] === 'rock' && player2response[0] === 'scissors') {
-				this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
+			if(player2response[0] === undefined) {
+				return this.sendReply(rpsplayers[1] + ' has not responded yet.');
+			} else {
+				if(player1response[0] === player2response[0]) {
+					this.add('Both players responded with \'' + player1response[0] + '\', so the game of rock-paper-scissors between ' + rpsplayers[0] + ' and ' + rpsplayers[1] + ' was a tie!');
+				}
+				if(player1response[0] === 'rock' && player2response[0] === 'paper') {
+					this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
+				}
+				if(player1response[0] === 'rock' && player2response[0] === 'scissors') {
+					this.add('|html|' + rpsplayers[0] + ' responded with \'rock\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
+				}
+				if(player1response[0] === 'paper' && player2response[0] === 'rock') {
+					this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
+				}
+				if(player1response[0] === 'paper' && player2response[0] === 'scissors') {
+					this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
+				}
+				if(player1response[0] === 'scissors' && player2response[0] === 'rock') {
+					this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
+				}
+				if(player1response[0] === 'scissors' && player2response[0] === 'paper') {
+					this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
+				}
+				rockpaperscissors = false;
+				numberofspots = 2;
+				gamestart = false;
+				rpsplayers = [];
+				rpsplayersid = [];
+				player1response = [];
+				player2response = [];
 			}
-			if(player1response[0] === 'paper' && player2response[0] === 'rock') {
-				this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
-			}
-			if(player1response[0] === 'paper' && player2response[0] === 'scissors') {
-				this.add('|html|' + rpsplayers[0] + ' responded with \'paper\' and ' + rpsplayers[1] + ' responded with \'scissors\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
-			}
-			if(player1response[0] === 'scissors' && player2response[0] === 'rock') {
-				this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'rock\', so <b>' + rpsplayers[1] + '</b> won the game of rock-paper-scissors!');
-			}
-			if(player1response[0] === 'scissors' && player2response[0] === 'paper') {
-				this.add('|html|' + rpsplayers[0] + ' responded with \'scissors\' and ' + rpsplayers[1] + ' responded with \'paper\', so <b>' + rpsplayers[0] + '</b> won the game of rock-paper-scissors!');
-			}
-
-		rockpaperscissors = false;
-		numberofspots = 2;
-		gamestart = false;
-		rpsplayers = [];
-		rpsplayersid = [];
-		player1response = [];
-		player2response = [];
-		}
 		}
 	},
 	
@@ -447,20 +443,20 @@ var commands = exports.commands = {
 				rpsplayersid.push(user.userid);
 				return false;
 			}
-		if(rpsplayers[0] === user.name) {
-			return this.sendReply('You are already in the game.');
+			if(rpsplayers[0] === user.name) {
+				return this.sendReply('You are already in the game.');
+			}
+			if(rpsplayers[0] && rpsplayers[1] === undefined) {
+				numberofspots = numberofspots - 1;
+				this.add('|html|<b>' + user.name + '</b> has joined the game of rock-paper-scissors!');
+				rpsplayers.push(user.name);
+				rpsplayersid.push(user.userid);
+			}
+			if(numberofspots === 0) {
+				this.add('|html|The game of rock-paper-scissors between <b>' + rpsplayers[0] + '</b> and <b>' + rpsplayers[1] + '</b> has begun!');
+				gamestart = true;
+			}
 		}
-		if(rpsplayers[0] && rpsplayers[1] === undefined) {
-			numberofspots = numberofspots - 1;
-			this.add('|html|<b>' + user.name + '</b> has joined the game of rock-paper-scissors!');
-			rpsplayers.push(user.name);
-			rpsplayersid.push(user.userid);
-		}
-		if(numberofspots === 0) {
-			this.add('|html|The game of rock-paper-scissors between <b>' + rpsplayers[0] + '</b> and <b>' + rpsplayers[1] + '</b> has begun!');
-			gamestart = true;
-		}
-	}
 	},
 	/*********************************************************
 	 * everything else (first, our custom stuff)
@@ -470,59 +466,40 @@ var commands = exports.commands = {
 	forums: function(target, room, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>The Amethyst Forums:</b><br /> - <a href = "http://amethystserver.freeforums.net/" target = _blank>Forums</a>');
-                },
-
-			
-	
-			anarky: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Elite Four Anarky:</b><br />'+
-                                'Type: Water<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Gyarados<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/130.png"><br />' +
-                                'Badge: Cascade Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/060_zps66636c1f.png">');
-                },
-               
-      
-                
+	},
+                  
 	riles: function(target, room, user) {
-	if(user.userid === 'riles') {
-		user.avatar = 64;
-		delete Users.users['riley'];
-		user.forceRename('Riley', user.authenticated);
-	}
+		if(user.userid === 'riles') {
+			user.avatar = 64;
+			delete Users.users['riley'];
+			user.forceRename('Riley', user.authenticated);
+		}
 	},
                
-        
-   
-       
-        colonialmustang: 'mustang',
-        mustang: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Mustang:</b><br />'+
-                                'Type: Ground<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Nidoking<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/034.png"><br />' +
-                                'Badge: Flame Alchemy Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/132_zpsb8a73a6e.png">');
-                },
+	colonialmustang: 'mustang',
+	mustang: function(target, rom, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<b>Information on Gym Le@der Mustang:</b><br />'+
+						'Type: Ground<br />' +
+						'Tier: Over Used (OU)<br />' +
+						'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
+						'Signature Pokemon: Nidoking<br />' +
+						'<img src="http://www.poke-amph.com/black-white/sprites/small/034.png"><br />' +
+						'Badge: Flame Alchemy Badge<br />' +
+						'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/132_zpsb8a73a6e.png">');
+	},
                
-		 koz: function (target, room, user) {
+	koz: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="purple"><b>Kozman</b></font><br />' +
                   '<center>Types: Fighting(OU E4)<br />' +
                   '<center>Ace: <font color="purple"><b>Mienshao</b></font><br />' + 
                   '<center>Catchphrase: Everyone has an inner Amethyst... You just need to unlock it.<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/620.gif">');
-		},
+	},
                 
                  
-		    saira: function (target, room, user) {
+	saira: function (target, room, user) {
  		 if (!this.canBroadcast()) return;
  		 this.sendReplyBox('<center>Trainer: <font color="#986C1B"><b>Saira</b></font><br />' +
                            '<center>Types: Psychic(OU)<br />' +
@@ -530,52 +507,52 @@ var commands = exports.commands = {
                            '<center>Signature Pokemon: <font color="#933BDB"><b>Gengar</b></font><br />' +
                            '<center><img src="http://www.smogon.com/download/sprites/bwmini/94.gif"><br />');
 		 },
-                ross: function (target, room, user) {
+   
+	ross: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer:<font color="#5A13CD"><b>Ross</b></font><br />' +
                    '<center>Types: Steel (OU E4), Dark (UU E4), Rock (RU E4), Grass(NU)<br />' +
                    '<center>Signature Pokemon: <font color="red"><b>Victini</b></font><br />' +
                    '<center>Catchphrase: I\'ll swallow swords spit up my pride, I follow through again this time. I\'ll be just fine...><br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif">');
-		},
-		nord: function (target, room, user) {
+	},
+		
+	nord: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer: <font color="#1A5370"><b>Nord</b></font><br />' + 
                    '<center>Types: Ice(OU E4)<br />' +
                    '<center>Signature Pokemon: <font color="#6E69D1"><b>Regice</b></font><br />' +
                    '<center>Catchphrase: Fabuuuuuuuuuuuloussssssssssssssss<br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/378.gif">');
-		},
+	},
 		
-		glomp: 'mizud',
-		mizud: function (target, room, user) {
+	mizud: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#C11FA9"><b>Mizu :D</b></font><br />' +
                   '<center>Types: Flying(UU)<br />' +
                   '<center>Ace: <font color="#C11FA9"><b>Togekiss</b></font><br />' +
                   '<center>Catchphrase: /me glomps jd<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
-		},
-		miner: function (target, room, user) {
+	},
+	
+	miner: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer:<font color="#750292"><b>Miner0</b></font><br />' +
                    '<center>Types: Fire(OU E4), Flying(UU E4),Bug (RU E4)<br />' +
                     '<center>Ace: <font color="red"><b>Darmanitan</b></font><br />' +
                     '<center>Catchphrase:  It doesn\'t matter on the types in the begining, only the outcome does.<br />' +
                     '<center><img src="http://www.smogon.com/download/sprites/bwmini/555.gif">');
-		},
-
-
+	},
                
-        	 aikenka: 'aik',
-		aik: function(target, room, user) {
+	aikenka: 'aik',
+	aik: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#C71A20"><b>Aikenká</b></font><br />' +
 		 '<center>Signature Pokemon: <font color="brown"><b>Damion the Dragonite</b></font><br />' +
                   '<center>Catchphrase: My mom is my inspiration<br />' +
 		  '<center><img src="http://www.smogon.com/download/sprites/bwmini/149.gif">');
 
-		},
+	},
 		
 	boss: function(target, room, user) {
 		if(!this.canBroadcast()) return;
@@ -584,25 +561,25 @@ var commands = exports.commands = {
                   '<center>Signature Pokemon: <font color="blue"><b>Kingdra</b></font><br />' +
                   '<center>Catchphrase: The one who is prepared is the one who wins.<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/230.gif">');
-		},
+	},
 		
-		malk: function(target, room, user) {
+	malk: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#B7C21E"><b>Malk</b></font><br />' +
                   '<center>Signature Pokemon: <b>Zebstrika</b><br />' +
                   '<center>Catchphrase:idk about catchphrase though<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/523.gif">');
-		},
+	},
 
-		mater: function(target, room, user) {
+	mater: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#289F75"><b>Mater9000</b></font><br />' +
                   '<center>Signature Pokemon: <b>Linoone</b><br />' +
                   '<center>Catchphrase: linooooooooooone<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/264.gif">');
-		},
+	},
 		
-		skymin: 'sky',
+	skymin: 'sky',
 		sky: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer: <font color="#199461"><b>Skymin</b></font><br />' +
@@ -610,17 +587,7 @@ var commands = exports.commands = {
                    '<center>Catchphrase:Things aren\'t the way they were before. You wouldn\'t even recognize me anymore. Not that you knew me back then, but it all comes back to me in the end.<br />' +
                    '<center><a href="http://www.listenonrepeat.com/watch?v=KRaRv7Zhwiw">Battle Theme</a><br />' +
                    '<center><a href="http://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></a>');
-
-		},
-		
-		mizu: function (target, room, user) {
-		if (!this.canBroadcast()) return;
-		this.sendReplyBox ('<center>Trainer:<font color="#F2A8F5"><b>Mizu :D</b></font><br />' +
-                   '<center>Types: Flying (UU)<br />' +
-                   '<center>Ace: Togekiss<br />' +
-                   '<center>Catchphrase: /me glomps jd<br />' +                  
-                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
-		},
+	},
 
 	cheese: function(target, room, user) {
 		if(!this.canBroadcast()) return;
@@ -629,154 +596,45 @@ var commands = exports.commands = {
                   '<center>Signature Pokemon:<font color="#C11FA9"><b>Togekiss</b></font><br />' +
                   '<center>Catchphrase: wait so i can put anything i want here?<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
-                  },
-                  
-                  
-                  nature: function(target, room, user) {
-target = target.toLowerCase();
-var matched = false;
-if (target === 'hardy') {
-matched = true;
-this.sendReplyBox('<b>Hardy</b>: <font color="green"><b>Neutral</b></font>');
-}
-if (target === 'lonely') {
-matched = true;
-this.sendReplyBox('<b>Lonely</b>: <font color="blue"><b>Attack</b></font>, <font color="red"><b>Defense</b></font>');
-}
-if (target === 'brave') {
-matched = true;
-this.sendReplyBox('<b>Brave</b>: <font color="blue"><b>Attack</b></font>, <font color="red"><b>Speed</b></font>');
-}
-if (target === 'adamant') {
-matched = true;
-this.sendReplyBox('<b>Adamant</b>: <font color="blue"><b>Attack</b></font>, <font color="red"><b>Special Attack</b></font>');
-}
-if (target === 'naughty') {
-matched = true;
-this.sendReplyBox('<b>Naughty</b>: <font color="blue"><b>Attack</b></font>, <font color="red"><b>Special Defense</b></font>');
-}
-if (target === 'bold') {
-matched = true;
-this.sendReplyBox('<b>Bold</b>: <font color="blue"><b>Defense</b></font>, <font color="red"><b>Attack</b></font>');
-}
-if (target === 'doctile') {
-matched = true;
-this.sendReplyBox('<b>Doctile</b>: <font color="green"><b>Neutral</b></font>');
-}
-if (target === 'relaxed') {
-matched = true;
-this.sendReplyBox('<b>Relaxed</b>: <font color="blue"><b>Defense</b></font>, <font color="red"><b>Speed</b></font>');
-}
-if (target === 'impish') {
-matched = true;
-this.sendReplyBox('<b>Impish</b>: <font color="blue"><b>Defense</b></font>, <font color="red"><b>Special Attack</b></font>');
-}
-if (target === 'lax') {
-matched = true;
-this.sendReplyBox('<b>Lax</b>: <font color="blue"><b>Defense</b></font>, <font color="red"><b>Special Defense</b></font>');
-}
-if (target === 'timid') {
-matched = true;
-this.sendReplyBox('<b>Timid</b>: <font color="blue"><b>Speed</b></font>, <font color="red"><b>Attack</b></font>');
-}
-if (target ==='hasty') {
-matched = true;
-this.sendReplyBox('<b>Hasty</b>: <font color="blue"><b>Speed</b></font>, <font color="red"><b>Defense</b></font>');
-}
-if (target ==='serious') {
-matched = true;
-this.sendReplyBox('<b>Serious</b>: <font color="green"><b>Neutral</b></font>');
-}
-if (target ==='jolly') {
-matched= true;
-this.sendReplyBox('<b>Jolly</b>: <font color="blue"><b>Speed</b></font>, <font color="red"><b>Special Attack</b></font>');
-}
-if (target==='naive') {
-matched = true;
-this.sendReplyBox('<b>Naive</b>: <font color="blue"><b>Speed</b></font>, <font color="red"><b>Special Defense</b></font>');
-}
-if (target==='modest') {
-matched = true;
-this.sendReplyBox('<b>Modest</b>: <font color="blue"><b>Special Attack</b></font>, <font color="red"><b>Attack</b></font>');
-}
-if (target==='mild') {
-matched = true;
-this.sendReplyBox('<b>Mild</b>: <font color="blue"><b>Special Attack</b></font>, <font color="red"><b>Defense</b></font>');
-}
-if (target==='quiet') {
-matched = true;
-this.sendReplyBox('<b>Quiet</b>: <font color="blue"><b>Special Attack</b></font>, <font color="red"><b>Speed</b></font>');
-}
-if (target==='bashful') {
-matched = true;
-this.sendReplyBox('<b>Bashful</b>: <font color="green"><b>Neutral</b></font>');
-}
-if (target ==='rash') {
-matched = true;
-this.sendReplyBox('<b>Rash</b>: <font color="blue"><b>Special Attack</b></font>, <font color="red"><b>Special Defense</b></font>');
-}
-if (target==='calm') {
-matched = true;
-this.sendReplyBox('<b>Calm</b>: <font color="blue"><b>Special Defense</b></font>, <font color="red"><b>Attack</b></font>');
-}
-if (target==='gentle') {
-matched = true;
-this.sendReplyBox('<b>Gentle</b>: <font color="blue"><b>Special Defense</b></font>, <font color="red"><b>Defense</b></font>');
-}
-if (target==='sassy') {
-matched = true;
-this.sendReplyBox('<b>Sassy</b>: <font color="blue"><b>Special Defense</b></font>, <font color="red"><b>Speed</b></font>');
-}
-if (target==='careful') {
-matched = true;
-this.sendReplyBox('<b>Careful<b/>: <font color="blue"><b>Special Defense</b></font>, <font color="red"><b>Special Attack</b></font>');
-}
-if (target==='quirky') {
-matched = true;
-this.sendReplyBox('<b>Quirky</b>: <font color="green"><b>Neutral</b></font>');
-}
-if (!target) {
-this.sendReply('/nature (nature) - tells you the increase and decrease of that nature. If you find a bug, pm blizzardq.');
-}
-},
-
-		
-		blizzard: 'blizzy',
-		blizz: 'blizzy',
-		blizzy: function(target, room, user) {
+	},
+	
+	blizzard: 'blizzy',
+	blizz: 'blizzy',
+	blizzy: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#2610B7"><b>blizzardq</b></font><br />' +
                   '<center>Signature Pokemon: <font color="blue"><b>Keldeo</b></font><br />' +
                   '<center>Catchphrase:猛吹雪.<br />' + 
                   '<center>Staff and Gym Leaders, if you need something coded, PM me. I am a coder in training. <br />' +
-		'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
-		},
+					'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
+	},
 		
-		absol: function(target, room, user) {
+	absol: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#741E99"><b>Absol-utelyEmily</b></font><br />' +
                   '<center>Types: Normal(OU)<br />' +
                   '<center>Signature Pokemon: <font color="red"><b>Porygon2</b></font><br />' +
                   '<center>Catchphrase: This thing is Absol-utely one bulky mofo<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/233.gif">');
-},
+	},
 		
-		umbreon: function(target, room, user) {
+	umbreon: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#0DD3A5"><b>TrainerUmbreon</b></font><br />' +
                   '<center>Signature Pokemon:<b>Umbreon</b>' +
                   '<center>Catchphrase: Roar :)<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/197.gif">');
-                  },
+	},
 		
-		smelly: function (target, room, user) {
+	smelly: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox ('<center>Trainer: mrSmellyfeet100<br />' +
                    '<center>Ace: <font color="purple"><b>Skuntank</b></font><br />' +
                    '<center>Catchphrase: smell ya later!<br />' +
                    '<center><img src="http://www.smogon.com/download/sprites/bwmini/435.gif">');
-		},
-		darkgirafarig: 'dg',
+	},
+	
+	darkgirafarig: 'dg',
 		dg: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#0C8334"><b>Dark Girafarig</b></font><br />' +
@@ -784,131 +642,111 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
                   '<center>Signature Pokemon: <font color="#C11FA9"><b>Mew</b></font><br />' +
                   '<center>Catchphrase: How it all began... and how I\'ll begin again.<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/151.gif">');
-		},
+	},
 		
-		sam: function (target, room, user) {
+	sam: function (target, room, user) {
 	 	if (!this.canBroadcast()) return;
-      		this.sendReplyBox ('<center>Trainer: <font color="#8D6007"><b>Sam</b></font><br />' +
+      	this.sendReplyBox ('<center>Trainer: <font color="#8D6007"><b>Sam</b></font><br />' +
                      '<center>Types: Grass(OU)<br />' + 
                      '<center>Ace:<font color="green"><b>Breloom</b></font><br />' + 
                      '<center>Catchphrase:Persona!<br />' + 
                      '<center><img src="http://www.smogon.com/download/sprites/bwmini/286.gif">');
-		 },
+	},
       
-    		ewok: function (target, room, user) {
-		 if (!this.canBroadcast()) return;
-     		this.sendReplyBox ('<center>Trainer: <font color="#928216"><b>Ewok</b></font><br />' + 
+    ewok: function (target, room, user) {
+		if (!this.canBroadcast()) return;
+     	this.sendReplyBox ('<center>Trainer: <font color="#928216"><b>Ewok</b></font><br />' + 
                      '<center>Types: Fire(OU), Poison(UU)<br />' +
                      '<center>Ace:<b>(Mega)Houndoom</b><br />' +
                      '<center>Catchphrase:Its better to burn out then fade away<br />' + 
                      '<center><img src="http://www.smogon.com/download/sprites/bwmini/229.gif">');
-    		},
+    },
 
 		
-		turtlelord: 'tl',
-		torterrasaks:'tl',
-		tl: function (target, room, user) {
+	turtlelord: 'tl',
+	tl: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#776C08"><b>The TurtleLord</b></font><br />' +
                   '<center>Types: Poison (RU E4)<br />' +
                   '<center>Signature Pokemon: <font color="green"><b>Torterra</b></font><br />' +
                   '<center>Catchphrase:my turtles will smash yo\' ass<br />' +
                   '<center><a href="http://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="http://www.smogon.com/download/sprites/bwmini/389.gif"></a>');
-		},
+	},
 		
-		dach: function(target, room, user) {
+	dach: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#AB3821"><b>Dach</b></font><br />' +
                   '<center>Types: Electric(UU)<br />' +
                   '<center>Signature Pokemon:<font color="#C6CF1D"><b>Galvantula</b></font><br />' +
                   '<center>Catchphrase:  procrastination... is a virtue<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/596.gif">');
-                  },
+	},
 
-		hostageclam: 'hg',
-		hg: function(target, room, user) {
+	hostageclam: 'hg',
+	hg: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#1B7E15"><b>hostageclam</b></font><br />' +
                   '<center>Types: Bug(UU),Bug(RU)<br />' +
                   '<center>Signature Pokemon: <font color="red"><b>Typhlosion</b></font><br />' +
                   '<center>Catchphrase: "Knock Knock? Who\'s there? Banana. Banana who? Banana you glad I didn\'t say orange? - Llama<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/157.gif">');
-		},
+	},
 		
-		bay: function (target, room, user) {
+	bay: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#491CAB"><b>Bayspot</b></font><br />' +
                   '<center>Types: Ice(OU UU), Flying(RU)<br />' +
                   '<center>Signature Pokemon: <font color="brown"><b>Mamoswine</b></font><br />' +
                   '<center>Catchphrase:Burns like Ice<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/473.gif">');
-},
-		finny: function(target, room, user) {
+	},
+	
+	finny: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#6D2231"><b>Finny</b></font><br />' +
                   '<center>Types: Ground(OU)<br />' +
                   '<center>Signature Pokemon: <font color="red"><b>Victini</b></font><br />' +
                   '<center>Catchphrase: Abc, I got a D<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/494.gif">');
-		},
+	},
 
-		miloticnob: 'nob',
-		nob: function(target, room, user) {
+	miloticnob: 'nob',
+	nob: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#C11FA9"><b>miloticnob</b></font><br />' +
                   '<center>Types: Bug(OU), Grass(RU)<br />' +
                   '<center>Signature Pokemon: <font color="blue"><b>Milotic</b></font> and <font color="green"><b>Whimsicott</b></font><br />' +
                   '<center>Catchpharse:excuse me I have some dick to suck<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/350.gif"><img src="http://www.smogon.com/download/sprites/bwmini/547.gif">');
-		},
+	},
 		
-		pidove: function (target, room, user) {
+	pidove: function (target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#051694"><b>Pidove</b></font><br />' +
                   '<center>Ace:<b>Shelgon</b><br />' +
                   '<center>Catchphrase: not bad not bad at all<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/372.gif">');
-		},
+	},
 
-
-
-		solor: function(target, room, user) {
+	solor: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#15A20B"><b>Solor</b></font><br />' +
                   '<center>Types: Flying(OU), Grass(UU)<br />' +
                   '<center>Signature Pokemon: <font color="blue"><b>Gyarados</b></font><br />' +
                   '<center>Catchphrase: haters gonna hate and twerkers gonna twerk<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/130.gif">');
-		},
-
-
+	},
 
 	qseasons: 'seasons',   
-        seasons: function(target, rom, user) {
+	seasons: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('Leader qSeasons!<br>' +
                 		'Type: Everything o3o<br>' +
                 		'He even gets his own shiny badge: <img src = "http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/153_zpsa3af73f7.png"><br>' +
                 		':D');
-                },
-               
-       
-      
- 
-        talon: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Talon:</b><br />'+
-                                'Type: Dark<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Weavile<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/461.png"><br />' +
-                                'Badge: Breaker Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/142_zpsea0762e7.png">');
-                },
-       
-      
-		cuddly: function(target, rom, user) {
+	},
+            
+	cuddly: function(target, rom, user) {
                 if (!this.canBroadcast()) return;
                 this.sendReplyBox('<b>Information on Gym Le@der Cuddly:</b><br />'+
                                 'Type: Ghost<br />' +
@@ -918,35 +756,17 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
                                 '<img src="http://www.poke-amph.com/black-white/sprites/small/623.png"><br />' +
                                 'Badge: Phantom Badge<br />' +
                                 '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/114_zps7313774a.png">');
-                },
-               
+	},
        
-       
-		 nub: 'energ218',
-		nubnub: 'energ218',
-		energ218: function(target, room, user) {
+	nubnub: 'energ218',
+	energ218: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="blue"><b>EnerG218</b></font><br />' +
-		'<center>Types: Nub(OU, UU, RU, NU)<br />' +
-		'<center>Signature Pokemon: <b>Nub</b><br />' +
-		'<center>Catchphrase: nubnubnubnubnubnubnubnubnubnubnubnubnubnub');
-		}, 
-               
-        onlylove: 'love',      
-        love: function(target, rom, user) {
-                if (!this.canBroadcast()) return;
-                this.sendReplyBox('<b>Information on Gym Le@der Love:</b><br />'+
-                                'Type: Grass<br />' +
-                                'Tier: Over Used (OU)<br />' +
-                                '<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                                'Signature Pokemon: Whimsicott<br />' +
-                                '<img src="http://www.poke-amph.com/black-white/sprites/small/547.png"><br />' +
-                                'Badge: Attract Badge<br />' +
-                                '<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/K003_zps16041652.png">');
-                },
+						'<center>Types: Nub(OU, UU, RU, NU)<br />' +
+						'<center>Signature Pokemon: <b>Nub</b><br />' +
+						'<center>Catchphrase: nubnubnubnubnubnubnubnubnubnubnubnubnubnub');
+	}, 
 
-		
-	selecao: 'modernwolf',
 	modernwolf: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<b>Information on Gym Le@der 9:</b><br />'+
@@ -957,73 +777,27 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
                         	'<img src="http://www.poke-amph.com/black-white/sprites/small/141.png"><br />' +
                              	'Badge: Obsidian Badge<br />' +
                            	'<img src="http://i1305.photobucket.com/albums/s542/TheBattleTowerPS/146_zps098d23fa.png">');
-		},
-		
-
-	//uu leaders
-		cc: 'crazyclown',
-	crazyclown: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on UU Le@der CC:</b><br />' +
-							'Type: Psychic<br />' +
-							'Tier: Under Used (UU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Medicham<br />' +
-                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/308.png"><br />' +
-							'Badge: Crazy Badge<br />');
-		},
+	},
 		
 	zact94: 'zac',	
 	zac: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font><br />' +
-      '<center>Types: Ghost(UU)<br />' +
-      '<center>Ace: <font color="#D9D50D"><b>Cofagrigus</b></font><br />' +
-      '<center>Catchphrase:Damn it my cat won\'t stop walking on my keyboard!<br />' +
-      '<center><img src="http://www.smogon.com/download/sprites/bwmini/563.gif">');
-		},
-		
-		aidenpyralis: 'aiden',
-		aiden: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on UU Elite F@ur Aiden:</b><br />' +
-							'Type: Water<br />' +
-							'Tier: Under Used (UU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Suicune<br />' +
-                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/245.png"><br />' +
-							'Badge: Barrier Reef Badge<br />');
-		},
-		
-		uudelibird: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on UU Le@der Delibird:</b><br />' +
-							'Type: Rock<br />' +
-							'Tier: Under Used (UU)<br />' + 
-							'<a href="gymleadermustang.wix.com%2F-amethystleague%23!gym-leaders%2FaboutPage" target="_blank">Thread</a><br />' +
-                          	'Signature Pokemon: Kabutops<br />' +
-                        	'<img src="http://www.poke-amph.com/black-white/sprites/small/141.png"><br />' +
-							'Badge: TM28: Tombstoner Badge<br />');
-		},
-		
+						  '<center>Types: Ghost(UU)<br />' +
+						  '<center>Ace: <font color="#D9D50D"><b>Cofagrigus</b></font><br />' +
+						  '<center>Catchphrase:Damn it my cat won\'t stop walking on my keyboard!<br />' +
+						  '<center><img src="http://www.smogon.com/download/sprites/bwmini/563.gif">');
+	},
 	
-		
-		batman: 'aortega',
-		ao: 'aortega',
-		aortega: function(target, room, user) {
+	batman: 'aortega',
+	ao: 'aortega',
+	aortega: function(target, room, user) {
 			if(!this.canBroadcast()) return;
-			var asdf = target;
-			if(asdf.length != 0) return this.parse('/stopspammingaortega');
-			this.sendReplyBox('Gym Le@der AOrtega: UU, Fighting type, etc etc.');
-		},
+			this.sendReplyBox('Elite F@ur AOrtega: UU, Fighting type, etc etc.');
+	},
 		
-		stopspammingaortega: 'aostrip',
-		aostrip: function(target, room, user) {
-			this.sendReply('ffs we know he strips.');
-			},
-		
-			uuhope: function(target, room, user) {
-			if(!this.canBroadcast()) return;
+	silver: function(target, room, user) {
+		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<b>Information on Elite F@ur Hope:</b><br />' +
 							'Type: Psychic<br />' +
 							'Tier: Under Used (UU)<br />' + 
@@ -1031,74 +805,41 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
                           	'Signature Pokemon: Mew<br />' +
 							'<img src="http://www.poke-amph.com/black-white/sprites/small/151.png"><br />' +
 							'Badge: ESP Badge<br />');
-		},
-		
+	},
 
-		
-		dark: 'darkgirafarig',
-		darkgirafarig: function(target, room, user) {
-			if(!this.canBroadcast()) return;
-			this.sendReplyBox('<b>Information on NU E3 Dark Girafarig:</b><br>' +
-								'Type: Psychic<br>' +
-								'Tier: Never Used (NU)<br>' +
-								'Signature Pokemon: Girafarig<br>' +
-								'Badge: Telepathy Badge');
-		},
-	
-	platinum: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<b>Information on NU E3 Pl@tinum:</b><br>' +
-							'Type: Poison<br>' +
-							'Tier: Never Used (NU)<br>' +
-							'Signature Pokemon: Golbat');
-		},
-		
 	league: 'leagueintro',
 	leagueintro: function(target, room, user) {
 		if (!this.canBroadcast()) return;
-		this.sendReplyBox('Welcome to the Amethyst League! To challenge the champion, you must win 10 badges and beat the Elite 4. Here are the <a href="http://gymleadermustang.wix.com/-amethystleague#!rules/c1w1e" target = _blank>rules</a>! Good luck!');
-		},
+		this.sendReplyBox('Welcome to the Amethyst League! To challenge the champion, you must win 10 badges and beat the Elite 4. Good luck!');
+	},
 		
-		ougymleaders: 'ouleaders',
-		ougl: 'ouleaders',
-		ou: 'ouleaders',
-        ouleaders: function(target, room, user) {
+	ougymleaders: 'ouleaders',
+	ougl: 'ouleaders',
+	ouleaders: function(target, room, user) {
                 if(!this.canBroadcast()) return;
                 this.sendReplyBox('A list of the active OU leaders can be found <a href = "http://pastebin.com/4Vq73sst" target = _blank>here</a> and <a href="http://amethystserver.freeforums.net/thread/32/ou-gym-leaders-elite">here</a>.');
-        	},
+	},
         
 	uugymleaders: 'uuleaders',
 	uugl: 'uuleaders',
-	uu: 'uuleaders',
 	uuleaders: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('A list of the active UU leaders can be found <a href = "http://pastebin.com/2EwGFFEW" target = _blank>here</a> and <a href="http://amethystserver.freeforums.net/thread/2/league-leaders-elite">here</a>.');
-		},
+	},
 		
-        nugymleaders: 'nuleaders',
-        nugl: 'nuleaders',
-        nu: 'nuleaders',
-        nuleaders: function(target, room, user) {
+	nugymleaders: 'nuleaders',
+	nugl: 'nuleaders',
+	nuleaders: function(target, room, user) {
    		if (!this.canBroadcast()) return;
 		this.sendReplyBox('A list of the active NU leaders can be found <a href = "http://pastebin.com/WwAmXACt" target = _blank>here</a>. RIP NU League.');
-		},
+	},
 
 	rugymleaders: 'ruleaders',
 	rugl: 'ruleaders',
-	ru: 'ruleaders',
 	ruleaders: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('A list of the active RU leaders can be found <a href = "http://pastebin.com/VM3bJLL6" target = _blank>here</a> and <a href="http://amethystserver.freeforums.net/thread/65/ru-gls-e4s">here</a>.');
-		},
- 
-        pika: 'chuuu',
-        chuuu: function(target, room, user) {
-        if(!this.canBroadcast()) return;
-        this.sendReplyBox('<b>These infoboxes were made by piiiikachuuu</b><br />'+
-                'pm him if you need something to be changed or if you\'re a new gym leader/elite four and you need one.<br />'+
-                                '<img src="http://i1073.photobucket.com/albums/w394/HeechulBread/Pikachu_sprite_by_Momogirl_zpsf31aafb5.gif">');
-                },
-               
+	},        
 				
 	cry: 'complain',
 	bitch: 'complain',
@@ -1107,15 +848,120 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
 		if(!target) return this.parse('/help complaint');
 		this.sendReplyBox('Thanks for your input. We\'ll review your feedback soon. The complaint you submitted was: ' + target);
 		this.logComplaint(target);
-		},
+	},
+                 
+	nature: function(target, room, user) {
+		target = target.toLowerCase();
+		target = target.trim();
+		var matched = false;
+		if (target === 'hardy') {
+			matched = true;
+			this.sendReplyBox('<b>Hardy</b>: <font color="green"><b>Neutral</b></font>');
+		}
+		if (target === 'lonely') {
+			matched = true;
+			this.sendReplyBox('<b>Lonely</b>: <font color="blue"><b>Attack</b></font>, <font color="red"><b>Defense</b></font>');
+		}
+		if (target === 'brave') {
+			matched = true;
+			this.sendReplyBox('<b>Brave</b>: <font color="blue"><b>Attack</b></font>, <font color="red"><b>Speed</b></font>');
+		}
+		if (target === 'adamant') {
+			matched = true;
+			this.sendReplyBox('<b>Adamant</b>: <font color="blue"><b>Attack</b></font>, <font color="red"><b>Special Attack</b></font>');
+		}
+		if (target === 'naughty') {
+			matched = true;
+			this.sendReplyBox('<b>Naughty</b>: <font color="blue"><b>Attack</b></font>, <font color="red"><b>Special Defense</b></font>');
+		}
+		if (target === 'bold') {
+			matched = true;
+			this.sendReplyBox('<b>Bold</b>: <font color="blue"><b>Defense</b></font>, <font color="red"><b>Attack</b></font>');
+		}
+		if (target === 'docile') {
+			matched = true;
+			this.sendReplyBox('<b>Doctile</b>: <font color="green"><b>Neutral</b></font>');
+		}
+		if (target === 'relaxed') {
+			matched = true;
+			this.sendReplyBox('<b>Relaxed</b>: <font color="blue"><b>Defense</b></font>, <font color="red"><b>Speed</b></font>');
+		}
+		if (target === 'impish') {
+			matched = true;
+			this.sendReplyBox('<b>Impish</b>: <font color="blue"><b>Defense</b></font>, <font color="red"><b>Special Attack</b></font>');
+		}
+		if (target === 'lax') {
+			matched = true;
+			this.sendReplyBox('<b>Lax</b>: <font color="blue"><b>Defense</b></font>, <font color="red"><b>Special Defense</b></font>');
+		}
+		if (target === 'timid') {
+			matched = true;
+			this.sendReplyBox('<b>Timid</b>: <font color="blue"><b>Speed</b></font>, <font color="red"><b>Attack</b></font>');
+		}
+		if (target ==='hasty') {
+			matched = true;
+			this.sendReplyBox('<b>Hasty</b>: <font color="blue"><b>Speed</b></font>, <font color="red"><b>Defense</b></font>');
+		}
+		if (target ==='serious') {
+			matched = true;
+			this.sendReplyBox('<b>Serious</b>: <font color="green"><b>Neutral</b></font>');
+		}
+		if (target ==='jolly') {
+			matched= true;
+			this.sendReplyBox('<b>Jolly</b>: <font color="blue"><b>Speed</b></font>, <font color="red"><b>Special Attack</b></font>');
+		}
+		if (target==='naive') {
+			matched = true;
+			this.sendReplyBox('<b>Naive</b>: <font color="blue"><b>Speed</b></font>, <font color="red"><b>Special Defense</b></font>');
+		}
+		if (target==='modest') {
+			matched = true;
+			this.sendReplyBox('<b>Modest</b>: <font color="blue"><b>Special Attack</b></font>, <font color="red"><b>Attack</b></font>');
+		}
+		if (target==='mild') {
+			matched = true;
+			this.sendReplyBox('<b>Mild</b>: <font color="blue"><b>Special Attack</b></font>, <font color="red"><b>Defense</b></font>');
+		}
+		if (target==='quiet') {
+			matched = true;
+			this.sendReplyBox('<b>Quiet</b>: <font color="blue"><b>Special Attack</b></font>, <font color="red"><b>Speed</b></font>');
+		}
+		if (target==='bashful') {
+			matched = true;
+			this.sendReplyBox('<b>Bashful</b>: <font color="green"><b>Neutral</b></font>');
+		}
+		if (target ==='rash') {
+			matched = true;
+			this.sendReplyBox('<b>Rash</b>: <font color="blue"><b>Special Attack</b></font>, <font color="red"><b>Special Defense</b></font>');
+		}
+		if (target==='calm') {
+			matched = true;
+			this.sendReplyBox('<b>Calm</b>: <font color="blue"><b>Special Defense</b></font>, <font color="red"><b>Attack</b></font>');
+		}
+		if (target==='gentle') {
+			matched = true;
+			this.sendReplyBox('<b>Gentle</b>: <font color="blue"><b>Special Defense</b></font>, <font color="red"><b>Defense</b></font>');
+		}
+		if (target==='sassy') {
+			matched = true;
+			this.sendReplyBox('<b>Sassy</b>: <font color="blue"><b>Special Defense</b></font>, <font color="red"><b>Speed</b></font>');
+		}
+		if (target==='careful') {
+			matched = true;
+			this.sendReplyBox('<b>Careful<b/>: <font color="blue"><b>Special Defense</b></font>, <font color="red"><b>Special Attack</b></font>');
+		}
+		if (target==='quirky') {
+			matched = true;
+			this.sendReplyBox('<b>Quirky</b>: <font color="green"><b>Neutral</b></font>');
+		}
+		if (!target) {
+			this.sendReply('/nature [nature] - tells you the increase and decrease of that nature. If you find a bug, pm blizzardq.');
+		}
+		if (!match) {
+			this.sendReply('Nature "'+target+'" not found. Check your spelling?');
+		}
+	},
 		
-		trivia: function(target, room, user) {
-		if(!user.can('declare')) return;
-		room.addRaw('<div class="infobox"><div class="broadcast-green"><font size = 3><b>Come join us for trivia!</b><br><div class="notice"><button name="joinRoom" value="trivia">Click here to join the Trivia room!</button></font></div></div></div>');
-		},
-		
-		
-
 	mizu: function (target, room, user) {
 		if (user.userid != 'mizukurage') {
 			return this.sendReply('nope');
@@ -1169,22 +1015,6 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
 		this.sendReplyBox('<font size=3><b>Kill the Mailman</b></font><br><font size=2>by platinumCheesecake</font><br>A list of the rules for Kill the Mailman can be found <a href="http://amethystserver.freeforums.net/thread/77/mailman-tier">here</a>.');
 	},
 	
-	fb: 'facebook',
-	facebook: function(target, room, user) {
-		if(!this.canBroadcast()) return;
-		this.sendReplyBox('<a href = "https://www.facebook.com/pages/Amethyst-League-PKMN-Showdown/176885049163353">Our Facebook page</a>');
-	},
-	
-	customclientlist: function(target, room, user) {
-		this.sendReply('Users using the custom client:');
-		for (var u in Users.users) {
-			if (Users.get(u).customClient && Users.get(u).connected) {
-				this.sendReply(Users.get(u).name);
-			}
-		}
-	},
-	
-//it's not formatted neatly, but whatever
 	poof: 'd',
 	flee: 'd',
 	d: function(target, room, user){
@@ -1254,11 +1084,6 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
 	fjs: 'forcejoinstaff',
 	forcejoinstaff: function(target, room, user){
 		if(!user.can('declare')) return false;
-		if(Rooms.rooms['staff'] == undefined){
-			Rooms.rooms['staff'] = new Rooms.ChatRoom('staff', 'staff');
-			Rooms.rooms['staff'].isPrivate = true;
-			this.sendReply('The private room \'staff\' was created.');
-		}
 		for(var u in Users.users)
 			if(Users.users[u].connected && config.groupsranking.indexOf(Users.users[u].group) >= 2)
 				Users.users[u].joinRoom('staff');
@@ -1688,13 +1513,13 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
 			'For the best experience use our custom client <a href="http://amethyst-server.no-ip.org"><i>here!</i></a><br /><br />' + 
 			'Welcome to Amethyst! We\'ll try to make your stay as comfortable as possible. Enjoy!<br /><br />' +
 			'Please join the Amethyst forums, <a href="http://amethyst.webuda.com/forums/">here</a>, to stay more connected with us!</div>');*/
-			return connection.sendTo('lobby','|html|<div class="infobox"> <center><font size=4><b>WELCOME TO <font color="purple">AMETHYST</b></font></center><br />' +
-		'<center>We have restarted the OU League! To register, PM <b>Ross</b> or <b>Miloticnob</b>!</center><br />' + 
-		'<center>You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
-			'<center>We now offer league rooms on request, contact an Administrator for more information!</center><br />' +
-			'<center>For the best experience use our custom client <a href="http://amethyst-server.no-ip.org">here!</a></center><br />' +
-			'<center>We are hosting awards called the <b>Amies</b>! Vote <a href="http://amethystserver.freeforums.net/board/26/award-categories">here</a>!<br />' +
-			'<center><img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></center></div>');
+		return connection.sendTo('lobby','|html|<div class="infobox"> <center><font size=4><b>WELCOME TO <font color="purple">AMETHYST</b></font></center><br />' +
+								'<center>We have restarted the OU League! To register, PM <b>Ross</b> or <b>Miloticnob</b>!</center><br />' + 
+								'<center>You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
+								'<center>We now offer league rooms on request, contact an Administrator for more information!</center><br />' +
+								'<center>For the best experience use our custom client <a href="http://amethyst-server.no-ip.org">here!</a></center><br />' +
+								'<center>We are hosting awards called the <b>Amies</b>! Vote <a href="http://amethystserver.freeforums.net/board/26/award-categories">here</a>!<br />' +
+								'<center><img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></center></div>');
 		}
 		if (targetRoom.id === "spamroom" && !user.can('declare')) {
 			return connection.sendTo(target, "|noinit|joinfailed|You cannot join this room.");
@@ -1712,7 +1537,7 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
 		targetUser.popup('You have been kicked from room '+ room.title +' by '+user.name+'.');
 		targetUser.leaveRoom(room);
 		room.add('|raw|'+ targetUser.name + ' has been kicked from room by '+ user.name + '.');
-		this.logRoomCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.');
+		this.logRoomCommand(targetUser.name + ' has been kicked from room by '+ user.name + '.', room);
 	},
 
 	rb: 'roomban',
@@ -2400,6 +2225,7 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
 			}
 		});
 	},
+	
 	modlog: function(target, room, user, connection) {
 		if (!this.can('modlog')) return false;
 		var lines = 0;
@@ -2568,7 +2394,7 @@ this.sendReply('/nature (nature) - tells you the increase and decrease of that n
 		if (target !== 'on' && target !== 'off') {
 			this.sendReply('Usage: /gymleader [on/off]');
 		}
-		},
+	},
 
 	hotpatch: function(target, room, user) {
 		if (!this.can('hotpatch')) return false;
@@ -3317,7 +3143,7 @@ function getRandMessage(user){
 		break;
 		case 19: message = message + user.name + ' got their sausage smoked by Charmanderp!';
 		break;
-		case 20: message = message + user.name + ' was forced to give jd an oil massage!'; //huehue
+		case 20: message = message + user.name + ' was forced to give jd an oil massage!';
 		break;
 		case 21: message = message + user.name + ' took an arrow to the knee... and then one to the face.';
 		break;
@@ -3341,13 +3167,13 @@ function getRandMessage(user){
 		break;
 		case 31: message = message + user.name + ' was knocked out cold by Fallacies!';
 		break;
-		case 32: message = message + user.name + ' died making love to an EnerG218!'; //huehuehue how long until someone notices 
+		case 32: message = message + user.name + ' died making love to an EnerG218!';
 		break;
 		case 33: message = message + user.name + ' was glomped to death by Mizu!';
 		break;
 		case 34: message = message + user.name + ' was hit by a wrecking ball!';
 		break;
-		case 35: message = message + user.name + ' was Flare Blitzed by miner0\'s Darmanitan!'; //huehue how long until some someone notices.~blizzy.
+		case 35: message = message + user.name + ' was Flare Blitzed by miner0\'s Darmanitan!';
 		break;
 		default: message = message + user.name + ' fled from colonial mustang!';
 	};
@@ -3355,7 +3181,6 @@ function getRandMessage(user){
 	return message;
 }
 
-//i was going to format this, but wtf
 function MD5(f){function i(b,c){var d,e,f,g,h;f=b&2147483648;g=c&2147483648;d=b&1073741824;e=c&1073741824;h=(b&1073741823)+(c&1073741823);return d&e?h^2147483648^f^g:d|e?h&1073741824?h^3221225472^f^g:h^1073741824^f^g:h^f^g}function j(b,c,d,e,f,g,h){b=i(b,i(i(c&d|~c&e,f),h));return i(b<<g|b>>>32-g,c)}function k(b,c,d,e,f,g,h){b=i(b,i(i(c&e|d&~e,f),h));return i(b<<g|b>>>32-g,c)}function l(b,c,e,d,f,g,h){b=i(b,i(i(c^e^d,f),h));return i(b<<g|b>>>32-g,c)}function m(b,c,e,d,f,g,h){b=i(b,i(i(e^(c|~d),
 f),h));return i(b<<g|b>>>32-g,c)}function n(b){var c="",e="",d;for(d=0;d<=3;d++)e=b>>>d*8&255,e="0"+e.toString(16),c+=e.substr(e.length-2,2);return c}var g=[],o,p,q,r,b,c,d,e,f=function(b){for(var b=b.replace(/\r\n/g,"\n"),c="",e=0;e<b.length;e++){var d=b.charCodeAt(e);d<128?c+=String.fromCharCode(d):(d>127&&d<2048?c+=String.fromCharCode(d>>6|192):(c+=String.fromCharCode(d>>12|224),c+=String.fromCharCode(d>>6&63|128)),c+=String.fromCharCode(d&63|128))}return c}(f),g=function(b){var c,d=b.length;c=
 d+8;for(var e=((c-c%64)/64+1)*16,f=Array(e-1),g=0,h=0;h<d;)c=(h-h%4)/4,g=h%4*8,f[c]|=b.charCodeAt(h)<<g,h++;f[(h-h%4)/4]|=128<<h%4*8;f[e-2]=d<<3;f[e-1]=d>>>29;return f}(f);b=1732584193;c=4023233417;d=2562383102;e=271733878;for(f=0;f<g.length;f+=16)o=b,p=c,q=d,r=e,b=j(b,c,d,e,g[f+0],7,3614090360),e=j(e,b,c,d,g[f+1],12,3905402710),d=j(d,e,b,c,g[f+2],17,606105819),c=j(c,d,e,b,g[f+3],22,3250441966),b=j(b,c,d,e,g[f+4],7,4118548399),e=j(e,b,c,d,g[f+5],12,1200080426),d=j(d,e,b,c,g[f+6],17,2821735955),c=
@@ -3363,8 +3188,6 @@ j(c,d,e,b,g[f+7],22,4249261313),b=j(b,c,d,e,g[f+8],7,1770035416),e=j(e,b,c,d,g[f
 d=k(d,e,b,c,g[f+15],14,3634488961),c=k(c,d,e,b,g[f+4],20,3889429448),b=k(b,c,d,e,g[f+9],5,568446438),e=k(e,b,c,d,g[f+14],9,3275163606),d=k(d,e,b,c,g[f+3],14,4107603335),c=k(c,d,e,b,g[f+8],20,1163531501),b=k(b,c,d,e,g[f+13],5,2850285829),e=k(e,b,c,d,g[f+2],9,4243563512),d=k(d,e,b,c,g[f+7],14,1735328473),c=k(c,d,e,b,g[f+12],20,2368359562),b=l(b,c,d,e,g[f+5],4,4294588738),e=l(e,b,c,d,g[f+8],11,2272392833),d=l(d,e,b,c,g[f+11],16,1839030562),c=l(c,d,e,b,g[f+14],23,4259657740),b=l(b,c,d,e,g[f+1],4,2763975236),
 e=l(e,b,c,d,g[f+4],11,1272893353),d=l(d,e,b,c,g[f+7],16,4139469664),c=l(c,d,e,b,g[f+10],23,3200236656),b=l(b,c,d,e,g[f+13],4,681279174),e=l(e,b,c,d,g[f+0],11,3936430074),d=l(d,e,b,c,g[f+3],16,3572445317),c=l(c,d,e,b,g[f+6],23,76029189),b=l(b,c,d,e,g[f+9],4,3654602809),e=l(e,b,c,d,g[f+12],11,3873151461),d=l(d,e,b,c,g[f+15],16,530742520),c=l(c,d,e,b,g[f+2],23,3299628645),b=m(b,c,d,e,g[f+0],6,4096336452),e=m(e,b,c,d,g[f+7],10,1126891415),d=m(d,e,b,c,g[f+14],15,2878612391),c=m(c,d,e,b,g[f+5],21,4237533241),
 b=m(b,c,d,e,g[f+12],6,1700485571),e=m(e,b,c,d,g[f+3],10,2399980690),d=m(d,e,b,c,g[f+10],15,4293915773),c=m(c,d,e,b,g[f+1],21,2240044497),b=m(b,c,d,e,g[f+8],6,1873313359),e=m(e,b,c,d,g[f+15],10,4264355552),d=m(d,e,b,c,g[f+6],15,2734768916),c=m(c,d,e,b,g[f+13],21,1309151649),b=m(b,c,d,e,g[f+4],6,4149444226),e=m(e,b,c,d,g[f+11],10,3174756917),d=m(d,e,b,c,g[f+2],15,718787259),c=m(c,d,e,b,g[f+9],21,3951481745),b=i(b,o),c=i(c,p),d=i(d,q),e=i(e,r);return(n(b)+n(c)+n(d)+n(e)).toLowerCase()};
-
-
 
 var colorCache = {};
 
