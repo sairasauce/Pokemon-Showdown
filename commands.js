@@ -604,7 +604,7 @@ var commands = exports.commands = {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer:<font color="#2610B7"><b>blizzardq</b></font><br />' +
                   '<center>Signature Pokemon: <font color="blue"><b>Keldeo</b></font><br />' +
-                  '<center>Catchphrase:猛吹雪.<br />' + 
+                  '<center>Catchphrase:雪.<br />' + 
                   '<center>Staff and Gym Leaders, if you need something coded, PM me. I am a coder in training. <br />' +
 					'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
 	},
@@ -1518,6 +1518,7 @@ var commands = exports.commands = {
 								'<center>You should check out our <a href="http://amethystserver.freeforums.net/">forums!</a></center><br />' +
 								'<center>We now offer league rooms on request, contact an Administrator for more information!</center><br />' +
 								'<center>For the best experience use our custom client <a href="http://amethyst-server.no-ip.org">here!</a></center><br />' +
+								'<center>Amethyst is making its own Pokemon ROM Hack! If you have an experience in ROM Hacking, PM <b>Colonial Mustang</b>!</center><br />' +
 								'<center>We are hosting awards called the <b>Amies</b>! Vote <a href="http://amethystserver.freeforums.net/board/26/award-categories">here</a>!<br />' +
 								'<center><img src="http://www.smogon.com/download/sprites/bwmini/461.gif"></center></div>');
 		}
