@@ -630,6 +630,114 @@ var commands = exports.commands = {
                   '<center>Catchphrase: wait so i can put anything i want here?<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/468.gif">');
                   },
+                  
+                  nature: function(target, room, user) {
+target = target.toLowerCase();
+var matched = false;
+if (target === 'hardy') {
+matched = true;
+this.sendReplyBox('<b>Hardy</b>: <font color="green">Neutral</font>');
+}
+if (target === 'lonely') {
+matched = true;
+this.sendReplyBox('<b>Lonely</b>: <font color="blue">Attack</font>, <font color="red">Defense</font>');
+}
+if (target === 'brave') {
+matched = true;
+this.sendReplyBox('<b>Brave</b>: <font color="blue">Attack</font>, <font color="red">Speed</font>');
+}
+if (target === 'adamant') {
+matched = true;
+this.sendReplyBox('<b>Adamant</b>: <font color="blue">Attack</font>, <font color="red">Special Attack</font>');
+}
+if (target === 'naughty') {
+matched = true;
+this.sendReplyBox('<b>Naughty</b>: <font color="blue">Attack</font>, <font color="red">Special Defense</font>');
+}
+if (target === 'bold') {
+matched = true;
+this.sendReplyBox('<b>Bold</b>: <font color="blue">Defense</font>, <font color="red">Attack</font>');
+}
+if (target === 'doctile') {
+matched = true;
+this.sendReplyBox('<b>Doctile</b>: <font color="green">Neutral</font>');
+}
+if (target === 'relaxed') {
+matched = true;
+this.sendReplyBox('<b>Relaxed</b>: <font color="blue">Defense</font>, <font color="red">Speed</font>');
+}
+if (target === 'impish') {
+matched = true;
+this.sendReplyBox('<b>Impish</b>: <font color="blue">Defense</font>, <font color="red">Special Attack</font>');
+}
+if (target === 'lax') {
+matched = true;
+this.sendReplyBox('<b>Lax</b>: <font color="blue">Defense</font>, <font color="red">Special Defense</font>');
+}
+if (target === 'timid') {
+matched = true;
+this.sendReplyBox('<b>Timid</b>: <font color="blue">Speed</font>, <font color="red">Attack</font>');
+}
+if (target ==='hasty') {
+matched = true;
+this.sendReplyBox('<b>Hasty</b>: <font color="blue">Speed</font>, <font color="red">Defense</font>');
+}
+if (target ==='serious') {
+matched = true;
+this.sendReplyBox('<b>Serious</b>: <font color="green">Neutral</font>');
+}
+if (target ==='jolly') {
+matched= true;
+this.sendReplyBox('<b>Jolly</b>: <font color="blue">Speed</font>, <font color="red">Special Attack</font>');
+}
+if (target==='naive') {
+matched = true;
+this.sendReplyBox('<b>Naive</b>: <font color="blue">Speed</font>, <font color="red">Special Defense</font>');
+}
+if (target==='modest') {
+matched = true;
+this.sendReplyBox('<b>Modest</b>: <font color="blue">Special Attack</font>, <font color="red">Attack</font>');
+}
+if (target==='mild') {
+matched = true;
+this.sendReplyBox('<b>Mild</b>: <font color="blue">Special Attack</font>, <font color="red">Defense</font>');
+}
+if (target==='quiet') {
+matched = true;
+this.sendReplyBox('<b>Quiet</b>: <font color="blue">Special Attack</font>, <font color="red">Speed</font>');
+}
+if (target==='bashful') {
+matched = true;
+this.sendReplyBox('<b>Bashful</b>: <font color="green">Neutral</font>');
+}
+if (target ==='rash') {
+matched = true;
+this.sendReplyBox('<b>Rash</b>: <font color="blue">Special Attack</font>, <font color="red">Special Defense</font>');
+}
+if (target==='calm') {
+matched = true;
+this.sendReplyBox('<b>Calm</b>: <font color="blue">Special Defense</font>, <font color="red">Attack</font>');
+}
+if (target==='gentle') {
+matched = true;
+this.sendReplyBox('<b>Gentle</b>: <font color="blue">Special Defense</font>, <font color="red">Defense</font>');
+}
+if (target==='sassy') {
+matched = true;
+this.sendReplyBox('<b>Sassy</b>: <font color="blue">Special Defense</font>, <font color="red">Speed</font>');
+}
+if (target==='careful') {
+matched = true;
+this.sendReplyBox('<b>Careful<b/>: <font color="blue">Special Defense</font>, <font color="red">Special Attack</font>');
+}
+if (target==='quirky') {
+matched = true;
+this.sendReplyBox('<b>Quirky</b>: <font color="green">Neutral</font>');
+}
+if (!target) {
+this.sendReply('/nature (nature) - tells you the increase and decrease of that nature. If you find a bug, pm blizzardq.');
+}
+},
 
 		
 		blizzard: 'blizzy',
