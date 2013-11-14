@@ -608,6 +608,11 @@ var commands = exports.commands = {
                   '<center>Staff and Gym Leaders, if you need something coded, PM me. I am a coder in training. <br />' +
 					'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
 	},
+	
+	pony: function(target, room, user) {
+		if(!this.canBroadcast()) return;
+		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/c75cf0dbf3b7b14afd62ac4d228fb57a/tumblr_mj59oo9OS71rb26uco1_400.gif">');
+	},
 		
 	absol: function(target, room, user) {
 		if(!this.canBroadcast()) return;
