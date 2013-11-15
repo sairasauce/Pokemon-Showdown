@@ -84,20 +84,23 @@ exports.Formats = [
 			if (pokemon.side.pokemon[0].item === 'mail') {
 				var name = pokemon.side.name;
 				var winner = '';
+				var message = 'the mailman of '+name+' fainted.';
 				if (pokemon.side.id === 'p1') {
 					if (this.p2.pokemon[0].item === 'mail') {
 						winner = 'p2';
+						message = 'The mailman of '+this.p1.name+' was KOed by the mailman of '+this.p2.name+'.';
 					} else {
 						winner = 'p1';
 					}
 				} else {
 					if (this.p1.pokemon[0].item === 'mail') {
 						winner = 'p1';
+						message = 'The mailman of '+this.p2.name+' was KOed by the mailman of '+this.p1.name+'.';
 					} else {
 						winner = 'p2';
 					}
 				}
-				this.add('message', 'The mailman of '+name+' fainted.');
+				this.add('message', message);
 				pokemon.battle.win(winner);
 			}
 		},
