@@ -138,7 +138,7 @@ exports.mafia = function(m) {
 					setTimeout(function() {mafia.endVote(room);}, 180000);
 					mafia[room].status = 4;
 				}
-				if (mafia[room.status === 4) {
+				if (mafia[room].status === 4) {
 					mafia.night(room);
 					mafia[room].status = 2;
 				}
