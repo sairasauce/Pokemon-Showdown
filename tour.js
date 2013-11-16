@@ -381,7 +381,7 @@ var cmds = {
 		return this.sendReply("An error occurred while trying to create the room '"+target+"'.");
 	},
 
-	hotpatch: function(target, room, user) {
+/*	hotpatch: function(target, room, user) {
 		if (!target) return this.parse('/help hotpatch');
 		if (!user.can('hotpatch')) return false;
 
@@ -421,7 +421,7 @@ var cmds = {
 
 		}
 		this.sendReply('Your hot-patch command was unrecognized.');
-	},
+	},*/
 
 	//tour commands
 	tour: function(target, room, user, connection) {
