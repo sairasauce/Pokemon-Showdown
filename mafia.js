@@ -289,6 +289,17 @@ var cmds = {
 		this.add('|raw|<hr><h2>Sign-ups have started for a new game of Mafia! This game has ' + mafia[room.id].size + ' spots and is being run by ' + user.name + '!</h2>Type /jm or /joinmafia to join!<hr>');
 	},
 	
+	mafiaremind: 'mremind',
+	mremind: function(target, room, user) {
+		if (room.id != 'mafia') {
+			return this.sendReply('This should only be played in the room Mafia due to its inherently spammy nature.');
+		}
+		if (mafia[room.id].status != 0) {
+			return this.sendReply('Mafia is not in sign-ups right now.');
+		}
+		this.sendReply('|raw|<hr><h2>Sign-ups are in progress for a new game of Mafia! This game has ' + mafia[room.id].size + ' spots, ' + mafia[room.id].spots + ' remaining, and is being run by ' + user.name + '!</h2>Type /jm or /joinmafia to join!<hr>');	
+	},
+	
 	mafiastatus: function(target, room, user) {
 		if (room.id != 'mafia') {
 			return this.sendReply('This should only be played in the room Mafia due to its inherently spammy nature.');
