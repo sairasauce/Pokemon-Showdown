@@ -681,3 +681,4 @@ fs.readFile('./config/ipbans.txt', function (err, data) {
 
 global.tour = require('./tour.js').tour(); 
 global.hangman = require('./hangman.js').hangman();
+global.mafia = require('./mafia.js').mafia();
