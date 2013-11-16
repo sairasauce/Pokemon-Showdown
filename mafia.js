@@ -62,6 +62,7 @@ exports.mafia = function(m) {
 					Users.get(mafia[room].detective[i]).send('|pm|*MafiaBot|'+Users.get(mafia[room].detective[i]).getIdentity()+'|Night has fallen, so decide whom to identify. Once you\'ve decided, you should use /identifyplayer [name].');
 				}
 			}
+			mafia[room].status = 2;
 		},
 		day: function(room) {
 			var storyteller = mafia[room].storyteller;
@@ -72,6 +73,7 @@ exports.mafia = function(m) {
 			} else {
 				mafia[room].deadPlayers.push(mafia[room].voteKill[0]);
 			}
+			mafia[room].storyTime = true;
 			mafia[room].status = 1;
 		},
 		voteTime: function(room) {
@@ -97,6 +99,7 @@ exports.mafia = function(m) {
 				return Math.max.apply(Math, array);
 			};
 			var mostVotes = Array.max(votes)
+			//what do i do if more than one person has the most votes?
 			var isMafia = '';
 			for (var u = 0; u < mafia[room].pollOptions.length; u++) {
 				var parts = mafia[room].pollOptions[u].split(':');
@@ -134,7 +137,7 @@ exports.mafia = function(m) {
 			}
 			else {
 				if (mafia[room].status === 1) {
-					mafia.voteTime(room.id);
+					mafia.voteTime(room);
 					setTimeout(function() {mafia.endVote(room);}, 180000);
 					mafia[room].status = 4;
 				}
@@ -145,7 +148,6 @@ exports.mafia = function(m) {
 			}
 		},
 		start: function(room) {
-			mafia[room].storyTime = true;
 			var size = mafia[room].size;
 			var players = mafia[room].players;
 			var mafias = 0;
@@ -255,6 +257,11 @@ var cmds = {
 	},*/
 	
 	//mafia commands
+	mafiahelp: function(target, room, user) {
+		if (!this.canBroadcast()) return false;
+		this.sendReplyBox();
+	},
+	
 	mafia: function(target, room, user) {
 		if (room.id != 'mafia') {
 			return this.sendReply('This should only be played in the room Mafia due to its inherently spammy nature.');
@@ -568,7 +575,7 @@ var cmds = {
 		}
 		this.sendReply('The mafia are: '+mafias.join(', '));
 		this.sendReply('The angel(s) are: '+angels.join(', '));
-		this.sendReply('The detective is (if there are any): '+detective);
+		this.sendReply('The detective is (if there are any): '+detectives);
 	}
 };
 
