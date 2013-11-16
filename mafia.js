@@ -62,7 +62,6 @@ exports.mafia = function(m) {
 					Users.get(mafia[room].detective[i]).send('|pm|*MafiaBot|'+Users.get(mafia[room].detective[i]).getIdentity()+'|Night has fallen, so decide whom to identify. Once you\'ve decided, you should use /identifyplayer [name].');
 				}
 			}
-			mafia[room].status = 2;
 		},
 		day: function(room) {
 			var storyteller = mafia[room].storyteller;
@@ -84,7 +83,7 @@ exports.mafia = function(m) {
 					mafia[room].pollOptions.push(Users.get(mafia[room].players[i]).userid+':0');
 				}
 			}
-			Rooms.get(room).addRaw('With that, it\'s time to vote for someone to be killed by the townspeople. Use /vote [option] to choose one of the people.<hr>' + poll + '</ul>You will have 3 minutes to vote.');
+			Rooms.get(room).addRaw('With that, it\'s time to vote for someone to be killed by the townspeople. Use /voteplayer [option] to choose one of the people.<hr>' + poll + '</ul>You will have 3 minutes to vote.');
 		},
 		endVote: function(room) {
 		var results = '<ul>';
@@ -110,6 +109,7 @@ exports.mafia = function(m) {
 			}
 			Rooms.get(room).addRaw('The results are in:'+results+'</ul>'+Users.get(dead).name+' was killed by the townspeople. '+isMafia);
 			mafia[room].deadPlayers.push(Users.get(dead).userid);
+			mafia.checkWin(room);
 		},			
 		checkWin: function(room) {
 			var aliveMafia = 0;
@@ -131,6 +131,17 @@ exports.mafia = function(m) {
 			if (aliveMafia === 0) {
 				Rooms.get(room).add('|raw|<hr><h2>Since there are no more mafia, the game is over. Congratulations to the townpeople! The mafia were: '+gameMafia.join(", ")+'</hr>');
 				mafia.reset(room);
+			}
+			else {
+				if (mafia[room].status === 1) {
+					mafia.voteTime(room.id);
+					setTimeout(function() {mafia.endVote(room);}, 180000);
+					mafia[room].status = 4;
+				}
+				if (mafia[room.status === 4) {
+					mafia.night(room);
+					mafia[room].status = 2;
+				}
 			}
 		},
 		start: function(room) {
@@ -293,7 +304,7 @@ var cmds = {
 			deadPlayers += 'The dead players: ';
 			deads = new Array();
 			for (var i = 0; i < mafia[room.id].deadPlayers.length; i++) {
-				deads.push(mafia[room.id].deadPlayers[i].name);
+				deads.push(Users.get(mafia[room.id].deadPlayers[i]).name);
 			}
 			deadPlayers += deads.join(', ');
 		}
@@ -309,6 +320,9 @@ var cmds = {
 		}
 		if (mafia[room.id].hasVoted.indexOf(user.userid) > -1) {
 			return this.sendReply('You have already voted!');
+		}
+		if (mafia[room.id].players.indexOf(user.userid) === -1) {
+			return this.sendReply('You cannot vote because you are not part of this game.');
 		}
 		target = this.splitTarget(target);
 		var targetUser = this.targetUser;
@@ -396,13 +410,11 @@ var cmds = {
 		}
 		mafia[room.id].story = target;
 		mafia.showStory(room.id, mafia[room.id].story);
-		if (mafia[room.id].status === 3) {
-			mafia.night(room.id);
-		}
-		if (mafia[room.id].status === 1) {
+		mafia.checkWin(room.id);
+		/*if (mafia[room.id].status === 1) {
 			mafia.voteTime(room.id);
 			setTimeout(function() {mafia.endVote(room.id);}, 180000);
-		}
+		}*/
 	},
 	
 	killplayer: 'saveplayer',
@@ -551,10 +563,12 @@ var cmds = {
 		for (var i = 0; i < mafia[room.id].angel.length; i++) {
 			angels.push(Users.get(mafia[room.id].angel[i]).name);
 		}
-		detectives.push(Users.get(mafia[room.id].detective[0]).name);
+		if (mafia[room.id].detective[0]) {
+			detectives.push(Users.get(mafia[room.id].detective[0]).name);
+		}
 		this.sendReply('The mafia are: '+mafias.join(', '));
-		this.sendReply('The angels are: '+angels.join(', '));
-		this.sendReply('The detective is: '+detective);
+		this.sendReply('The angel(s) are: '+angels.join(', '));
+		this.sendReply('The detective is (if there are any): '+detective);
 	}
 };
 
