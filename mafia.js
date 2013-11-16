@@ -294,6 +294,7 @@ var cmds = {
 		if (room.id != 'mafia') {
 			return this.sendReply('This should only be played in the room Mafia due to its inherently spammy nature.');
 		}
+		if (!this.canBroadcast()) return false;
 		if (mafia[room.id].status != 0) {
 			return this.sendReply('Mafia is not in sign-ups right now.');
 		}
