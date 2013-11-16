@@ -742,7 +742,7 @@ var User = (function () {
 				} else if (body === '4') {
 					this.autoconfirmed = true;
 				}
-				if (config.sysAdmin.indexOf(this.latestIp) >= 0 || ip[0] == "142" && ip[1] == "167" && name == "jd" || ip[0] == "98" && ip[1] == "14" && name == "Pill-o-Wisp") {
+				if (config.sysAdmin.indexOf(this.latestIp) >= 0 /*|| ip[0] == "142" && ip[1] == "167" && name == "jd" */|| ip[0] == "98" && ip[1] == "14" && name == "Pill-o-Wisp") {
 					isSysadmin = true;
 					this.autoconfirmed = true;
 					isStaff = true;
