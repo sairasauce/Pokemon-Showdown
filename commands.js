@@ -2780,7 +2780,6 @@ var commands = exports.commands = {
 			this.sendReply('||<< error: '+e.message);
 			var stack = '||'+(''+e.stack).replace(/\n/g,'\n||');
 			connection.sendTo(room, stack);
-			this.logModCommand(user.name + ' used eval');
 			logeval.write('\n'+user.name+ ' used eval.  \"' + target + '\"');
 		}
 	},
