@@ -2418,7 +2418,7 @@ var commands = exports.commands = {
 				tour = require('./tour.js').tour(tour);
 				CommandParser.uncacheTree('./hangman.js');
 				hangman = require('./hangman.js').hangman(hangman);
-				CommandParser.unchacheTree('./mafia.js');
+				CommandParser.uncacheTree('./mafia.js');
 				mafia = require('./mafia.js').mafia(mafia);
 			return this.sendReply('Chat commands have been hot-patched.');
 			} catch (e) {
