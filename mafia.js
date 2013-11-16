@@ -551,10 +551,10 @@ var cmds = {
 		for (var i = 0; i < mafia[room.id].angel.length; i++) {
 			angels.push(Users.get(mafia[room.id].angel[i]).name);
 		}
-		detectives.push(Users.get(mafia[room.id].detective[0]).name;
-		this.sendReply('The mafia are: '+mafias.join(', ');
-		this.sendReply('The angels are: '+angels.join(', ');
-		this.sendReply('The detective is: '+detective;
+		detectives.push(Users.get(mafia[room.id].detective[0]).name);
+		this.sendReply('The mafia are: '+mafias.join(', '));
+		this.sendReply('The angels are: '+angels.join(', '));
+		this.sendReply('The detective is: '+detective);
 	}
 };
 
