@@ -611,6 +611,7 @@ var commands = exports.commands = {
 	
 	pony: function(target, room, user) {
 		if(!this.canBroadcast()) return;
+		if (this.broadcasting && !this.can('warn')) return;
 		this.sendReplyBox('<center><img src="http://31.media.tumblr.com/c75cf0dbf3b7b14afd62ac4d228fb57a/tumblr_mj59oo9OS71rb26uco1_400.gif">');
 	},
 		
