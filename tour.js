@@ -262,7 +262,7 @@ exports.tour = function(t) {
 				if (!round[i][1]) {
 						var p1n = tour.username(round[i][0]);
 						if (p1n.substr(0, 6) === 'Guest ') p1n = round[i][0];
-						html += "<font color=\"red\">" + clean(p1n) + " has received a bye!</font><br />";
+						html += "<font color=\"red\">" + clean(p1n) + " advances to the next round automatically!</font><br />";
 				}
 				else {
 					var p1n = tour.username(round[i][0]);
@@ -772,7 +772,7 @@ var cmds = {
 			if (!r[i][1]) {
 				//bye
 				var byer = tour.username(r[i][0]);
-				html += "<font color=\"red\">" + clean(byer) + " has received a bye.</font><br />";
+				html += "<font color=\"red\">" + clean(byer) + " advances to the next round automatically.</font><br />";
 			}
 			else {
 				if (r[i][2] == undefined) {
