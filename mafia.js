@@ -94,7 +94,8 @@ exports.mafia = function(m) {
 			var isMax = true;
 			for (var u = 0; u < mafia[room].pollOptions.length; u++) {
 				var parts = mafia[room].pollOptions[u].split(':');
-				pollResults += '<li>'+parts[0]+': '+parts[1]+'</li>';
+				var name = Users.get(parts[0]).name;
+				pollResults += '<li>'+name+': '+parts[1]+'</li>';
 				votes.push(Number(parts[1]));
 			}
 			Array.max = function(array){
@@ -114,7 +115,7 @@ exports.mafia = function(m) {
 			//what do i do if more than one person has the most votes?
 			//make an array, push all users with that many votes into it, if its length is > 1, set a variable to false, then do the checking
 			if (isMax) {
-			var isMafia = '';
+				var isMafia = '';
 				for (var u = 0; u < mafia[room].pollOptions.length; u++) {
 					var parts = mafia[room].pollOptions[u].split(':');
 					if (mostVotes === Number(parts[1])) {
@@ -135,6 +136,7 @@ exports.mafia = function(m) {
 			if (isMax) {
 				mafia[room].deadPlayers.push(Users.get(dead).userid);
 			}
+			mafia[room].pollOptions = [];
 			mafia.checkWin(room);
 		},			
 		checkWin: function(room) {
@@ -609,6 +611,19 @@ var cmds = {
 		this.sendReply('The mafia are: '+mafias.join(', '));
 		this.sendReply('The angel(s) are: '+angels.join(', '));
 		this.sendReply('The detective is (if there are any): '+detectives);
+	},
+	
+	mafiaplayers: 'viewplayers',
+	viewplayers: function(target, room, user) {
+		if (!mafia[room.id].game) {
+			return this.sendReply('There is no a game of mafia going on.');
+		}
+		if (!this.canBroadcast()) return;
+		var players = new Array();
+		for (var i = 0; i < mafia[room.id].players.length; i++) {
+			players.push(Users.get(mafia[room.id].players[i]).name);
+		}
+		this.sendReplyBox('The players are: '+players.join(', '));
 	}
 };
 
