@@ -585,7 +585,7 @@ var commands = exports.commands = {
 		this.sendReplyBox ('<center>Trainer: <font color="#199461"><b>Skymin</b></font><br />' +
                    '<center>Ace: <font color="#3CC977"><b>Shaymin-Sky</b></font><br />' +
                    '<center>Catchphrase:Things aren\'t the way they were before. You wouldn\'t even recognize me anymore. Not that you knew me back then, but it all comes back to me in the end.<br />' +
-                   '<center><a href="http://www.listenonrepeat.com/watch?v=KRaRv7Zhwiw">Battle Theme</a><br />' +
+                   '<center><a href="https://www.listenonrepeat.com/watch?v=MVO-iK2aTK4">Battle Theme</a><br />' +
                    '<center><a href="http://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="http://www.smogon.com/download/sprites/bwmini/492-s.gif"></a>');
 	},
 
@@ -722,7 +722,7 @@ var commands = exports.commands = {
 		this.sendReplyBox('<center>Trainer:<font color="#C11FA9"><b>miloticnob</b></font><br />' +
                   '<center>Types: Bug(OU), Grass(RU)<br />' +
                   '<center>Signature Pokemon: <font color="blue"><b>Milotic</b></font> and <font color="green"><b>Whimsicott</b></font><br />' +
-                  '<center>Catchpharse:excuse me I have some dick to suck<br />' +
+                  '<center>Catchpharse: excuse me I have some dick to suck<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/350.gif"><img src="http://www.smogon.com/download/sprites/bwmini/547.gif">');
 	},
 		
@@ -737,7 +737,7 @@ var commands = exports.commands = {
 	solor: function(target, room, user) {
 		if (!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#15A20B"><b>Solor</b></font><br />' +
-                  '<center>Types: Flying(OU), Grass(UU)<br />' +
+                  '<center>Types: Flying(OU E4), Grass(UU)<br />' +
                   '<center>Signature Pokemon: <font color="blue"><b>Gyarados</b></font><br />' +
                   '<center>Catchphrase: haters gonna hate and twerkers gonna twerk<br />' +
                   '<center><img src="http://www.smogon.com/download/sprites/bwmini/130.gif">');
