@@ -88,30 +88,53 @@ exports.mafia = function(m) {
 			Rooms.get(room).addRaw('With that, it\'s time to vote for someone to be killed by the townspeople. Use /voteplayer [option] to choose one of the people.<hr>' + poll + '</ul>You will have 3 minutes to vote.');
 		},
 		endVote: function(room) {
-		var results = '<ul>';
-		var votes = new Array();
+			mafia[room].status = 4;
+			var pollResults = '<ul>';
+			var votes = new Array();
+			var isMax = true;
 			for (var u = 0; u < mafia[room].pollOptions.length; u++) {
 				var parts = mafia[room].pollOptions[u].split(':');
-				results += '<li>'+parts[0]+': '+parts[1]+'</li>';
+				pollResults += '<li>'+parts[0]+': '+parts[1]+'</li>';
 				votes.push(Number(parts[1]));
 			}
 			Array.max = function(array){
 				return Math.max.apply(Math, array);
 			};
 			var mostVotes = Array.max(votes)
-			//what do i do if more than one person has the most votes?
-			var isMafia = '';
-			for (var u = 0; u < mafia[room].pollOptions.length; u++) {
+			var isMostVotes = new Array();
+			for (var i = 0; i < mafia[room].pollOptionslength; i++) {
 				var parts = mafia[room].pollOptions[u].split(':');
 				if (mostVotes === Number(parts[1])) {
-					var dead = parts[0];
-					if (mafia[room].mafia.indexOf(dead) > -1) {
-						isMafia += 'They were part of the mafia. Congratulations.';
+					isMostVotes.push(parts[0]);
+				}
+			}
+			if (isMostVotes.length > 1) {
+				isMax = false;
+			}
+			//what do i do if more than one person has the most votes?
+			//make an array, push all users with that many votes into it, if its length is > 1, set a variable to false, then do the checking
+			if (isMax) {
+			var isMafia = '';
+				for (var u = 0; u < mafia[room].pollOptions.length; u++) {
+					var parts = mafia[room].pollOptions[u].split(':');
+					if (mostVotes === Number(parts[1])) {
+						var dead = parts[0];
+						if (mafia[room].mafia.indexOf(dead) > -1) {
+							isMafia += 'They were part of the mafia. Congratulations.';
+						}
 					}
 				}
 			}
-			Rooms.get(room).addRaw('The results are in:'+results+'</ul>'+Users.get(dead).name+' was killed by the townspeople. '+isMafia);
-			mafia[room].deadPlayers.push(Users.get(dead).userid);
+			var results = pollResults
+			if (isMax) {
+				results += Users.get(dead).name+' was killed by the townspeople. '+isMafia;
+			} else {
+				results += 'Since no one received a deciding number of votes, no one died.';
+			}
+			Rooms.get(room).addRaw(results);
+			if (isMax) {
+				mafia[room].deadPlayers.push(Users.get(dead).userid);
+			}
 			mafia.checkWin(room);
 		},			
 		checkWin: function(room) {
@@ -139,11 +162,9 @@ exports.mafia = function(m) {
 				if (mafia[room].status === 1) {
 					mafia.voteTime(room);
 					setTimeout(function() {mafia.endVote(room);}, 180000);
-					mafia[room].status = 4;
 				}
 				if (mafia[room].status === 4) {
 					mafia.night(room);
-					mafia[room].status = 2;
 				}
 			}
 		},
