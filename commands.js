@@ -2491,7 +2491,7 @@ var commands = exports.commands = {
 		this.add('|raw|<div class="broadcast-green"><b>The ladder is now back.</b><br />Rated games will update the ladder now.</div>');
 	},
 
-	lockdown: function(target, room, user) {
+	lockdown: function(target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/lockdown - Access denied.");
 		}
@@ -2506,7 +2506,7 @@ var commands = exports.commands = {
 
 	},
 
-	endlockdown: function(target, room, user) {
+	endlockdown: function(target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/lockdown - Access denied.");
 		}
@@ -2550,7 +2550,7 @@ var commands = exports.commands = {
 		this.logEntry(user.name + ' used /endemergency');
 	},
 
-	kill: function(target, room, user) {
+	kill: function(target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/kill - Access denied.");
 		}
@@ -2575,7 +2575,7 @@ var commands = exports.commands = {
 		}, 10000);
 	},
 
-	restart: function(target, room, user) {
+	restart: function(target, room, user, connection) {
 		if (!user.hasConsoleAccess(connection)) {
 			return this.sendReply("/restart - Access denied.");
 		}
