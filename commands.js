@@ -2492,7 +2492,9 @@ var commands = exports.commands = {
 	},
 
 	lockdown: function(target, room, user) {
-		if (!this.can('lockdown')) return false;
+		if (!user.hasConsoleAccess(connection)) {
+			return this.sendReply("/lockdown - Access denied.");
+		}
 
 		Rooms.global.lockdown = true;
 		for (var id in Rooms.rooms) {
@@ -2505,8 +2507,9 @@ var commands = exports.commands = {
 	},
 
 	endlockdown: function(target, room, user) {
-		if (!this.can('lockdown')) return false;
-
+		if (!user.hasConsoleAccess(connection)) {
+			return this.sendReply("/lockdown - Access denied.");
+		}
 		if (!Rooms.global.lockdown) {
 			return this.sendReply("We're not under lockdown right now.");
 		}
@@ -2548,8 +2551,9 @@ var commands = exports.commands = {
 	},
 
 	kill: function(target, room, user) {
-		if (!this.can('lockdown')) return false;
-
+		if (!user.hasConsoleAccess(connection)) {
+			return this.sendReply("/kill - Access denied.");
+		}
 		if (!Rooms.global.lockdown) {
 			return this.sendReply('For safety reasons, /kill can only be used during lockdown.');
 		}
@@ -2572,8 +2576,9 @@ var commands = exports.commands = {
 	},
 
 	restart: function(target, room, user) {
-		if (!this.can('lockdown')) return false;
-
+		if (!user.hasConsoleAccess(connection)) {
+			return this.sendReply("/restart - Access denied.");
+		}
 		if (!Rooms.global.lockdown) {
 			return this.sendReply('For safety reasons, /restart can only be used during lockdown.');
 		}
