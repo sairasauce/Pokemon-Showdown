@@ -6716,7 +6716,7 @@ exports.BattleMovedex = {
 		id: "infestation",
 		isViable: true,
 		name: "Infestation",
-		pp: 35,
+		pp: 20,
 		priority: 0,
 		isContact: true,
 		volatileStatus: 'partiallytrapped',
@@ -9005,6 +9005,7 @@ exports.BattleMovedex = {
 		name: "Parting Shot",
 		pp: 20,
 		priority: 0,
+		isSoundBased: true,
 		selfSwitch: true,
 		boosts: {
 			atk: -1,
@@ -9447,8 +9448,16 @@ exports.BattleMovedex = {
 		isBounceable: true,
 		volatileStatus: 'powder',
 		effect: {
+			duration: 1,
 			onStart: function(target) {
 				this.add('-start', target, 'Powder');
+			},
+			onBeforeMove: function(pokemon, target, move) {
+				if (move.type === 'Fire') {
+					this.add('-activate', pokemon, 'Powder');
+					this.directDamage(Math.floor(pokemon.maxhp / 4) + 1);
+					return false;
+				}
 			}
 		},
 		secondary: false,
