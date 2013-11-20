@@ -615,7 +615,7 @@ var commands = exports.commands = {
                   '<center>Types: Fairy(OU)<br />' +
                   '<center>Signature Pokemon: <b>Mawile</b><br />' +
                   '<center>Catchphrase: "Every strike brings me closer to my next homerun" ~Babe Ruth<br />' +
-                  '<center><img src="http://play.pokemonshowdown.com/sprites/bwani/mawile.gif">');
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/303.gif">');
 	},
 	
 	pony: function(target, room, user) {
