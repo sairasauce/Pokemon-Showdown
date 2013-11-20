@@ -1367,7 +1367,7 @@ var commands = exports.commands = {
 
 	roomowner: function(target, room, user) {
 		if (room.id === 'lobby') {
-			return this.sendReply('Please don\'nt use this in lobby.');
+			return this.sendReply('Please don\'t use this in lobby.');
 		}
 		if (!room.chatRoomData) {
 			return this.sendReply("/roomowner - This room isn't designed for per-room moderation to be added");
