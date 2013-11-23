@@ -223,7 +223,7 @@ exports.mafia = function(m) {
 				mafias = 2;
 				angels = 1;
 				detectives = 1;
-				villageChiefs = 0;
+				villageChiefs = 1;
 			}
 			if (size <= 8) {
 				verb = "is";
@@ -258,7 +258,6 @@ exports.mafia = function(m) {
 				Users.get(mafia[room].detective[i]).send('|pm|*MafiaBot|'+Users.get(mafia[room].detective[i]).getIdentity()+'|You are the detective for this round.');
 			}
 			Users.get(mafia[room].villageChief[0]).send('|pm|*MafiaBot|'+Users.get(mafia[room].villageChief[0]).getIdentity()+'|You are the Village Chief for this round. If there is a tie during voting, use /tiebreaker [name] to determine the one to die.');
-			}
 		}
 	};
 	for (var i in mafiaFunctions) {
