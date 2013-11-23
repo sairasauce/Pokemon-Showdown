@@ -606,7 +606,16 @@ var commands = exports.commands = {
                   '<center>Signature Pokemon: <font color="blue"><b>Keldeo</b></font><br />' +
                   '<center>Catchphrase:雪.<br />' + 
                   '<center>Staff and Gym Leaders, if you need something coded, PM me. I am a coder in training. <br />' +
-					'<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
+		  '<center><img src="http://www.smogon.com/download/sprites/bwmini/647.gif">');
+	},
+	
+	wise: function(target, room, user) {
+		if (!this.canBroadcast()) return;
+		this.sendReplyBox('<center>Trainer:<font color="#AC6116"><b>wisecarver</b></font><br />' +
+                  '<center>Types: Fairy(OU)<br />' +
+                  '<center>Signature Pokemon: <b>Mawile</b><br />' +
+                  '<center>Catchphrase: "Every strike brings me closer to my next homerun" ~Babe Ruth<br />' +
+                  '<center><img src="http://www.smogon.com/download/sprites/bwmini/303.gif">');
 	},
 	
 	pony: function(target, room, user) {
@@ -789,7 +798,7 @@ var commands = exports.commands = {
 	zac: function(target, room, user) {
 		if(!this.canBroadcast()) return;
 		this.sendReplyBox('<center>Trainer: <font color="#2723A4"><b>ZacT94</b></font><br />' +
-						  '<center>Types: Ghost(UU)<br />' +
+						  '<center>Types: Ghost(UU), Noraml(RU)<br />' +
 						  '<center>Ace: <font color="#D9D50D"><b>Cofagrigus</b></font><br />' +
 						  '<center>Catchphrase:Damn it my cat won\'t stop walking on my keyboard!<br />' +
 						  '<center><img src="http://www.smogon.com/download/sprites/bwmini/563.gif">');
