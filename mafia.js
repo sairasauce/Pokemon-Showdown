@@ -243,10 +243,10 @@ exports.mafia = function(m) {
 			for (var i = (mafias + angels); i < (mafias + angels + detectives); i++) {
 				mafia[room].detective.push(randomPlayers[i]);
 			}
-			for (var i = (mafias + angels + detectives); i < (mafias + angels + detectives + villageChiefs); i++) {
+			/*for (var i = (mafias + angels + detectives); i < (mafias + angels + detectives + villageChiefs); i++) {
 				mafia[room].villageChief.push(randomPlayers[i]);
-			}
-			Rooms.get(room).addRaw('The round of Mafia has started! This round, there ' +  verb + ' <b>' + mafias + '</b> mafia, <b>' + angels + '</b> ' + angelCount + ', <b>' + detectives + '</b> ' + detectiveCount + ', and <b>' + villageChiefs + '</b> Village Chief. Night has fallen! Go to sleep!');
+			}*/
+			Rooms.get(room).addRaw('The round of Mafia has started! This round, there ' +  verb + ' <b>' + mafias + '</b> mafia, <b>' + angels + '</b> ' + angelCount + ', and <b>' + detectives + '</b> ' + detectiveCount + '. Night has fallen! Go to sleep!');
 			Users.get(mafia[room].storyteller).send('|pm|*MafiaBot|'+Users.get(mafia[room].storyteller).getIdentity()+'|The round of Mafia has begun. You can use /roles to view who the mafia, angels, and detectives are.');
 			for (var i = 0; i < mafia[room].mafia.length; i++) {
 				Users.get(mafia[room].mafia[i]).send('|pm|*MafiaBot|'+Users.get(mafia[room].mafia[i]).getIdentity()+'|You are one of the mafia for this round. The full list: ' + mafia[room].mafia.join(',') + '.');
@@ -257,7 +257,7 @@ exports.mafia = function(m) {
 			for (var i = 0; i < mafia[room].detective.length; i++) {
 				Users.get(mafia[room].detective[i]).send('|pm|*MafiaBot|'+Users.get(mafia[room].detective[i]).getIdentity()+'|You are the detective for this round.');
 			}
-			Users.get(mafia[room].villageChief[0]).send('|pm|*MafiaBot|'+Users.get(mafia[room].villageChief[0]).getIdentity()+'|You are the Village Chief for this round. If there is a tie during voting, use /tiebreaker [name] to determine the one to die.');
+			/*Users.get(mafia[room].villageChief[0]).send('|pm|*MafiaBot|'+Users.get(mafia[room].villageChief[0]).getIdentity()+'|You are the Village Chief for this round. If there is a tie during voting, use /tiebreaker [name] to determine the one to die.');*/
 		}
 	};
 	for (var i in mafiaFunctions) {
@@ -677,7 +677,7 @@ var cmds = {
 		this.sendReply('The mafia are: '+mafias.join(', '));
 		this.sendReply('The angel(s) are: '+angels.join(', '));
 		this.sendReply('The detective is (if there are any): '+detectives);
-		this.sendReply('The Village Chief: '+Users.get(mafia[room.id].villageChief[0]).name);
+		/*this.sendReply('The Village Chief: '+Users.get(mafia[room.id].villageChief[0]).name);*/
 	},
 	
 	mafiaplayers: 'viewplayers',
