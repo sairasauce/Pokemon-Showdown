@@ -586,7 +586,6 @@ var cmds = {
 					if (mafia[room.id].voteSave.length === 1) {
 						mafia[room.id].saved = true;
 					}
-					}
 					for (var i = 1; i < mafia[room.id].voteSave.length; i++) {
 						if (mafia[room.id].voteSave.length > 1) {
 							if (mafia[room.id].voteSave[i] === mafia[room.id].voteSave[i-1]) {
