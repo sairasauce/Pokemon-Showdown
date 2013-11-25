@@ -51,14 +51,14 @@ exports.mafia = function(m) {
 		night: function(room) {
 			var deadMafia = 0;
 			for (var i = 0; i < mafia[room].mafia.length; i++) {
-				if (mafia[room].deadPlayers.indexOf(mafia[room].mafia[i])) {
+				if (mafia[room].deadPlayers.indexOf(mafia[room].mafia[i]) != -1) {
 					deadMafia++;
 				}
 			}
 			var aliveMafia = mafia[room].mafia.length - deadMafia;
 			var deadAngels = 0;
 			for (var i = 0; i < mafia[room].angel.length; i++) {
-				if (mafia[room].deadPlayers.indexOf(mafia[room].angel[i])) {
+				if (mafia[room].deadPlayers.indexOf(mafia[room].angel[i]) != -1) {
 					deadAngels++;
 				}
 			}
