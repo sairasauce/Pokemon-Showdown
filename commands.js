@@ -504,8 +504,8 @@ var commands = exports.commands = {
  		 this.sendReplyBox('<center>Trainer: <font color="#986C1B"><b>Saira</b></font><br />' +
                            '<center>Types: Psychic(OU)<br />' +
                            '<center>Catchphrase:bloom to blossom, bloom to perish<br />' +
-                           '<center>Signature Pokemon: <font color="#933BDB"><b>Gengar</b></font><br />' +
-                           '<center><img src="http://www.smogon.com/download/sprites/bwmini/94.gif"><br />');
+                           '<center>Signature Pokemon: <font color="#FFFCAB"><b>Alakazam</b></font><br />' +
+                           '<center><img src="http://www.smogon.com/download/sprites/bwmini/65.gif"><br />');
 		 },
    
 	ross: function (target, room, user) {
