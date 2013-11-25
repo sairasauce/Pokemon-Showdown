@@ -89,8 +89,11 @@ exports.mafia = function(m) {
 		day: function(room) {
 			var storyteller = mafia[room].storyteller;
 			Rooms.get(room).addRaw('The night has ended! Please wait while <b>' + Users.get(storyteller).name + '</b> writes a story.');
-			Users.get(storyteller).send('|pm|*MafiaBot|'+Users.get(storyteller).getIdentity()+'|The mafia and angels and detectives have done their work. The mafia have chosen to kill **' + Users.get(mafia[room].voteKill[0]).name + '** and the angels have chosen to save **' + Users.get(mafia[room].voteSave[0]).name + '**. Now, use /story [context] to show what happened while the game moves into the day.');
-			if (mafia[room].voteKill[0] === mafia[room].voteSave[0]) {
+			Users.get(storyteller).send('|pm|*MafiaBot|'+Users.get(storyteller).getIdentity()+'|The mafia and angels and detectives have done their work. The mafia have chosen to kill **' + Users.get(mafia[room].voteKill[0]).name + '**. Now, use /story [context] to show what happened while the game moves into the day.');
+			if (mafia[room].voteSave[0] != undefined) {
+				Users.get(storyteller).send('|pm|*MafiaBot|'+Users.get(storyteller).getIdentity()+'|The angels have chosen to save **' + Users.get(mafia[room].voteSave[0]).name + '**');
+			};
+			if (mafia[room].voteSave[0] != undefined && mafia[room].voteKill[0] === mafia[room].voteSave[0]) {
 				Users.get(storyteller).send('|pm|*MafiaBot|'+Users.get(storyteller).getIdentity()+'|Keep in mind that they decided to kill and save the same player, therefore, no one died this round.');
 			} else {
 				mafia[room].deadPlayers.push(mafia[room].voteKill[0]);
@@ -530,7 +533,7 @@ var cmds = {
 				this.sendReply('You have voted to kill ' + targetUser.name + '.');
 				var deadMafia = 0;
 				for (var i = 0; i < mafia[room.id].mafia.length; i++) {
-					if (mafia[room.id].deadPlayers.indexOf(mafia[room.id].mafia[i])) {
+					if (mafia[room.id].deadPlayers.indexOf(mafia[room.id].mafia[i]) != -1) {
 						deadMafia++;
 					}
 				}
@@ -574,7 +577,7 @@ var cmds = {
 				this.sendReply('You have voted to save ' + targetUser.name + '.');
 				var deadAngels = 0;
 				for (var i = 0; i < mafia[room.id].angel.length; i++) {
-					if (mafia[room.id].deadPlayers.indexOf(mafia[room.id].angel[i])) {
+					if (mafia[room.id].deadPlayers.indexOf(mafia[room.id].angel[i]) != -1) {
 						deadAngels++;
 					}
 				}
@@ -582,6 +585,7 @@ var cmds = {
 				if (mafia[room.id].voteSave.length === aliveAngels) {
 					if (mafia[room.id].voteSave.length === 1) {
 						mafia[room.id].saved = true;
+					}
 					}
 					for (var i = 1; i < mafia[room.id].voteSave.length; i++) {
 						if (mafia[room.id].voteSave.length > 1) {
