@@ -538,7 +538,7 @@ var cmds = {
 					}
 				}
 				var aliveMafia = mafia[room.id].mafia.length - deadMafia;
-				if (mafia[room.id].voteSave.length === aliveMafia) {
+				if (mafia[room.id].voteKill.length === aliveMafia) {
 					if (mafia[room.id].voteKill.length === 1) {
 						mafia[room.id].toBeKilled.push(targetUser.userid);
 						mafia[room.id].killed = true;
