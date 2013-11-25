@@ -92,7 +92,7 @@ exports.mafia = function(m) {
 			Users.get(storyteller).send('|pm|*MafiaBot|'+Users.get(storyteller).getIdentity()+'|The mafia and angels and detectives have done their work. The mafia have chosen to kill **' + Users.get(mafia[room].voteKill[0]).name + '**. Now, use /story [context] to show what happened while the game moves into the day.');
 			if (mafia[room].voteSave[0] != undefined) {
 				Users.get(storyteller).send('|pm|*MafiaBot|'+Users.get(storyteller).getIdentity()+'|The angels have chosen to save **' + Users.get(mafia[room].voteSave[0]).name + '**');
-			};
+			}
 			if (mafia[room].voteSave[0] != undefined && mafia[room].voteKill[0] === mafia[room].voteSave[0]) {
 				Users.get(storyteller).send('|pm|*MafiaBot|'+Users.get(storyteller).getIdentity()+'|Keep in mind that they decided to kill and save the same player, therefore, no one died this round.');
 			} else {
