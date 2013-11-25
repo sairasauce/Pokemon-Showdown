@@ -110,7 +110,7 @@ exports.mafia = function(m) {
 					mafia[room].pollOptions.push(Users.get(mafia[room].players[i]).userid+':0');
 				}
 			}
-			Rooms.get(room).addRaw('With that, it\'s time to vote for someone to be killed by the townspeople. Use /voteplayer [option] to choose one of the people.<hr>' + poll + '</ul>You will have 3 minutes to vote.');
+			Rooms.get(room).addRaw('With that, it\'s time to vote for someone to be killed by the townspeople. Use /voteplayer [option] to choose one of the people.<hr>' + poll + '</ul>You will have one and a half minutes to vote.');
 		},
 		endVote: function(room) {
 			var alivePlayers = 0;
@@ -434,9 +434,6 @@ var cmds = {
 			if (mafia[room.id].deadPlayers.indexOf(mafia[room.id].players[i]) === -1) {
 				alivePlayers++;
 			}
-		}
-		if (mafia[room.id].hasVoted.length === alivePlayers) {
-			mafia.endVote(room.id);
 		}
 	},
 	
